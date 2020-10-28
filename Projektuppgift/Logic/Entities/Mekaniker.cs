@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Logic.Entities
 {
-    class Mekaniker
+    public class Mekaniker : INotifyPropertyChanged
     {
-        public List<Ärende> ärendelista = new List<Ärende>();
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        //public List<Ärende> ärendelista = new List<Ärende>();
         public string Namn { get; set; }
         public string Födelsedatum { get; set; }
         public string Anställninsdatum { get; set; }
@@ -91,6 +95,13 @@ namespace Logic.Entities
                 }
             }
             return sumärende;
+        }
+
+        // Create the OnPropertyChanged method to raise the event
+        // The calling member's name will be used as the parameter.
+        protected void OnPropertyChanged([CallerMemberName] string name = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }
