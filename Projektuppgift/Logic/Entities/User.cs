@@ -9,5 +9,6 @@ namespace Logic.Entities
         public string Username { get; set; }
         public string Password { get; set; }
         public int MyProperty { get; set; }
+        public string användare{ get; set; }
     }
 }
