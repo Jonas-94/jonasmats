@@ -21,6 +21,7 @@ namespace GUI.Home
         public HomePage()
         {
             InitializeComponent();
+            
         }
     }
 }
