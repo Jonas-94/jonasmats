@@ -28,6 +28,9 @@ namespace GUI.Login
             InitializeComponent();
 
             _loginService = new LoginService();
+
+            tbUsernam.Text = "Bosse";
+            pbPassword.Password = "Meckarn123";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

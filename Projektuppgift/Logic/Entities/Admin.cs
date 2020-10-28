@@ -58,7 +58,7 @@ namespace Logic.Entities
                     mekaniker = mekanikerlista[i];
                     if (mekaniker.Getaktivaärenden() < 2)
                     {
-                        mekaniker.ärendelista.Add(ärende);
+                        //mekaniker.ärendelista.Add(ärende);
                     }
 
                 }
