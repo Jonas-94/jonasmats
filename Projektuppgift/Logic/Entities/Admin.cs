@@ -34,7 +34,6 @@ namespace Logic.Entities
                     mekanikerlista.Remove(mekanikerlista[i]);
                 }
             }
-
         }
         public void Läggtillkpmpetens(string kompetens, string namn)
         {
