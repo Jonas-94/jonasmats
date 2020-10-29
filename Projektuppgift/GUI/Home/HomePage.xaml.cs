@@ -25,9 +25,7 @@ namespace GUI.Home
             InitializeComponent();
 
 
-            Mekanikers.Add(new Mekaniker { Namn = "Jonas", Födelsedatum = "dsadasd", Anställninsdatum = "HEj" });
-
-            dgMainPage.ItemsSource = Mekanikers;
+            
         }
 
         Mekaniker mekaniker;
