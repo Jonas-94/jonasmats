@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Logic.Entities
 {
-    public class Mekaniker : INotifyPropertyChanged
+    public class Mekaniker: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

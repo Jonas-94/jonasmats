@@ -1,5 +1,5 @@
-﻿using Logic.Entities;
-using System;
+﻿using System;
+using Logic.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -20,13 +20,10 @@ namespace GUI.Home
     /// </summary>
     public partial class HomePage : Page
     {
-
-
-        ObservableCollection<Mekaniker> Mekanikers = new ObservableCollection<Mekaniker>();
-
         public HomePage()
         {
             InitializeComponent();
+
 
             Mekanikers.Add(new Mekaniker { Namn = "Jonas", Födelsedatum = "dsadasd", Anställninsdatum = "HEj" });
 
@@ -42,6 +39,9 @@ namespace GUI.Home
             mekaniker.Födelsedatum = txtBoxBirthday.Text;
             mekaniker.Anställninsdatum = txtBoxEmploymentDate.Text;
             mekaniker.Slutdatum = txtBoxUnEmploymentDate.Text;
+
+            
+
         }
     }
 }
