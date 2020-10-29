@@ -6,9 +6,6 @@ namespace Logic.Entities
 {
     class Bromsar:Ärende
     {
-        public override void Utförärende()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

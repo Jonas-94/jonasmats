@@ -6,9 +6,5 @@ namespace Logic.Entities
 {
     class Däck:Ärende
     {
-        public override void Utförärende()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

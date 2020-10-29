@@ -24,7 +24,7 @@ namespace Logic.Entities
             nyanvändare.Lösenord = lösenord;
             nyanvändare.mekaniker = mekaniker;
         }
-        public void Skapaadmin(string användarnamn, string lösenord, List<Ärende> ärendelista, List<Användare> användarelista, List<Mekaniker> mekanikerlista)
+        public void Skapaadmin(string användarnamn, string lösenord/*, List<Ärende> ärendelista*/, List<Användare> användarelista, List<Mekaniker> mekanikerlista)
         {
             Admin nyadmin = new Admin();
             nyadmin.Användarnamn = användarnamn;

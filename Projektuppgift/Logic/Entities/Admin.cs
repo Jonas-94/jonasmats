@@ -58,7 +58,7 @@ namespace Logic.Entities
                     mekaniker = mekanikerlista[i];
                     if (mekaniker.Getaktivaärenden() < 2)
                     {
-                        //mekaniker.ärendelista.Add(ärende);
+                        ErrandList.Ärendes.Add(ärende);
                     }
 
                 }
@@ -68,8 +68,8 @@ namespace Logic.Entities
         }
         public void Läggtillärenden(Ärende ärende)
         {
-
-            ärendelista.Add(ärende);
+            ErrandList.Ärendes.Add(ärende);
+            
         }
         public void Utförärende(Ärende ärende)
         {

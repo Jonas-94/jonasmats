@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Logic.Entities
 {
-    abstract class Ärende
+    public class Ärende
     {
         Fordon fordon { get; set; }
 
@@ -14,15 +14,20 @@ namespace Logic.Entities
         public bool Pågåendeärende;
         public Mekaniker Mekaniker;
 
-        public abstract void Utförärende();
-
         public void Sparaärende()
         {
-            List<Ärende> Ärendelista = new List<Ärende>();
-            Ärendelista.Add(this);
-            string json = JsonConvert.SerializeObject(Ärendelista.ToArray());
+            //List<Ärende> Ärendelista = new List<Ärende>();
+            //Ärendelista.Add(this);
+            ErrandList.Ärendes.Add(this);
+            string json = JsonConvert.SerializeObject(ErrandList.Ärendes.ToArray());
             System.IO.File.WriteAllText(@"C: \Users\Acer\OneDrive\Dokument\Repository\C - Sharp\Projektuppgift\Ärenden.json", json);
         }
+
+        internal void Utförärende()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Setavklaratärende(bool avklaratärende)
         {
             Avklaratärende = avklaratärende;

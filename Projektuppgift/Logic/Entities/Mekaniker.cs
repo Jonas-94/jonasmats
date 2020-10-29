@@ -10,7 +10,7 @@ namespace Logic.Entities
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //public List<Ärende> ärendelista = new List<Ärende>();
+        
         public string Namn { get; set; }
         public string Födelsedatum { get; set; }
         public string Anställninsdatum { get; set; }
@@ -87,7 +87,7 @@ namespace Logic.Entities
         public int Getaktivaärenden()
         {
             int sumärende = 0;
-            foreach (var ä in ärendelista)
+            foreach (var ä in ErrandList.Ärendes)
             {
                 if (ä.Avklaratärende == false)
                 {

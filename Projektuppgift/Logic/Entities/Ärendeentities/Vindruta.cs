@@ -6,9 +6,5 @@ namespace Logic.Entities
 {
     class Vindruta:Ärende
     {
-        public override void Utförärende()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -31,7 +31,6 @@ namespace GUI.Home
             Mekanikers.Add(new Mekaniker { Namn = "Jonas", Födelsedatum = "dsadasd", Anställninsdatum = "HEj" });
 
             dgMainPage.ItemsSource = Mekanikers;
-            ListBox.AddSelectedHandler(mekaniker);
         }
 
         Mekaniker mekaniker;
