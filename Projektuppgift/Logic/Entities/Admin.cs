@@ -6,11 +6,10 @@ namespace Logic.Entities
 {
     class Admin:Användare
     {
-        public List<Ärende> ärendelista = new List<Ärende>();
-        public List<Användare> användarlista = new List<Användare>();
-        public List<Mekaniker> mekanikerlista = new List<Mekaniker>();
+        
+        public Verkstad verkstad;
 
-
+        
         public void Läggatillmekaniker(string namn, string födelsedatum, string anställningsdatum, string slutdatum)
         {
             Mekaniker mekaniker = new Mekaniker();
@@ -23,25 +22,25 @@ namespace Logic.Entities
             mekaniker.Kkaross = false;
             mekaniker.Kmotor = false;
             mekaniker.Kvindruta = false;
-            mekanikerlista.Add(mekaniker);
+            verkstad.mekanikerlista.Add(mekaniker);
         }
         public void Tabortmekaniker(string namn)
         {
-            for (int i = 0; i < mekanikerlista.Count; i++)
+            for (int i = 0; i < verkstad.mekanikerlista.Count; i++)
             {
-                if (mekanikerlista[i].Namn == namn)
+                if (verkstad.mekanikerlista[i].Namn == namn)
                 {
-                    mekanikerlista.Remove(mekanikerlista[i]);
+                    verkstad.mekanikerlista.Remove(verkstad.mekanikerlista[i]);
                 }
             }
         }
         public void Läggtillkpmpetens(string kompetens, string namn)
         {
-            for (int i = 0; i < mekanikerlista.Count; i++)
+            for (int i = 0; i < verkstad.mekanikerlista.Count; i++)
             {
-                if (mekanikerlista[i].Namn == namn)
+                if (verkstad.mekanikerlista[i].Namn == namn)
                 {
-                    mekanikerlista[i].Ändrakompetens(kompetens);
+                    verkstad.mekanikerlista[i].Ändrakompetens(kompetens);
                     // den mekanikern som vi väljer i listan ändrar vi kompetens på.
                 }
             }
@@ -49,15 +48,17 @@ namespace Logic.Entities
         public void Mekanikeriärende(Ärende ärende, string namn)
         {
             Mekaniker mekaniker;
-            for (int i = 0; i < mekanikerlista.Count; i++)
+            for (int i = 0; i < verkstad.mekanikerlista.Count; i++)
             {
 
-                if (mekanikerlista[i].Namn == namn)
+                if (verkstad.mekanikerlista[i].Namn == namn)
                 {
-                    mekaniker = mekanikerlista[i];
+                    mekaniker = verkstad.mekanikerlista[i];
                     if (mekaniker.Getaktivaärenden() < 2)
                     {
-                        ErrandList.Ärendes.Add(ärende);
+                        mekaniker.märendelista.Add(ärende);
+                        ärende.Mekaniker = mekaniker;
+                        ärende.Pågåendeärende = true;
                     }
 
                 }
@@ -67,10 +68,10 @@ namespace Logic.Entities
         }
         public void Läggtillärenden(Ärende ärende)
         {
-            ErrandList.Ärendes.Add(ärende);
+            verkstad.ärendelista.Add(ärende);
             
         }
-        public void Utförärende(Ärende ärende)
+        public void Utförtärende(Ärende ärende)
         {
             ärende.Utförärende();
         }

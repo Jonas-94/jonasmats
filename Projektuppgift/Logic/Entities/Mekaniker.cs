@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Logic.Entities
 {
-    public class Mekaniker: INotifyPropertyChanged
+    public class Mekaniker//: INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        //  public event PropertyChangedEventHandler PropertyChanged;
 
-        
+        public List<Ärende> märendelista = new List<Ärende>();
         public string Namn { get; set; }
         public string Födelsedatum { get; set; }
         public string Anställninsdatum { get; set; }
@@ -87,7 +87,7 @@ namespace Logic.Entities
         public int Getaktivaärenden()
         {
             int sumärende = 0;
-            foreach (var ä in ErrandList.Ärendes)
+            foreach (var ä in märendelista)
             {
                 if (ä.Avklaratärende == false)
                 {
@@ -99,9 +99,9 @@ namespace Logic.Entities
 
         // Create the OnPropertyChanged method to raise the event
         // The calling member's name will be used as the parameter.
-        protected void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        //protected void OnPropertyChanged([CallerMemberName] string name = "")
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        //}
     }
 }

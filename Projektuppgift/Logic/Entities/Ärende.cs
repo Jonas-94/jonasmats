@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 
@@ -8,24 +8,26 @@ namespace Logic.Entities
 {
     public class Ärende
     {
+        
         Fordon fordon { get; set; }
 
-        public bool Avklaratärende;
-        public bool Pågåendeärende;
+        public bool Avklaratärende = false;
+        public bool Pågåendeärende = false;
         public Mekaniker Mekaniker;
 
         public void Sparaärende()
         {
             //List<Ärende> Ärendelista = new List<Ärende>();
             //Ärendelista.Add(this);
-            ErrandList.Ärendes.Add(this);
-            string json = JsonConvert.SerializeObject(ErrandList.Ärendes.ToArray());
-            System.IO.File.WriteAllText(@"C: \Users\Acer\OneDrive\Dokument\Repository\C - Sharp\Projektuppgift\Ärenden.json", json);
+            //ErrandList.Ärendes.Add(this);
+            //string json = JsonConvert.SerializeObject(ErrandList.Ärendes.ToArray());
+            //System.IO.File.WriteAllText(@"C: \Users\Acer\OneDrive\Dokument\Repository\C - Sharp\Projektuppgift\Ärenden.json", json);
         }
 
         internal void Utförärende()
         {
-            throw new NotImplementedException();
+            Pågåendeärende = false;
+            Avklaratärende = true;
         }
 
         public void Setavklaratärende(bool avklaratärende)
