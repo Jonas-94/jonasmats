@@ -87,13 +87,17 @@ namespace Logic.Entities
         public int Getaktivaärenden()
         {
             int sumärende = 0;
-            foreach (var ä in märendelista)
+            if (märendelista != null)
             {
-                if (ä.Avklaratärende == false)
+                foreach (var ä in märendelista)
                 {
-                    sumärende += 1;
+                    if (ä.Avklaratärende == false)
+                    {
+                        sumärende += 1;
+                    }
                 }
             }
+           
             return sumärende;
         }
 

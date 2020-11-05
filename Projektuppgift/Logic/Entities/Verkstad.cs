@@ -32,6 +32,8 @@ namespace Logic.Entities
            
 
         }
+
+
         public void Visainfo()
         {
             for (int i = 0; i < mekanikerlista.Count; i++)
@@ -42,19 +44,34 @@ namespace Logic.Entities
             }
             Console.WriteLine("---");
         }
+
+        public void Visaanvändare()
+        {
+            for (int i = 1; i < användarelista.Count; i++)
+            {
+                Console.WriteLine(användarelista[i].Användarnamn +""+ användarelista[i].mekaniker.Namn);
+
+            }
+            Console.WriteLine("--------");
+
+        }
         public void Visaärende()
         {
             for (int i = 0; i < ärendelista.Count; i++)
             {
+                Console.WriteLine("-");
                 if (ärendelista[i].Mekaniker != null)
                 {
 
                  Console.WriteLine(ärendelista[i].Mekaniker.Namn);
                 }
                 Console.WriteLine(ärendelista[i].Avklaratärende);
+                Console.WriteLine(ärendelista[i]);
             }
+            Console.WriteLine("--------");
+            
         }
-        public void Skapanyanvändare(string lösenord, string användarnamn, Mekaniker mekaniker)
+        public void Skapanyanvändare(string användarnamn, string lösenord, Mekaniker mekaniker)
         {
 
             Användare nyanvändare = new Användare();
@@ -62,7 +79,7 @@ namespace Logic.Entities
             nyanvändare.Lösenord = lösenord;
             nyanvändare.mekaniker = mekaniker;
             användarelista.Add(nyanvändare);
-
+            Console.WriteLine(nyanvändare.mekaniker.Namn + "LARRE");
         }
         public void Skapaadmin(string användarnamn, string lösenord)
         {

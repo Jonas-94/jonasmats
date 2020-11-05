@@ -21,5 +21,7 @@ namespace Logic.Entities
 
             mekaniker.Ändrakompetens(kompetens);
         }
+
+
     }
 }

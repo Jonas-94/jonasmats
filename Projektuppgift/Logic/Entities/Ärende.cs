@@ -9,7 +9,7 @@ namespace Logic.Entities
     public class Ärende
     {
         
-        Fordon fordon { get; set; }
+        public Fordon fordon { get; set; }
 
         public bool Avklaratärende = false;
         public bool Pågåendeärende = false;
