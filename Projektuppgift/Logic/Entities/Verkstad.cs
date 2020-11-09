@@ -38,7 +38,7 @@ namespace Logic.Entities
         {
             for (int i = 0; i < mekanikerlista.Count; i++)
             {
-                Console.WriteLine(mekanikerlista[i].Namn +" "+  mekanikerlista[i].Anställninsdatum +" "+mekanikerlista[i].Slutdatum +" "+ mekanikerlista[i].Födelsedatum
+                Console.WriteLine(mekanikerlista[i].Namn +" "+  mekanikerlista[i].Anställningsdatum +" "+mekanikerlista[i].Slutdatum +" "+ mekanikerlista[i].Födelsedatum
                     +" "+ mekanikerlista[i].Kbromsar);
                
             }
@@ -98,7 +98,7 @@ namespace Logic.Entities
             mekaniker1.Namn = namn;
             mekaniker1.Födelsedatum = födelsedatum;
             mekaniker1.Slutdatum = slutdatum;
-            mekaniker1.Anställninsdatum = anställningdatum;
+            mekaniker1.Anställningsdatum = anställningdatum;
             mekaniker1.Kbromsar = false;
             mekaniker1.Kdäck = false;
             mekaniker1.Kkaross = false;
