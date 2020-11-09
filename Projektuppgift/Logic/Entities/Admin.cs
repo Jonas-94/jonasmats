@@ -16,7 +16,7 @@ namespace Logic.Entities
             Mekaniker mekaniker = new Mekaniker();
             mekaniker.Namn = namn;
             mekaniker.Födelsedatum = födelsedatum;
-            mekaniker.Anställninsdatum = anställningsdatum;
+            mekaniker.Anställningsdatum = anställningsdatum;
             mekaniker.Slutdatum = slutdatum;
             mekaniker.Kbromsar = false;
             mekaniker.Kdäck = false;

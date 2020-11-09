@@ -13,7 +13,7 @@ namespace Logic.Entities
         
         public string Namn { get; set; }
         public string Födelsedatum { get; set; }
-        public string Anställninsdatum { get; set; }
+        public string Anställningsdatum { get; set; }
         public string Slutdatum { get; set; }
 
 
@@ -22,6 +22,11 @@ namespace Logic.Entities
         public bool Kkaross { get; set; }
         public bool Kvindruta { get; set; }
         public bool Kdäck { get; set; }
+
+        public override string ToString()
+        {
+            return Namn + " " + Födelsedatum;
+        }
 
         public void Ändrakompetens(string kompetens)
         {
