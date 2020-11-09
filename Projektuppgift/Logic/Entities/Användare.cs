@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Logic.Entities
 {
-    class Användare
+    public class Användare
     {
         public string Användarnamn { get; set; }
         public string Lösenord { get; set; }
@@ -21,5 +21,7 @@ namespace Logic.Entities
 
             mekaniker.Ändrakompetens(kompetens);
         }
+
+
     }
 }

@@ -6,11 +6,62 @@ namespace Logic.Entities
 {
     class Admin:Användare
     {
-        public List<Ärende> ärendelista = new List<Ärende>();
-        public List<Användare> användarlista = new List<Användare>();
-        public List<Mekaniker> mekanikerlista = new List<Mekaniker>();
+        
+        public Verkstad verkstad;
 
+        public Fordon Skapafordon(string typ, string modell, string regnr, string drivmedel, decimal milmätare, int däck, string regdatum, bool dragkrok = false, decimal maxvikt = 0, int maxpassagerare = 0)
+        {
+            if (typ == "Bil")
+            {
+                Bil bil = new Bil();
+                Standardfordon( bil, modell, regnr, drivmedel, milmätare, däck, regdatum);
+                bil.Dragkrok = dragkrok;
+                return bil;
+            
+            }
+            if (typ == "Lastbil")
+            {
+                Lastbil lastbil = new Lastbil();
+                Standardfordon(lastbil, modell, regnr, drivmedel, milmätare, däck, regdatum);
+                lastbil.Maxvikt = maxvikt;
+                return lastbil;
+            }
+            if (typ == "Buss")
+            {
+                Buss buss = new Buss();
+                Standardfordon(buss, modell, regnr, drivmedel, milmätare, däck, regdatum);
+                buss.Antalpassagerare = maxpassagerare;
+                return buss;
+            }
+            if (typ == "Motorcykel")
+            {
+                Motorcykel motorcykel = new Motorcykel();
+                Standardfordon(motorcykel, modell, regnr, drivmedel, milmätare, däck, regdatum);
+                return motorcykel;
+            }
+            return new Bil();
+        }
 
+        public void Standardfordon(Fordon fordon, string modell, string regnr, string drivmedel, decimal milmätare, int däck, string regdatum)
+        {
+
+            fordon.Drivmedel = drivmedel;
+            fordon.Däck = däck;
+            fordon.Milmätare = milmätare;
+            fordon.Modellnamn = modell;
+            fordon.Registreringsnummer = regnr;
+            fordon.Registreringsdatum = regdatum;
+            
+            
+        }
+        public void Läggtillanvändare(string användarnamn, string lösenord, Mekaniker mekaniker)
+        {
+            Användare användare = new Användare();
+            användare.Lösenord = lösenord;
+            användare.Användarnamn = användarnamn;
+            användare.mekaniker = mekaniker;
+            verkstad.användarelista.Add(användare);
+        }
         public void Läggatillmekaniker(string namn, string födelsedatum, string anställningsdatum, string slutdatum)
         {
             Mekaniker mekaniker = new Mekaniker();
@@ -23,56 +74,189 @@ namespace Logic.Entities
             mekaniker.Kkaross = false;
             mekaniker.Kmotor = false;
             mekaniker.Kvindruta = false;
-            mekanikerlista.Add(mekaniker);
+            verkstad.mekanikerlista.Add(mekaniker);
         }
         public void Tabortmekaniker(string namn)
         {
-            for (int i = 0; i < mekanikerlista.Count; i++)
+            for (int i = 0; i < verkstad.användarelista.Count; i++)
             {
-                if (mekanikerlista[i].Namn == namn)
+                try
                 {
-                    mekanikerlista.Remove(mekanikerlista[i]);
+                    if (verkstad.användarelista[i].mekaniker.Namn == namn)
+                    {
+
+                        verkstad.användarelista.Remove(verkstad.användarelista[i]);
+                    }
+                }
+                catch (Exception )
+                {
+                    throw new Exception("Detta är bosse");
+                   
+                }
+               
+            }
+            for (int i = 0; i < verkstad.mekanikerlista.Count; i++)
+            {
+                if (verkstad.mekanikerlista[i].Namn == namn)
+                {
+                    verkstad.mekanikerlista.Remove(verkstad.mekanikerlista[i]);
+                    
                 }
             }
         }
+
+
         public void Läggtillkpmpetens(string kompetens, string namn)
         {
-            for (int i = 0; i < mekanikerlista.Count; i++)
+            for (int i = 0; i < verkstad.mekanikerlista.Count; i++)
             {
-                if (mekanikerlista[i].Namn == namn)
+                if (verkstad.mekanikerlista[i].Namn == namn)
                 {
-                    mekanikerlista[i].Ändrakompetens(kompetens);
-                    // den mekanikern som vi väljer i listan ändrar vi kompetens på.
+                    verkstad.mekanikerlista[i].Ändrakompetens(kompetens);
+                    // den mekanikern som vi väljer i listan ändrar vi typ på.
                 }
             }
         }
-        public void Mekanikeriärende(Ärende ärende, string namn)
+        public void Mekanikeriärende(Ärende ärende, Mekaniker mekaniker)
         {
-            Mekaniker mekaniker;
-            for (int i = 0; i < mekanikerlista.Count; i++)
+            if (ärende.Mekaniker != null)
             {
 
-                if (mekanikerlista[i].Namn == namn)
-                {
-                    mekaniker = mekanikerlista[i];
-                    if (mekaniker.Getaktivaärenden() < 2)
-                    {
-                        ErrandList.Ärendes.Add(ärende);
-                    }
-
-                }
-
+                ärende.Mekaniker.märendelista.Remove(ärende);
             }
 
+            if ((mekaniker.Getaktivaärenden() < 2) && (Jämförkompetens(ärende, mekaniker)))
+            {
+
+                        mekaniker.märendelista.Add(ärende);
+                        ärende.Mekaniker = mekaniker;
+                        ärende.Pågåendeärende = true;
+                
+            }
+
+
         }
-        public void Läggtillärenden(Ärende ärende)
+
+        public bool Jämförkompetens(Ärende ärende, Mekaniker mekaniker)
         {
-            ErrandList.Ärendes.Add(ärende);
+            bool output = false;
+            Bromsar bromsar = new Bromsar();
+            Motor motor = new Motor();
+            Kaross kaross = new Kaross();
+            Vindruta vindruta = new Vindruta();
+            Däck däck = new Däck();
+            
+            if (ärende.GetType() == bromsar.GetType()) 
+            {
+                output = mekaniker.Kbromsar;
+
+            }
+            
+            if (ärende.GetType() == motor.GetType())
+            {
+                output = mekaniker.Kmotor;
+
+            }
+            
+            if (ärende.GetType() == kaross.GetType())
+            {
+                output = mekaniker.Kkaross;
+
+            }
+            
+            if (ärende.GetType() == vindruta.GetType())
+            {
+                output = mekaniker.Kvindruta;
+
+            }
+            
+            if (ärende.GetType() == däck.GetType())
+            {
+                output = mekaniker.Kdäck;
+
+            }
+            
+            return output;
+            
+
+        }
+        public void Läggtillärenden(Ärende ärende, Fordon fordon)
+        {
+            ärende.fordon = fordon;
+            verkstad.ärendelista.Add(ärende);
             
         }
-        public void Utförärende(Ärende ärende)
+
+        public void Tabortärende(Ärende ärende)
+        {
+            if (ärende.Mekaniker != null)
+            {
+                ärende.Mekaniker.märendelista.Remove(ärende);
+            }
+                verkstad.ärendelista.Remove(ärende);
+        }
+        public void Utförtärende(Ärende ärende)
         {
             ärende.Utförärende();
+        }
+
+        public void Redigeraärende(Ärende ärende, Fordon fordon, string typ )
+        {
+            ärende.fordon = fordon;
+            if (typ == "Bromsar")
+            {
+                Bromsar bärende = new Bromsar();
+                 
+                
+                Mekaniker mekaniker = ärende.Mekaniker;
+                Allametoder(ärende, fordon, bärende, mekaniker);
+
+            } 
+
+            else if (typ == "Motor")
+            {
+                Motor bärende = new Motor();
+                
+                
+                Mekaniker mekaniker = ärende.Mekaniker;
+                Allametoder(ärende,fordon,bärende,mekaniker);
+                
+            }
+            else if (typ == "Kaross")
+            {
+                Kaross bärende = new Kaross();
+               
+                Mekaniker mekaniker = ärende.Mekaniker;
+                Allametoder(ärende, fordon, bärende, mekaniker);
+            }
+            else if (typ == "Vindruta")
+            {
+                Vindruta bärende = new Vindruta();
+                
+                Mekaniker mekaniker = ärende.Mekaniker;
+                Allametoder(ärende, fordon, bärende, mekaniker);
+            }
+            else if (typ == "Däck")
+            {
+                Däck bärende = new Däck();
+                
+                Mekaniker mekaniker = ärende.Mekaniker;
+                Allametoder(ärende, fordon, bärende, mekaniker);
+            }
+
+            
+
+        }
+
+        private void Allametoder(Ärende ärende, Fordon fordon, Ärende bärende, Mekaniker mekaniker)
+        {
+            Tabortärende(ärende);
+            Läggtillärenden(bärende, fordon);
+            if (mekaniker != null)
+            {
+
+              Mekanikeriärende(bärende, mekaniker);
+            }
         }
     }
 }

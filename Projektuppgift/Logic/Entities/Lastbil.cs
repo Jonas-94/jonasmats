@@ -6,6 +6,6 @@ namespace Logic.Entities
 {
     class Lastbil:Fordon
     {
-        public int Maxvikt { get; set; }
+        public decimal Maxvikt { get; set; }
     }
 }
