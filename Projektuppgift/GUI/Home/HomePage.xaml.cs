@@ -37,7 +37,7 @@ namespace GUI.Home
             mekaniker.Födelsedatum = txtBoxBirthday.Text;
             mekaniker.Anställninsdatum = txtBoxEmploymentDate.Text;
             mekaniker.Slutdatum = txtBoxUnEmploymentDate.Text;
-
+            
             
 
         }

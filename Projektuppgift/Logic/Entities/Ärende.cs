@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-//using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 
@@ -17,11 +17,11 @@ namespace Logic.Entities
 
         public void Sparaärende()
         {
-            //List<Ärende> Ärendelista = new List<Ärende>();
-            //Ärendelista.Add(this);
-            //ErrandList.Ärendes.Add(this);
-            //string json = JsonConvert.SerializeObject(ErrandList.Ärendes.ToArray());
-            //System.IO.File.WriteAllText(@"C: \Users\Acer\OneDrive\Dokument\Repository\C - Sharp\Projektuppgift\Ärenden.json", json);
+            List<Ärende> Ärendelista = new List<Ärende>();
+            Ärendelista.Add(this);
+            Ärendelista.Add(this);
+            string json = JsonConvert.SerializeObject(Ärendelista.ToArray());
+            System.IO.File.WriteAllText(@"C: \Users\Acer\OneDrive\Dokument\Repository\C - Sharp\Projektuppgift\Ärenden.json", json);
         }
 
         internal void Utförärende()

@@ -9,7 +9,7 @@ namespace Logic.Entities
         
         public Verkstad verkstad;
 
-        public Fordon Skapafordon(string typ, string modell, string regnr, string drivmedel, decimal milmätare, int däck, string regdatum, bool dragkrok = false, decimal maxvikt = 100, int maxpassagerare = 25)
+        public Fordon Skapafordon(string typ, string modell, string regnr, string drivmedel, decimal milmätare, int däck, string regdatum, bool dragkrok = false, decimal maxvikt = 0, int maxpassagerare = 0)
         {
             if (typ == "Bil")
             {
@@ -90,7 +90,7 @@ namespace Logic.Entities
                 }
                 catch (Exception )
                 {
-                    Console.WriteLine("det här va bosse");
+                    throw new Exception("Detta är bosse");
                    
                 }
                
@@ -131,7 +131,7 @@ namespace Logic.Entities
                         mekaniker.märendelista.Add(ärende);
                         ärende.Mekaniker = mekaniker;
                         ärende.Pågåendeärende = true;
-                Console.WriteLine("bloooop");
+                
             }
 
 
