@@ -10,7 +10,7 @@ namespace Logic.Entities
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder(":[");
+            StringBuilder sb = new StringBuilder("[");
 
             for (int i = 0; i < mekaniker.Count;i++)
             {

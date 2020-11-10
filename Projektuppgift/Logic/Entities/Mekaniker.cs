@@ -12,8 +12,8 @@ namespace Logic.Entities
 
         public List<Ärende> märendelista = new List<Ärende>();
         public string Namn { get; set; }
-        public string Födelsedatum { get; set; }
-        public string Anställningsdatum { get; set; }
+        public string Fodelsedatum { get; set; }
+        public string Anstallningsdatum { get; set; }
         public string Slutdatum { get; set; }
 
 
@@ -21,13 +21,13 @@ namespace Logic.Entities
         public bool Kmotor { get; set; }
         public bool Kkaross { get; set; }
         public bool Kvindruta { get; set; }
-        public bool Kdäck { get; set; }
-
+        public bool Kdack { get; set; }
+        
         public override string ToString()
         {
-            return Namn + " " + Födelsedatum;
+            return Namn + " " + Fodelsedatum + " " + Anstallningsdatum +" " + Slutdatum;
         }
-
+        
         public void Ändrakompetens(string kompetens)
         {
 
@@ -78,13 +78,13 @@ namespace Logic.Entities
             }
             else if (kompetens == "Däck")
             {
-                if (Kdäck)
+                if (Kdack)
                 {
-                    Kdäck = false;
+                    Kdack = false;
                 }
                 else
                 {
-                    Kdäck = true;
+                    Kdack = true;
                 }
             }
 
