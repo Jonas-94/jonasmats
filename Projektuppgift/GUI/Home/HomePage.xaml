@@ -55,13 +55,13 @@
                         </DataGrid.CellStyle>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Namn" Binding="{Binding Namn}" IsReadOnly="True" Width="150"/>
-                            <DataGridTextColumn Header="Födelsedatum" Binding="{Binding Födelsedatum}" IsReadOnly="True" Width="150"/>
-                            <DataGridTextColumn Header="Anställning" Binding="{Binding Anställningsdatum}" IsReadOnly="True" Width="150"/>
+                            <DataGridTextColumn Header="Födelsedatum" Binding="{Binding Fodelsedatum}" IsReadOnly="True" Width="150"/>
+                            <DataGridTextColumn Header="Anställning" Binding="{Binding Anstallningsdatum}" IsReadOnly="True" Width="150"/>
                             <DataGridTextColumn Header="Slutdatum" Binding="{Binding Slutdatum}" IsReadOnly="True" Width="150"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="editMekaniker" Content="Redigera " HorizontalAlignment="Left" Margin="236,350,0,0" VerticalAlignment="Top" Width="133" Click="editMekaniker_Click" Grid.Row="1" Height="20" Grid.RowSpan="2"/>
-                    <Button x:Name="laddaFil" Content="Ladda fil" HorizontalAlignment="Left" Margin="121,3,0,0" VerticalAlignment="Top" Click="laddaFil_Click" Width="62" Grid.RowSpan="2" Height="20"/>
+                    <Button x:Name="laddaFil" Content="Ladda fil" HorizontalAlignment="Left" Margin="121,3,0,0" VerticalAlignment="Top" Click="laddaMekFil_Click" Width="62" Grid.RowSpan="2" Height="20"/>
                     <Button x:Name="btnSaveEdit" Content="Spara ändring" HorizontalAlignment="Left" Margin="389,350,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2" Width="111" Click="btnSaveEditedMechanic_Click"/>
                     <Label Content="Kompetenser:" HorizontalAlignment="Left" Margin="26,189,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chBoxBroms" Content="Bromsar" HorizontalAlignment="Left" Margin="32,216,0,0" Grid.Row="1" VerticalAlignment="Top"/>
@@ -69,6 +69,7 @@
                     <CheckBox x:Name="chBoxMotor" Content="Motor" HorizontalAlignment="Left" Margin="33,261,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chBoxVindruta" Content="Vindruta" HorizontalAlignment="Left" Margin="34,282,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chBoxDäck" Content="Däck" HorizontalAlignment="Left" Margin="34,301,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                    <Button x:Name="saveMechFile" Content="Spara fil" HorizontalAlignment="Left" Margin="118,11,0,0" Grid.Row="1" VerticalAlignment="Top" Width="58" Click="saveMechFile_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Fordon" HorizontalAlignment="Right" Margin="0,0,0,0" Width="58" FontWeight="Normal">

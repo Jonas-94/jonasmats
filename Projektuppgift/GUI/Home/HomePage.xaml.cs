@@ -24,43 +24,140 @@ namespace GUI.Home
     /// </summary>
     public partial class HomePage : Page
     {
+        FileLoader fLoader = new FileLoader();
         public string filePath = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/Mekaniker.json";
-        public HomePage()
-        {
-            InitializeComponent();
-            
-            try {
-
-                FileStream fs = File.OpenRead(filePath);
-                MekanikerSamling ms = new MekanikerSamling();
-                string json = JsonSerializer.Serialize(ms);
-                StreamReader sr = new StreamReader(fs);
-                json = sr.ReadToEnd();
-                MekanikerSamling uppLast = JsonSerializer.Deserialize<MekanikerSamling>(json);
-                ms.mekaniker = uppLast.mekaniker;
-                sr.Close();
-                mekList = uppLast.mekaniker;
-                foreach (var mek in uppLast.mekaniker)
-                    mekDataGrid.Items.Add(mek);
-                laddaFil.Background = Brushes.Green;
-            }
-            catch {
-                laddaFil.Background = Brushes.Red;
-                  }
-
-        }
-        
         Mekaniker mekaniker;
         List<Mekaniker> mekList = new List<Mekaniker>();
         MekanikerSamling ms = new MekanikerSamling();
         public int mekListChoice { get; set; }
+        public HomePage()
+        {
+            InitializeComponent();
+
+            fLoader.LoadMechanicFile(filePath, mekList,ms, mekDataGrid, laddaFil);
+        }
+
+        
 
         private void BtnSaveMechanic_Click(object sender, RoutedEventArgs e)
         {
+            CreateMechanic();
+
+
+            ms.mekaniker.Add(mekaniker);
+
+
+            // fLoader.WriteMechanicFile(filePath, ms);
+
+            foreach (var mek in ms.mekaniker)
+                mekDataGrid.Items.Remove(mek);
+            foreach (var mek in ms.mekaniker)
+                mekDataGrid.Items.Add(mek);
+
+            ResetMechText();
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void editMekaniker_Click(object sender, RoutedEventArgs e)
+        {
+            mekList = ms.mekaniker;
+            int i = 0;
+            for(i=0; i<mekList.Count;i++)
+            {
+                if (mekDataGrid.SelectedItem.ToString() == mekList[i].ToString())
+                {
+                    
+                    chBoxBroms.IsChecked = false; chBoxKaross.IsChecked = false; chBoxMotor.IsChecked = false;
+                    chBoxVindruta.IsChecked = false; chBoxDäck.IsChecked = false;
+                    txtBoxName.Text = mekList[i].Namn;
+                    txtBoxBirthday.Text = mekList[i].Fodelsedatum;
+                    txtBoxEmploymentDate.Text = mekList[i].Anstallningsdatum;
+                    txtBoxUnEmploymentDate.Text = mekList[i].Slutdatum;
+                    if (mekList[i].Kbromsar == true)
+                        chBoxBroms.IsChecked = true;
+                    if (mekList[i].Kkaross == true)
+                        chBoxKaross.IsChecked = true;
+                    if (mekList[i].Kmotor == true)
+                        chBoxMotor.IsChecked = true;
+                    if (mekList[i].Kvindruta == true)
+                        chBoxVindruta.IsChecked = true;
+                    if (mekList[i].Kdack == true)
+                        chBoxDäck.IsChecked = true;
+                    mekListChoice = i;
+                }
+            }
+           
+            
+        }
+
+        private void laddaMekFil_Click(object sender, RoutedEventArgs e)
+        {
+            FileDialog fileDialog = new OpenFileDialog();
+            fileDialog.ShowDialog();
+            filePath = fileDialog.FileName;
+
+            fLoader.LoadMechanicFile(filePath, mekList,ms, mekDataGrid, laddaFil);
+
+        }
+
+        private void btnSaveEditedMechanic_Click(object sender, RoutedEventArgs e)
+        {
+            
+            mekList[mekListChoice].Namn = txtBoxName.Text;
+            mekList[mekListChoice].Fodelsedatum = txtBoxBirthday.Text;
+            mekList[mekListChoice].Anstallningsdatum = txtBoxEmploymentDate.Text;
+            mekList[mekListChoice].Slutdatum = txtBoxUnEmploymentDate.Text;
+
+            if (chBoxBroms.IsChecked == true)
+                mekList[mekListChoice].Kbromsar = true;
+            else
+                mekList[mekListChoice].Kbromsar = false;
+            
+            if (chBoxKaross.IsChecked == true)
+                mekList[mekListChoice].Kkaross = true;
+            else
+                mekList[mekListChoice].Kkaross = false;
+
+            if (chBoxMotor.IsChecked == true)
+                mekList[mekListChoice].Kmotor = true;
+            else
+                mekList[mekListChoice].Kmotor = false;
+
+            if (chBoxVindruta.IsChecked == true)
+                mekList[mekListChoice].Kvindruta = true;
+            else
+                mekList[mekListChoice].Kvindruta = false;
+
+            if (chBoxDäck.IsChecked == true)
+                mekList[mekListChoice].Kdack = true;
+            else
+                mekList[mekListChoice].Kdack = false;
+
+            foreach (var mek in mekList)
+                mekDataGrid.Items.Remove(mek);
+
+            foreach (var mek in mekList)
+                mekDataGrid.Items.Add(mek);
+
+            
+
+            //fLoader.WriteMechanicFile(filePath, ms);
+
+            ResetMechText();
+            
+
+        }
+
+        public void CreateMechanic()
+        {
             mekaniker = new Mekaniker();
             mekaniker.Namn = txtBoxName.Text;
-            mekaniker.Födelsedatum = txtBoxBirthday.Text;
-            mekaniker.Anställningsdatum = txtBoxEmploymentDate.Text;
+            mekaniker.Fodelsedatum = txtBoxBirthday.Text;
+            mekaniker.Anstallningsdatum = txtBoxEmploymentDate.Text;
             mekaniker.Slutdatum = txtBoxUnEmploymentDate.Text;
             if (chBoxBroms.IsChecked == true)
                 mekaniker.Kbromsar = true;
@@ -83,181 +180,28 @@ namespace GUI.Home
                 mekaniker.Kvindruta = false;
 
             if (chBoxDäck.IsChecked == true)
-                mekaniker.Kdäck = true;
+                mekaniker.Kdack = true;
             else
-                mekaniker.Kdäck = false;
+                mekaniker.Kdack = false;
 
-            mekList.Add(mekaniker);
-
-            ms.mekaniker = mekList;
-            try
-            {
-                FileStream fs = File.OpenWrite(filePath);
-                StreamWriter sw = new StreamWriter(fs);
-                string json = JsonSerializer.Serialize(mekList);
-                sw.Write(json);
-                sw.Close();
-            }
-            catch
-            {
-                FileDialog fileDialog = new OpenFileDialog();
-                fileDialog.ShowDialog();
-                filePath = fileDialog.FileName;
-            }
-            foreach (var mek in ms.mekaniker)
-                mekDataGrid.Items.Remove(mek);
-            foreach (var mek in ms.mekaniker)
-                mekDataGrid.Items.Add(mek);
-
-            // nu kan vi spara ner mekaniker i json
-            //txtBoxName.Text = "";
-            //txtBoxBirthday.Text = "";
-            //txtBoxEmploymentDate.Text = "";
-            //txtBoxUnEmploymentDate.Text = "";
-            //chBoxBroms.IsChecked = false; chBoxKaross.IsChecked = false; chBoxMotor.IsChecked = false;
-            //chBoxVindruta.IsChecked = false; chBoxDäck.IsChecked = false;
-
-
-        }
-
-        private void lBoxMek_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void editMekaniker_Click(object sender, RoutedEventArgs e)
-        {
-
-            txtBoxName.Text = mekDataGrid.SelectedItem.ToString();
-            for(int i=0; i<mekList.Count;i++)
-            {
-                if (mekDataGrid.SelectedItem.ToString().Contains(mekList[i].ToString()))
-                {
-                    chBoxBroms.IsChecked = false; chBoxKaross.IsChecked = false; chBoxMotor.IsChecked = false;
-                    chBoxVindruta.IsChecked = false; chBoxDäck.IsChecked = false;
-                    txtBoxName.Text = mekList[i].Namn;
-                    txtBoxBirthday.Text = mekList[i].Födelsedatum;
-                    txtBoxEmploymentDate.Text = mekList[i].Anställningsdatum;
-                    txtBoxUnEmploymentDate.Text = mekList[i].Slutdatum;
-                    if (mekList[i].Kbromsar == true)
-                        chBoxBroms.IsChecked = true;
-                    if (mekList[i].Kkaross == true)
-                        chBoxKaross.IsChecked = true;
-                    if (mekList[i].Kmotor == true)
-                        chBoxMotor.IsChecked = true;
-                    if (mekList[i].Kvindruta == true)
-                        chBoxVindruta.IsChecked = true;
-                    if (mekList[i].Kdäck == true)
-                        chBoxDäck.IsChecked = true;
-                    mekListChoice = i;
-                }
-            }
-           
             
         }
 
-        private void laddaFil_Click(object sender, RoutedEventArgs e)
+        public void ResetMechText()
         {
-            try
-            {
-                FileDialog fileDialog = new OpenFileDialog();
-                fileDialog.ShowDialog();
-                filePath = fileDialog.FileName;
-
-                FileStream fs = File.OpenRead(filePath);
-                MekanikerSamling ms = new MekanikerSamling();
-                string json = JsonSerializer.Serialize(ms);
-                StreamReader sr = new StreamReader(fs);
-                json = sr.ReadToEnd();
-                MekanikerSamling uppLast = JsonSerializer.Deserialize<MekanikerSamling>(json);
-
-                ms.mekaniker = uppLast.mekaniker;
-                sr.Close();
-                mekList = ms.mekaniker;
-                    foreach (var rmek in mekList)
-                        mekDataGrid.Items.Remove(rmek);
-                    foreach (var mek in mekList)
-                        mekDataGrid.Items.Add(mek);
-                laddaFil.Background = Brushes.Green;
-            }
-            catch
-            {
-                laddaFil.Background = Brushes.Red;
-            }
-
-        }
-
-        private void btnSaveEditedMechanic_Click(object sender, RoutedEventArgs e)
-        {
-            
-            mekList[mekListChoice].Namn = txtBoxName.Text;
-            mekList[mekListChoice].Födelsedatum = txtBoxBirthday.Text;
-            mekList[mekListChoice].Anställningsdatum = txtBoxEmploymentDate.Text;
-            mekList[mekListChoice].Slutdatum = txtBoxUnEmploymentDate.Text;
-
-            if (chBoxBroms.IsChecked == true)
-                mekList[mekListChoice].Kbromsar = true;
-            else
-                mekList[mekListChoice].Kbromsar = false;
-
-            if (chBoxKaross.IsChecked == true)
-                mekList[mekListChoice].Kkaross = true;
-            else
-                mekList[mekListChoice].Kkaross = false;
-
-            if (chBoxMotor.IsChecked == true)
-                mekList[mekListChoice].Kmotor = true;
-            else
-                mekList[mekListChoice].Kmotor = false;
-
-            if (chBoxVindruta.IsChecked == true)
-                mekList[mekListChoice].Kvindruta = true;
-            else
-                mekList[mekListChoice].Kvindruta = false;
-
-            if (chBoxDäck.IsChecked == true)
-                mekList[mekListChoice].Kdäck = true;
-            else
-                mekList[mekListChoice].Kdäck = false;
-
-            foreach (var mek in mekList)
-                mekDataGrid.Items.Remove(mek);
-
-            foreach (var mek in mekList)
-                mekDataGrid.Items.Add(mek);
-
-            SaveFile();
-
             chBoxBroms.IsChecked = false; chBoxKaross.IsChecked = false; chBoxMotor.IsChecked = false;
             chBoxVindruta.IsChecked = false; chBoxDäck.IsChecked = false;
             txtBoxName.Text = "";
             txtBoxBirthday.Text = "";
             txtBoxEmploymentDate.Text = "";
             txtBoxUnEmploymentDate.Text = "";
-
         }
 
-        private void rBtnBroms_Checked(object sender, RoutedEventArgs e)
+        private void saveMechFile_Click(object sender, RoutedEventArgs e)
         {
+            fLoader.WriteMechanicFile(filePath, ms);
 
-        }
 
-        public void SaveFile()
-        {
-            
-                ms.mekaniker = mekList;
-                FileStream fs = File.OpenWrite(filePath);
-                StreamWriter sw = new StreamWriter(fs);
-                string json = JsonSerializer.Serialize(ms);
-                sw.Write(json);
-                sw.Close();
-            
-           
         }
     }
 }

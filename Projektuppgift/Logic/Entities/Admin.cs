@@ -66,11 +66,11 @@ namespace Logic.Entities
         {
             Mekaniker mekaniker = new Mekaniker();
             mekaniker.Namn = namn;
-            mekaniker.Födelsedatum = födelsedatum;
-            mekaniker.Anställningsdatum = anställningsdatum;
+            mekaniker.Fodelsedatum = födelsedatum;
+            mekaniker.Anstallningsdatum = anställningsdatum;
             mekaniker.Slutdatum = slutdatum;
             mekaniker.Kbromsar = false;
-            mekaniker.Kdäck = false;
+            mekaniker.Kdack = false;
             mekaniker.Kkaross = false;
             mekaniker.Kmotor = false;
             mekaniker.Kvindruta = false;
@@ -172,7 +172,7 @@ namespace Logic.Entities
             
             if (ärende.GetType() == däck.GetType())
             {
-                output = mekaniker.Kdäck;
+                output = mekaniker.Kdack;
 
             }
             
