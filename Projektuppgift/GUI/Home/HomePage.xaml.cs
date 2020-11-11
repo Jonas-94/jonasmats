@@ -25,168 +25,78 @@ namespace GUI.Home
     public partial class HomePage : Page
     {
         FileLoader fLoader = new FileLoader();
-        public string filePath = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/Mekaniker.json";
+        public string filePathMechanics = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/Mekaniker.json";
+        public string filePathFordons = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/Fordon.json";
         Mekaniker mekaniker;
         List<Mekaniker> mekList = new List<Mekaniker>();
         MekanikerSamling ms = new MekanikerSamling();
         public int mekListChoice { get; set; }
+
+        BilSamling bs = new BilSamling();
+        
+
         public HomePage()
         {
             InitializeComponent();
+            
 
-            fLoader.LoadMechanicFile(filePath, mekList,ms, mekDataGrid, laddaFil);
+            //Laddar mekaniker från Json
+            fLoader.GetMechs(filePathMechanics, ms);
+            //Lägger in mekaniker i Datagrid
+            mekDataGrid.ItemsSource = ms.mekaniker;
+
+            /* --- Test för fordonsdatagrid ---
+            //Lägger in 2 nya bilar i Klassen bilsamling(ofärdigt)
+            bs.Bilar.Add(new Bil { Dragkrok = true, Drivmedel = "El", Däck = 4 });
+            bs.Bilar.Add(new Bil { Dragkrok = false, Drivmedel = "OK", Däck = 3 });
+            //Lägger in bilar i datagrid
+            fordonDataGrid.ItemsSource = bs.Bilar;
+            //sparar bilar i Json()
+            fLoader.WriteFordonFile(filePathFordons, bs.Bilar);
+            */
         }
 
-        
-
-        private void BtnSaveMechanic_Click(object sender, RoutedEventArgs e)
+        //Knappen för att lägga till en ny Mekaniker
+        private void BtnCreateMechanic_Click(object sender, RoutedEventArgs e)
         {
-            CreateMechanic();
-
-
+            Mekaniker mekaniker = new Mekaniker();
+            //bools för kompetenser
+            bool broms = false;
+            bool kaross = false;
+            bool motor = false;
+            bool vindruta = false;
+            bool däck = false;
+            if (chBoxBroms.IsChecked == true) { broms = true; };
+            if (chBoxKaross.IsChecked == true) { kaross = true; };
+            if(chBoxMotor.IsChecked == true) { motor = true; };
+            if(chBoxVindruta.IsChecked == true) { vindruta = true; };
+            if (chBoxDäck.IsChecked == true){ däck = true; };
+            //Skapar ny mekaniker
+            mekaniker = mekaniker.CreateMechanic(txtBoxName.Text, txtBoxBirthday.Text,txtBoxEmploymentDate.Text,txtBoxUnEmploymentDate.Text,
+                broms, kaross, motor, vindruta, däck);
             ms.mekaniker.Add(mekaniker);
-
-
-            // fLoader.WriteMechanicFile(filePath, ms);
-
-            foreach (var mek in ms.mekaniker)
-                mekDataGrid.Items.Remove(mek);
-            foreach (var mek in ms.mekaniker)
-                mekDataGrid.Items.Add(mek);
-
+            //Refreshar DataGrid, nollställer och lägger in listan på nytt
+            mekDataGrid.ItemsSource = null;
+            mekDataGrid.ItemsSource = ms.mekaniker;
+            
             ResetMechText();
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-        private void editMekaniker_Click(object sender, RoutedEventArgs e)
-        {
-            mekList = ms.mekaniker;
-            int i = 0;
-            for(i=0; i<mekList.Count;i++)
-            {
-                if (mekDataGrid.SelectedItem.ToString() == mekList[i].ToString())
-                {
-                    
-                    chBoxBroms.IsChecked = false; chBoxKaross.IsChecked = false; chBoxMotor.IsChecked = false;
-                    chBoxVindruta.IsChecked = false; chBoxDäck.IsChecked = false;
-                    txtBoxName.Text = mekList[i].Namn;
-                    txtBoxBirthday.Text = mekList[i].Fodelsedatum;
-                    txtBoxEmploymentDate.Text = mekList[i].Anstallningsdatum;
-                    txtBoxUnEmploymentDate.Text = mekList[i].Slutdatum;
-                    if (mekList[i].Kbromsar == true)
-                        chBoxBroms.IsChecked = true;
-                    if (mekList[i].Kkaross == true)
-                        chBoxKaross.IsChecked = true;
-                    if (mekList[i].Kmotor == true)
-                        chBoxMotor.IsChecked = true;
-                    if (mekList[i].Kvindruta == true)
-                        chBoxVindruta.IsChecked = true;
-                    if (mekList[i].Kdack == true)
-                        chBoxDäck.IsChecked = true;
-                    mekListChoice = i;
-                }
-            }
-           
             
         }
-
+        //Knapp som kan ladda Mekaniker-Json-fil om den inte hittats
         private void laddaMekFil_Click(object sender, RoutedEventArgs e)
         {
             FileDialog fileDialog = new OpenFileDialog();
             fileDialog.ShowDialog();
-            filePath = fileDialog.FileName;
+            filePathMechanics = fileDialog.FileName;
 
-            fLoader.LoadMechanicFile(filePath, mekList,ms, mekDataGrid, laddaFil);
-
+            //fLoader.LoadFile(filePathMechanics, ms);
         }
 
-        private void btnSaveEditedMechanic_Click(object sender, RoutedEventArgs e)
-        {
-            
-            mekList[mekListChoice].Namn = txtBoxName.Text;
-            mekList[mekListChoice].Fodelsedatum = txtBoxBirthday.Text;
-            mekList[mekListChoice].Anstallningsdatum = txtBoxEmploymentDate.Text;
-            mekList[mekListChoice].Slutdatum = txtBoxUnEmploymentDate.Text;
-
-            if (chBoxBroms.IsChecked == true)
-                mekList[mekListChoice].Kbromsar = true;
-            else
-                mekList[mekListChoice].Kbromsar = false;
-            
-            if (chBoxKaross.IsChecked == true)
-                mekList[mekListChoice].Kkaross = true;
-            else
-                mekList[mekListChoice].Kkaross = false;
-
-            if (chBoxMotor.IsChecked == true)
-                mekList[mekListChoice].Kmotor = true;
-            else
-                mekList[mekListChoice].Kmotor = false;
-
-            if (chBoxVindruta.IsChecked == true)
-                mekList[mekListChoice].Kvindruta = true;
-            else
-                mekList[mekListChoice].Kvindruta = false;
-
-            if (chBoxDäck.IsChecked == true)
-                mekList[mekListChoice].Kdack = true;
-            else
-                mekList[mekListChoice].Kdack = false;
-
-            foreach (var mek in mekList)
-                mekDataGrid.Items.Remove(mek);
-
-            foreach (var mek in mekList)
-                mekDataGrid.Items.Add(mek);
-
-            
-
-            //fLoader.WriteMechanicFile(filePath, ms);
-
-            ResetMechText();
-            
-
-        }
-
-        public void CreateMechanic()
-        {
-            mekaniker = new Mekaniker();
-            mekaniker.Namn = txtBoxName.Text;
-            mekaniker.Fodelsedatum = txtBoxBirthday.Text;
-            mekaniker.Anstallningsdatum = txtBoxEmploymentDate.Text;
-            mekaniker.Slutdatum = txtBoxUnEmploymentDate.Text;
-            if (chBoxBroms.IsChecked == true)
-                mekaniker.Kbromsar = true;
-            else
-                mekaniker.Kbromsar = false;
-
-            if (chBoxKaross.IsChecked == true)
-                mekaniker.Kkaross = true;
-            else
-                mekaniker.Kkaross = false;
-
-            if (chBoxMotor.IsChecked == true)
-                mekaniker.Kmotor = true;
-            else
-                mekaniker.Kmotor = false;
-
-            if (chBoxVindruta.IsChecked == true)
-                mekaniker.Kvindruta = true;
-            else
-                mekaniker.Kvindruta = false;
-
-            if (chBoxDäck.IsChecked == true)
-                mekaniker.Kdack = true;
-            else
-                mekaniker.Kdack = false;
-
-            
-        }
-
+        //metod som tar bort texten i TextBoxar och uncheckar Kompetens-bools i mekanikerfliker
         public void ResetMechText()
         {
             chBoxBroms.IsChecked = false; chBoxKaross.IsChecked = false; chBoxMotor.IsChecked = false;
@@ -196,12 +106,26 @@ namespace GUI.Home
             txtBoxEmploymentDate.Text = "";
             txtBoxUnEmploymentDate.Text = "";
         }
-
+        //metod som spara mekaniker till json
         private void saveMechFile_Click(object sender, RoutedEventArgs e)
         {
-            fLoader.WriteMechanicFile(filePath, ms);
+            ms.mekaniker = ms.mekaniker;
+            //fLoader.WriteFile(filePathMechanics, ms);
+            fLoader.SaveMechs(filePathMechanics, ms);
+        }
 
-
+        private void DataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+        //Knapp som tar bort vald mekaniker
+        private void btnDeleteMechanic_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < ms.mekaniker.Count; i++)
+                if (mekDataGrid.SelectedItem == ms.mekaniker[i])
+                    ms.mekaniker.RemoveAt(i);
+            mekDataGrid.ItemsSource = null;
+            mekDataGrid.ItemsSource = ms.mekaniker;
         }
     }
 }

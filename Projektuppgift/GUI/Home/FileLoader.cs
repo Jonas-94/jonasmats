@@ -21,16 +21,16 @@ namespace GUI.Home
 {
     public class FileLoader
     {
-        
-        public void WriteMechanicFile(string filePath, MekanikerSamling ms)
+        //Test att spara lista till Json, ofärdig
+        public void WriteFile<T>(string filePath, List<T> writeList)
         {
             try
             {
-                string json = JsonSerializer.Serialize(ms);
+                string json = JsonSerializer.Serialize(writeList);
                 FileStream fs = File.OpenWrite(filePath);
                 StreamWriter sw = new StreamWriter(fs);
                 
-                sw.WriteLine(json);
+                sw.Write(json);
                 sw.Close();
             }
             catch
@@ -41,38 +41,92 @@ namespace GUI.Home
 
                 FileStream fs = File.OpenWrite(filePath);
                 StreamWriter sw = new StreamWriter(fs);
-                string json = JsonSerializer.Serialize(ms);
+                string json = JsonSerializer.Serialize(writeList);
                 
                 sw.Write(json);
                 sw.Close();
             }
         }
 
-
-        public void LoadMechanicFile(string filePath, List<Mekaniker>mekList,MekanikerSamling ms, DataGrid mekDataGrid ,System.Windows.Controls.Button load)
+        //Test att ladda lista från json, ofärdig 
+        public void LoadFile<T>(string filePath, List<T>list)
         {
             
             try
             {
-                FileStream fs = File.OpenRead(filePath);
-                string json = JsonSerializer.Serialize(ms);
-                StreamReader sr = new StreamReader(fs);
-                json = sr.ReadToEnd();
-                MekanikerSamling uppLast = JsonSerializer.Deserialize<MekanikerSamling>(json);
-                
 
-                ms.mekaniker = uppLast.mekaniker;
-                mekList = ms.mekaniker;
+                FileStream fs = File.OpenRead(filePath);
+                StreamReader sr = new StreamReader(fs);
+                string json = sr.ReadToEnd();
+                List<T>upLoad = JsonSerializer.Deserialize<List<T>>(json);
+                
+                list = upLoad;
                 sr.Close();
-                foreach (var rmek in mekList)
-                    mekDataGrid.Items.Remove(rmek);
-                foreach (var mek in mekList)
-                    mekDataGrid.Items.Add(mek);
-                load.Background = Brushes.Green;
             }
             catch
             {
-                load.Background = Brushes.Red;
+            }
+        }
+
+        //Sparar Mekaniker i Json
+        public void SaveMechs(string filePath, MekanikerSamling meks)
+        {
+            System.IO.File.WriteAllText(filePath, "");
+            string json = JsonSerializer.Serialize(meks);
+            FileStream fs = File.OpenWrite(filePath);
+            StreamWriter sw = new StreamWriter(fs);
+
+            sw.Write(json);
+            sw.Close();
+        }
+        //Hämtar mekaniker från Json
+        public void GetMechs(string filePath, MekanikerSamling meks)
+        {
+            try
+            {
+                FileStream fs = File.OpenRead(filePath);
+                StreamReader sr = new StreamReader(fs);
+                string json = sr.ReadToEnd();
+                MekanikerSamling ms = JsonSerializer.Deserialize<MekanikerSamling>(json);
+                foreach (var mek in ms.mekaniker)
+                    meks.mekaniker.Add(mek);
+
+                sr.Close();
+            }
+            catch { }
+        }
+        //Experiment
+        public MekanikerSamling GetMechsfromlist(string filePath, List<Mekaniker> list  )
+        {
+            MekanikerSamling ms = new MekanikerSamling();
+            
+            LoadFile(filePath, list);
+            ms.mekaniker = list;
+            return ms;
+        }
+        //Sparar fordon i Json
+        public void WriteFordonFile <T>(string filePath, List<T> fordonLista)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize(fordonLista);
+                FileStream fs = File.OpenWrite(filePath);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write(json);
+                sw.Close();
+            }
+            catch
+            {
+                FileDialog fileDialog = new OpenFileDialog();
+                fileDialog.ShowDialog();
+                filePath = fileDialog.FileName;
+
+                FileStream fs = File.OpenWrite(filePath);
+                StreamWriter sw = new StreamWriter(fs);
+                string json = JsonSerializer.Serialize(fordonLista);
+
+                sw.Write(json);
+                sw.Close();
             }
         }
     }

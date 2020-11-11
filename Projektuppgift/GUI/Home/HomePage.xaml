@@ -48,21 +48,8 @@
                     <Label Content="Födelsedag" HorizontalAlignment="Left" Margin="30,67,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="71"/>
                     <Label Content="Anställningsdatum" HorizontalAlignment="Left" Margin="30,107,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="109"/>
                     <Label Content="Slutdatum" HorizontalAlignment="Left" Margin="30,147,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="65"/>
-                    <Button x:Name="btnSave" Content="Lägg till Mekaniker" HorizontalAlignment="Left" Margin="30,324,0,0" Width="120" Click="BtnSaveMechanic_Click" Height="25" VerticalAlignment="Top" Grid.Row="1"/>
-                    <DataGrid x:Name="mekDataGrid" Margin="235,21,74,21" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" RowDetailsVisibilityMode="VisibleWhenSelected" Background="#FFF0F0F0" Grid.Row="1">
-                        <DataGrid.CellStyle>
-                            <Style/>
-                        </DataGrid.CellStyle>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Namn" Binding="{Binding Namn}" IsReadOnly="True" Width="150"/>
-                            <DataGridTextColumn Header="Födelsedatum" Binding="{Binding Fodelsedatum}" IsReadOnly="True" Width="150"/>
-                            <DataGridTextColumn Header="Anställning" Binding="{Binding Anstallningsdatum}" IsReadOnly="True" Width="150"/>
-                            <DataGridTextColumn Header="Slutdatum" Binding="{Binding Slutdatum}" IsReadOnly="True" Width="150"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Button x:Name="editMekaniker" Content="Redigera " HorizontalAlignment="Left" Margin="236,350,0,0" VerticalAlignment="Top" Width="133" Click="editMekaniker_Click" Grid.Row="1" Height="20" Grid.RowSpan="2"/>
+                    <Button x:Name="btnCreateMechanic" Content="Lägg till Mekaniker" HorizontalAlignment="Left" Margin="30,324,0,0" Width="120" Click="BtnCreateMechanic_Click" Height="25" VerticalAlignment="Top" Grid.Row="1"/>
                     <Button x:Name="laddaFil" Content="Ladda fil" HorizontalAlignment="Left" Margin="121,3,0,0" VerticalAlignment="Top" Click="laddaMekFil_Click" Width="62" Grid.RowSpan="2" Height="20"/>
-                    <Button x:Name="btnSaveEdit" Content="Spara ändring" HorizontalAlignment="Left" Margin="389,350,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2" Width="111" Click="btnSaveEditedMechanic_Click"/>
                     <Label Content="Kompetenser:" HorizontalAlignment="Left" Margin="26,189,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chBoxBroms" Content="Bromsar" HorizontalAlignment="Left" Margin="32,216,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chBoxKaross" Content="Kaross" HorizontalAlignment="Left" Margin="32,238,0,0" Grid.Row="1" VerticalAlignment="Top"/>
@@ -70,6 +57,8 @@
                     <CheckBox x:Name="chBoxVindruta" Content="Vindruta" HorizontalAlignment="Left" Margin="34,282,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chBoxDäck" Content="Däck" HorizontalAlignment="Left" Margin="34,301,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <Button x:Name="saveMechFile" Content="Spara fil" HorizontalAlignment="Left" Margin="118,11,0,0" Grid.Row="1" VerticalAlignment="Top" Width="58" Click="saveMechFile_Click"/>
+                    <DataGrid x:Name="mekDataGrid" Grid.Row="1" Margin="240,0,0,20" SelectedIndex="0"/>
+                    <Button x:Name="btnDeleteMechanic" Content="Radera vald mekaniker" HorizontalAlignment="Left" Margin="508,351,0,0" Grid.Row="1" VerticalAlignment="Top" Width="139" Grid.RowSpan="2" Click="btnDeleteMechanic_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Fordon" HorizontalAlignment="Right" Margin="0,0,0,0" Width="58" FontWeight="Normal">
@@ -78,6 +67,7 @@
                         <ColumnDefinition Width="35*"/>
                         <ColumnDefinition Width="202*"/>
                     </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="fordonDataGrid" Grid.Column="1" Margin="94,21,72,20" SelectionChanged="DataGrid_SelectionChanged_1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Ärenden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" FontWeight="Normal">

@@ -25,9 +25,27 @@ namespace Logic.Entities
         
         public override string ToString()
         {
-            return Namn + " " + Fodelsedatum + " " + Anstallningsdatum +" " + Slutdatum;
+            return Namn + " " + Fodelsedatum + " " + Anstallningsdatum +" " + Slutdatum +
+                " " + Kbromsar + " " + Kmotor + " " + Kkaross + " " + Kvindruta + " " + Kdack;
         }
         
+        
+        public Mekaniker CreateMechanic(string Namn, string Fodelsedatum, string Anstallningsdatum, string Slutdatum,
+            bool bromsar, bool kaross, bool motor, bool vindruta, bool dack)
+        {
+            Mekaniker mekaniker = new Mekaniker();
+            mekaniker.Namn = Namn;
+            mekaniker.Fodelsedatum = Fodelsedatum;
+            mekaniker.Anstallningsdatum = Anstallningsdatum;
+            mekaniker.Slutdatum = Slutdatum;
+            mekaniker.Kbromsar = bromsar;
+            mekaniker.Kkaross = kaross;
+            mekaniker.Kmotor = motor;
+            mekaniker.Kvindruta = vindruta;
+            mekaniker.Kdack = dack;
+            return mekaniker;
+
+        }
         public void Ändrakompetens(string kompetens)
         {
 
