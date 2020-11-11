@@ -24,11 +24,13 @@ namespace GUI.Home
     /// </summary>
     public partial class HomePage : Page
     {
+        public string filePath = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/Mekaniker.json";
         public HomePage()
         {
             InitializeComponent();
             
             try {
+
                 FileStream fs = File.OpenRead(filePath);
                 MekanikerSamling ms = new MekanikerSamling();
                 string json = JsonSerializer.Serialize(ms);
@@ -47,7 +49,7 @@ namespace GUI.Home
                   }
 
         }
-        public string filePath = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/Mekaniker.json";
+        
         Mekaniker mekaniker;
         List<Mekaniker> mekList = new List<Mekaniker>();
         MekanikerSamling ms = new MekanikerSamling();
@@ -92,7 +94,7 @@ namespace GUI.Home
             {
                 FileStream fs = File.OpenWrite(filePath);
                 StreamWriter sw = new StreamWriter(fs);
-                string json = JsonSerializer.Serialize(ms);
+                string json = JsonSerializer.Serialize(mekList);
                 sw.Write(json);
                 sw.Close();
             }
@@ -106,12 +108,14 @@ namespace GUI.Home
                 mekDataGrid.Items.Remove(mek);
             foreach (var mek in ms.mekaniker)
                 mekDataGrid.Items.Add(mek);
-            txtBoxName.Text = "";
-            txtBoxBirthday.Text = "";
-            txtBoxEmploymentDate.Text = "";
-            txtBoxUnEmploymentDate.Text = "";
-            chBoxBroms.IsChecked = false; chBoxKaross.IsChecked = false; chBoxMotor.IsChecked = false;
-            chBoxVindruta.IsChecked = false; chBoxDäck.IsChecked = false;
+
+            // nu kan vi spara ner mekaniker i json
+            //txtBoxName.Text = "";
+            //txtBoxBirthday.Text = "";
+            //txtBoxEmploymentDate.Text = "";
+            //txtBoxUnEmploymentDate.Text = "";
+            //chBoxBroms.IsChecked = false; chBoxKaross.IsChecked = false; chBoxMotor.IsChecked = false;
+            //chBoxVindruta.IsChecked = false; chBoxDäck.IsChecked = false;
 
 
         }
