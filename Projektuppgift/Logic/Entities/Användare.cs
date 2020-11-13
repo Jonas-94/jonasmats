@@ -7,8 +7,17 @@ namespace Logic.Entities
     public class Användare
     {
         public string Användarnamn { get; set; }
+        public int Mekanikerid { get; set; }
         public string Lösenord { get; set; }
-        public Mekaniker mekaniker { get; set; }
+        public Mekaniker mekaniker;
+
+        
+        public void Startaden(Mekaniker mekanikerm)
+        {
+            Mekanikerid = mekanikerm.Id;
+            mekaniker = mekanikerm;
+
+        }
 
         //en metod som gör att mekanikeranvändaren kan utföra ett ärende.
         public void Utförärende(Ärende ärende)
@@ -21,6 +30,9 @@ namespace Logic.Entities
 
             mekaniker.Ändrakompetens(kompetens);
         }
+
+        
+
 
 
     }

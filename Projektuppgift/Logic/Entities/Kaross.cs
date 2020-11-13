@@ -6,5 +6,6 @@ namespace Logic.Entities
 {
     class Kaross:Ärende
     {
+        
     }
 }

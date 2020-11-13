@@ -6,6 +6,6 @@ namespace Logic.Entities
 {
     class Motor:Ärende
     {
-
+        
     }
 }

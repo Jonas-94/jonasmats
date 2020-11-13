@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Logic.Entities
 {
-    class Bromsar:Ärende
+    class Bromsar : Ärende 
     {
-
+        
     }
+    
 }

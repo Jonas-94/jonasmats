@@ -1,4 +1,5 @@
-﻿using System;
+﻿using provakod.Logic.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -11,9 +12,12 @@ namespace Logic.Entities
         //  public event PropertyChangedEventHandler PropertyChanged;
 
         public List<Ärende> märendelista = new List<Ärende>();
+        public List<int> idlista { get; set; }
+        
+        public int Id { get; set; }
         public string Namn { get; set; }
-        public string Fodelsedatum { get; set; }
-        public string Anstallningsdatum { get; set; }
+        public string Födelsedatum { get; set; }
+        public string Anställningsdatum { get; set; }
         public string Slutdatum { get; set; }
 
 
@@ -21,31 +25,49 @@ namespace Logic.Entities
         public bool Kmotor { get; set; }
         public bool Kkaross { get; set; }
         public bool Kvindruta { get; set; }
-        public bool Kdack { get; set; }
-        
+        public bool Kdäck { get; set; }
+
         public override string ToString()
         {
-            return Namn + " " + Fodelsedatum + " " + Anstallningsdatum +" " + Slutdatum +
-                " " + Kbromsar + " " + Kmotor + " " + Kkaross + " " + Kvindruta + " " + Kdack;
+            return Namn + " " + Födelsedatum + " " + Anställningsdatum + " " + Slutdatum +
+                " " + Kbromsar + " " + Kmotor + " " + Kkaross + " " + Kvindruta + " " + Kdäck;
         }
-        
-        
+
+
         public Mekaniker CreateMechanic(string Namn, string Fodelsedatum, string Anstallningsdatum, string Slutdatum,
             bool bromsar, bool kaross, bool motor, bool vindruta, bool dack)
         {
             Mekaniker mekaniker = new Mekaniker();
             mekaniker.Namn = Namn;
-            mekaniker.Fodelsedatum = Fodelsedatum;
-            mekaniker.Anstallningsdatum = Anstallningsdatum;
+            mekaniker.Födelsedatum = Fodelsedatum;
+            mekaniker.Anställningsdatum = Anstallningsdatum;
             mekaniker.Slutdatum = Slutdatum;
             mekaniker.Kbromsar = bromsar;
             mekaniker.Kkaross = kaross;
             mekaniker.Kmotor = motor;
             mekaniker.Kvindruta = vindruta;
-            mekaniker.Kdack = dack;
+            mekaniker.Kdäck = dack;
             return mekaniker;
 
         }
+        public Mekaniker()
+        {
+            
+           
+            this.Id = ID.Mnästaid();
+            idlista = new List<int>();
+            
+        }
+
+        public void Läggtillid()
+        {
+            idlista = new List<int>();
+            foreach ( var i in märendelista)
+            {
+                idlista.Add(i.Id);
+            }
+        }
+
         public void Ändrakompetens(string kompetens)
         {
 
@@ -96,13 +118,13 @@ namespace Logic.Entities
             }
             else if (kompetens == "Däck")
             {
-                if (Kdack)
+                if (Kdäck)
                 {
-                    Kdack = false;
+                    Kdäck = false;
                 }
                 else
                 {
-                    Kdack = true;
+                    Kdäck = true;
                 }
             }
 

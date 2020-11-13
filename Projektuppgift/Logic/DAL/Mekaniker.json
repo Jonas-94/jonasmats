@@ -1,1 +1,54 @@
-{"mekaniker":[{"Namn":"nadjsnajdk","Fodelsedatum":"njk","Anstallningsdatum":"njn","Slutdatum":"jn","Kbromsar":false,"Kmotor":false,"Kkaross":false,"Kvindruta":false,"Kdack":false},{"Namn":"2","Fodelsedatum":"2","Anstallningsdatum":"2","Slutdatum":"2","Kbromsar":false,"Kmotor":false,"Kkaross":false,"Kvindruta":false,"Kdack":false},{"Namn":"4","Fodelsedatum":"4","Anstallningsdatum":"44","Slutdatum":"4","Kbromsar":false,"Kmotor":false,"Kkaross":false,"Kvindruta":false,"Kdack":false},{"Namn":"7","Fodelsedatum":"7","Anstallningsdatum":"7","Slutdatum":"7","Kbromsar":false,"Kmotor":false,"Kkaross":false,"Kvindruta":false,"Kdack":false}]}
+[
+  {
+    "idlista": [],
+    "Id": 3,
+    "Namn": "hasse",
+    "F\u00F6delsedatum": "1947",
+    "Anst\u00E4llningsdatum": "1950",
+    "Slutdatum": "2080",
+    "Kbromsar": false,
+    "Kmotor": false,
+    "Kkaross": false,
+    "Kvindruta": false,
+    "Kd\u00E4ck": false
+  },
+  {
+    "idlista": [],
+    "Id": 4,
+    "Namn": "\u00E5ke",
+    "F\u00F6delsedatum": "1930",
+    "Anst\u00E4llningsdatum": "1932",
+    "Slutdatum": "2045",
+    "Kbromsar": false,
+    "Kmotor": false,
+    "Kkaross": false,
+    "Kvindruta": false,
+    "Kd\u00E4ck": false
+  },
+  {
+    "idlista": [ 1 ],
+    "Id": 5,
+    "Namn": "sture",
+    "F\u00F6delsedatum": "1945",
+    "Anst\u00E4llningsdatum": "1970",
+    "Slutdatum": "2095",
+    "Kbromsar": true,
+    "Kmotor": false,
+    "Kkaross": false,
+    "Kvindruta": false,
+    "Kd\u00E4ck": false
+  },
+  {
+    "idlista": [],
+    "Id": 6,
+    "Namn": "Johsn",
+    "F\u00F6delsedatum": "bsfs",
+    "Anst\u00E4llningsdatum": "sfgs",
+    "Slutdatum": "gsdgsdf",
+    "Kbromsar": false,
+    "Kmotor": false,
+    "Kkaross": false,
+    "Kvindruta": false,
+    "Kd\u00E4ck": false
+  }
+]
