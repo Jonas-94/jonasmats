@@ -78,6 +78,18 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </TabItem>
+            <TabItem Header="Användare" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="70" Margin="0,-1,0,0">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="txtBoxAnvändare" HorizontalAlignment="Left" Margin="311,106,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="498" Height="266" TextChanged="TextBox_TextChanged"/>
+                    <Button x:Name="append" Content="append" HorizontalAlignment="Left" Margin="414,48,0,0" VerticalAlignment="Top" Height="33" Width="131" Click="Button_Click"/>
+                    <Button x:Name="writefile" Content="writefile" HorizontalAlignment="Left" Margin="616,45,0,0" VerticalAlignment="Top" Height="31" Width="122" Click="writefile_Click"/>
+                    <TextBox x:Name="txtBoxCreateUsername" HorizontalAlignment="Left" Margin="31,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" Height="21"/>
+                    <Label Content="Skapa användarnamn:" HorizontalAlignment="Left" Margin="33,222,0,0" VerticalAlignment="Top" Width="127"/>
+                    <Label Content="Skapa lösenord" HorizontalAlignment="Left" Margin="34,278,0,0" VerticalAlignment="Top" Width="121"/>
+                    <TextBox x:Name="txtBoxCreatePassword" HorizontalAlignment="Left" Margin="34,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="skapa användare" HorizontalAlignment="Left" Margin="34,338,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_1"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Page>

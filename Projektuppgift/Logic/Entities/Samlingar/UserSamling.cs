@@ -4,24 +4,21 @@ using System.Text;
 
 namespace Logic.Entities
 {
-    public class MekanikerSamling
+    public class UserSamling
     {
-        public List<Mekaniker> mekaniker { get; set; } = new List<Mekaniker>();
-        
+        public List<User> users { get; set; } = new List<User>();
         public override string ToString()
         {
+            List<User> users = new List<User>();
             StringBuilder sb = new StringBuilder("mekaniker:[");
-
-            for (int i = 0; i < mekaniker.Count;i++)
+            for (int i = 0; i < users.Count; i++)
             {
-                sb.Append(mekaniker[i].ToString());
+                sb.Append(users[i].ToString());
                 sb.Append(",");
             }
             sb.Append("]");
-
             return sb.ToString();
 
         }
-        
     }
 }

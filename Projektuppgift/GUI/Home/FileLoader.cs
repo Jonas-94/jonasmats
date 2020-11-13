@@ -24,8 +24,10 @@ namespace GUI.Home
         //Test att spara lista till Json, ofärdig
         public void WriteFile<T>(string filePath, List<T> writeList)
         {
+            
             try
             {
+                System.IO.File.WriteAllText(filePath, "");
                 string json = JsonSerializer.Serialize(writeList);
                 FileStream fs = File.OpenWrite(filePath);
                 StreamWriter sw = new StreamWriter(fs);
@@ -67,7 +69,16 @@ namespace GUI.Home
             {
             }
         }
+        public void SaveUserJson(string filePath, UserSamling us)
+        {
+            System.IO.File.WriteAllText(filePath, "");
+            string json = JsonSerializer.Serialize(us);
+            FileStream fs = File.OpenWrite(filePath);
+            StreamWriter sw = new StreamWriter(fs);
 
+            sw.Write(json);
+            sw.Close();
+        }
         //Sparar Mekaniker i Json
         public void SaveMechs(string filePath, MekanikerSamling meks)
         {
@@ -93,7 +104,12 @@ namespace GUI.Home
 
                 sr.Close();
             }
-            catch { }
+            catch
+            {
+                FileDialog fileDialog = new OpenFileDialog();
+                fileDialog.ShowDialog();
+                filePath = fileDialog.FileName;
+            }
         }
         //Experiment
         public MekanikerSamling GetMechsfromlist(string filePath, List<Mekaniker> list  )
@@ -105,7 +121,7 @@ namespace GUI.Home
             return ms;
         }
         //Sparar fordon i Json
-        public void WriteFordonFile <T>(string filePath, List<T> fordonLista)
+        public void WriteFordonFile<T>(string filePath, List<T> fordonLista)
         {
             try
             {
@@ -128,6 +144,18 @@ namespace GUI.Home
                 sw.Write(json);
                 sw.Close();
             }
+
+        }
+        public string AppendToString<T>(List<T> list)
+        {
+            StringBuilder sb = new StringBuilder("[");
+            for (int i = 0; i < list.Count; i++)
+            {
+                sb.Append(list[i].ToString());
+                sb.Append(",");
+            }
+            sb.Append("]");
+            return sb.ToString();
         }
     }
 }

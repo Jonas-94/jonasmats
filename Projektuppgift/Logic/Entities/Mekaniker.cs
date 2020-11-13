@@ -52,11 +52,8 @@ namespace Logic.Entities
         }
         public Mekaniker()
         {
-            
-           
             this.Id = ID.Mnästaid();
             idlista = new List<int>();
-            
         }
 
         public void Läggtillid()
