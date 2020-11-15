@@ -6,17 +6,16 @@ using System.IO;
 
 namespace Logic.Entities
 {
-    public class BilSamling : InterfaceLoadSave
+    public class FordonSamling : InterfaceLoadSave
     {
-        public List<Bil> Bilar { get; set; } = new List<Bil>();
-        
+        public List<Fordon> fordon { get; set; } = new List<Fordon>();
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder("[");
 
-            for (int i = 0; i < Bilar.Count; i++)
+            for (int i = 0; i < fordon.Count; i++)
             {
-                sb.Append(Bilar[i].ToString());
+                sb.Append(fordon[i].ToString());
                 sb.Append(",");
             }
             sb.Append("]");
@@ -32,15 +31,6 @@ namespace Logic.Entities
             StreamWriter sw = new StreamWriter(fs);
             sw.Write(json);
             sw.Close();
-        }
-        List<T> InterfaceLoadSave.Load<T>(string filePath)
-        {
-            FileStream fs = File.OpenRead(filePath);
-            StreamReader sr = new StreamReader(fs);
-            string json = sr.ReadToEnd();
-            BilSamling bil = JsonSerializer.Deserialize<BilSamling>(json);
-            sr.Close();
-            return bil.Bilar as List<T>;
         }
     }
 }

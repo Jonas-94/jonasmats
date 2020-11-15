@@ -26,35 +26,43 @@ namespace GUI.Home
     public partial class HomePage : Page
     {
         FileLoader fLoader = new FileLoader();
-        public string filePath = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/";
-        public string filePathMechanics = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/Mekaniker.json";
-        public string filePathFordons = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/Fordon.json";
+
+        string filePath { get; set; } = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/";
+        string userPath = "/User.json";
+        string bussPath = "/Buss.json";string bilPath = "Bil.json";string mekPath = "Mekaniker.json";
+        
         Mekaniker mekaniker;
         List<Mekaniker> mekList = new List<Mekaniker>();
         MekanikerSamling ms = new MekanikerSamling();
+        FordonSamling fs = new FordonSamling();
         public int mekListChoice { get; set; }
 
-        BilSamling bs = new BilSamling();
-        Samlingar samlingar = new Samlingar();
+        BilSamling bilSamling = new BilSamling();
+        BussSamling bussSamling = new BussSamling();
 
+        UserSamling userSamling = new UserSamling();
+        InterfaceLoadSave IUser = new UserSamling();
+        InterfaceLoadSave IMekaniker = new MekanikerSamling();
+        InterfaceLoadSave IBil = new BilSamling();
+        InterfaceLoadSave IFordon = new FordonSamling();
+        InterfaceLoadSave IBuss = new BussSamling();
+        
+        
         public HomePage()
         {
             InitializeComponent();
+            try
+            {
+                userSamling.users = IUser.Load<User>(filePath + userPath);
+            }
+            catch { }
             //Laddar mekaniker från Json
-            fLoader.GetMechs(filePathMechanics, ms);
-            //Lägger in mekaniker i Datagrid
-            mekDataGrid.ItemsSource = ms.mekaniker;
-            /* --- Test för fordonsdatagrid ---
-            //Lägger in 2 nya bilar i Klassen bilsamling(ofärdigt)
-            bs.Bilar.Add(new Bil { Dragkrok = true, Drivmedel = "El", Däck = 4 });
-            bs.Bilar.Add(new Bil { Dragkrok = false, Drivmedel = "OK", Däck = 3 });
-            //Lägger in bilar i datagrid
-            fordonDataGrid.ItemsSource = bs.Bilar;
-            //sparar bilar i Json()
-            fLoader.WriteFordonFile(filePathFordons, bs.Bilar);
-            */
-
+            ms.mekaniker = IMekaniker.Load<Mekaniker>(filePath+mekPath);
+            dataGridMekaniker.ItemsSource = ms.mekaniker;
+            bilSamling.Bilar = IBil.Load<Bil>(filePath+bilPath);
+            dataGridFordon.ItemsSource = bilSamling.Bilar;
             
+
         }
 
         //Knappen för att lägga till en ny Mekaniker
@@ -77,8 +85,8 @@ namespace GUI.Home
                 broms, kaross, motor, vindruta, däck);
             ms.mekaniker.Add(mekaniker);
             //Refreshar DataGrid, nollställer och lägger in listan på nytt
-            mekDataGrid.ItemsSource = null;
-            mekDataGrid.ItemsSource = ms.mekaniker;
+            dataGridMekaniker.ItemsSource = null;
+            dataGridMekaniker.ItemsSource = ms.mekaniker;
             ResetMechText();
         }
 
@@ -89,9 +97,11 @@ namespace GUI.Home
         //Knapp som kan ladda Mekaniker-Json-fil om den inte hittats
         private void laddaMekFil_Click(object sender, RoutedEventArgs e)
         {
-            FileDialog fileDialog = new OpenFileDialog();
-            fileDialog.ShowDialog();
-            filePathMechanics = fileDialog.FileName;
+            fLoader.FoldPath();
+            filePath = fLoader.folderPath;
+             //FileDialog fileDialog = new OpenFileDialog();
+             //fileDialog.ShowDialog();
+             //filePath = fileDialog.FileName;
             //fLoader.LoadFile(filePathMechanics, ms);
         }
 
@@ -111,8 +121,12 @@ namespace GUI.Home
             ms.mekaniker = ms.mekaniker;
             //string write = fLoader.AppendToString(ms.mekaniker);
             //fLoader.WriteFile(filePathMechanics, ms.mekaniker);
-            fLoader.SaveMechs(filePathMechanics, ms);
+            //fLoader.SaveMechs(filePathMechanics, ms);
             //samlingar.AppendToString(ms.mekaniker);
+            //ms.Save();
+
+            IMekaniker = ms;
+            IMekaniker.Save(filePath + "Mekaniker.json");
         }
 
         private void DataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -123,10 +137,10 @@ namespace GUI.Home
         private void btnDeleteMechanic_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < ms.mekaniker.Count; i++)
-                if (mekDataGrid.SelectedItem == ms.mekaniker[i])
+                if (dataGridMekaniker .SelectedItem == ms.mekaniker[i])
                     ms.mekaniker.RemoveAt(i);
-            mekDataGrid.ItemsSource = null;
-            mekDataGrid.ItemsSource = ms.mekaniker;
+            dataGridMekaniker.ItemsSource = null;
+            dataGridMekaniker.ItemsSource = ms.mekaniker;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -149,11 +163,37 @@ namespace GUI.Home
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             User user = new User {Username = txtBoxCreateUsername.Text, Password = txtBoxCreatePassword.Text };
-            UserSamling us = new UserSamling();
-            us.users.Add(user);
-            fLoader.SaveUserJson(filePath + "User.Json", us);
             
-           
+            userSamling.users.Add(user);
+            IUser = userSamling;
+            IUser.Save(filePath + userPath);
+        }
+        private void BtnCreateFordon_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (fordonTypeMenu.Text == "Bil")
+            {
+                Bil bil = new Bil { Modellnamn = txtTb2modellNamn.Text, Registreringsnummer = txtTb2RegNr.Text, Registreringsdatum = txtTb2RegDate.Text };
+                bilSamling.Bilar.Add(bil);
+                IBil = bilSamling;
+                IBil.Save(filePath + bilPath);
+                fs.fordon.Add(bil);
+            }
+            else if(fordonTypeMenu.Text == "Buss")
+            {
+                Buss buss = new Buss { Modellnamn = txtTb2modellNamn.Text, Registreringsnummer = txtTb2RegNr.Text, Registreringsdatum = txtTb2RegDate.Text };
+                bussSamling.Bussar.Add(buss);
+                IBuss = bussSamling;
+                IBuss.Save(filePath + bussPath);
+                fs.fordon.Add(buss);
+            }
+            
+            dataGridFordon.ItemsSource = null;
+            dataGridFordon.ItemsSource = fs.fordon;
+         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

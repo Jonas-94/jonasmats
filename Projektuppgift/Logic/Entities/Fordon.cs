@@ -15,7 +15,7 @@ namespace Logic.Entities
         public string Drivmedel { get; set; }
         public int Däck { get; set; }
 
-        public Fordon()
+       /* public Fordon()
         {
             
             this.Id = ID.Fnästaid();
@@ -24,6 +24,6 @@ namespace Logic.Entities
         public void Startafordon()
         {
 
-        }
+        }*/
     }
 }

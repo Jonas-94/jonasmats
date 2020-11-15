@@ -21,6 +21,13 @@ namespace GUI.Home
 {
     public class FileLoader
     {
+        public string folderPath { get; set; }
+        public void FoldPath()
+        {
+            FolderBrowserDialog folder = new FolderBrowserDialog();
+            folder.ShowDialog();
+            folderPath = folder.SelectedPath;
+        }
         //Test att spara lista till Json, ofärdig
         public void WriteFile<T>(string filePath, List<T> writeList)
         {

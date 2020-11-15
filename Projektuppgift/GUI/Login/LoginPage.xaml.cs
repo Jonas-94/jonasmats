@@ -12,7 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Logic.Entities;
+using System.Windows.Forms;
+using System.Text.Json;
+using System.IO;
+using Logic.DAL;
 namespace GUI.Login
 {
     /// <summary>
@@ -21,12 +25,23 @@ namespace GUI.Login
     public partial class LoginPage : Page
     {
         private const string _errorMsg = "Inloggningen misslyckades";
+        InterfaceLoadSave IUser = new UserSamling();
+        UserSamling userSamling = new UserSamling();
+        public string filePath { get; set; }
+        
 
         private LoginService _loginService;
         public LoginPage()
         {
             InitializeComponent();
-
+            try
+            {
+                userSamling.users = IUser.Load<User>(filePath);
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Ladda User json-filen yo");
+            }
             _loginService = new LoginService();
 
             tbUsernam.Text = "Bosse";
@@ -50,10 +65,21 @@ namespace GUI.Login
             else
             {
 
-                MessageBox.Show(_errorMsg);
+                System.Windows.MessageBox.Show(_errorMsg);
                 this.tbUsernam.Clear();
                 this.pbPassword.Clear();
             }
         }
+
+        private void btnfindUserFile_Click(object sender, RoutedEventArgs e)
+        {
+            FileDialog fileDialog = new OpenFileDialog();
+            fileDialog.ShowDialog();
+            filePath = fileDialog.FileName;
+            userSamling.users = IUser.Load<User>(filePath);
+            _loginService.filePathGet = filePath;
+        }
+            
+        
     }
 }

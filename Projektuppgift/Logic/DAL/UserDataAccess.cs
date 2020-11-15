@@ -19,13 +19,17 @@ namespace Logic.DAL
         /// <returns></returns>
         public List<User> GetUsers()
         {
-            UserSamling us = new UserSamling();
-            string jsonString = File.ReadAllText(path);
-            us = JsonSerializer.Deserialize<UserSamling>(jsonString);
-            
-            
+            List<User> users = new List<User>();
+            FileStream fs = File.OpenRead(path);
+            StreamReader sr = new StreamReader(fs);
+            string json = sr.ReadToEnd();
+            UserSamling us = JsonSerializer.Deserialize<UserSamling>(json);
+            us = JsonSerializer.Deserialize<UserSamling>(json);
 
-            return us.users;
+            foreach (var u in us.users)
+                users.Add(u);
+
+            return users;
         }
     }
 }

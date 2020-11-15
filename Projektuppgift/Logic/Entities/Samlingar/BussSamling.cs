@@ -6,20 +6,22 @@ using System.IO;
 
 namespace Logic.Entities
 {
-    public class MekanikerSamling : InterfaceLoadSave
+    public class BussSamling : InterfaceLoadSave
     {
-        public List<Mekaniker> mekaniker { get; set; } = new List<Mekaniker>();
+        public List<Buss> Bussar { get; set; } = new List<Buss>();
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder("mekaniker:[");
-            
-            for (int i = 0; i < mekaniker.Count;i++)
+            StringBuilder sb = new StringBuilder("[");
+
+            for (int i = 0; i < Bussar.Count; i++)
             {
-                sb.Append(mekaniker[i].ToString());
+                sb.Append(Bussar[i].ToString());
                 sb.Append(",");
             }
             sb.Append("]");
+
             return sb.ToString();
+
         }
         void InterfaceLoadSave.Save(string filePath)
         {
@@ -35,9 +37,9 @@ namespace Logic.Entities
             FileStream fs = File.OpenRead(filePath);
             StreamReader sr = new StreamReader(fs);
             string json = sr.ReadToEnd();
-            MekanikerSamling meks = JsonSerializer.Deserialize<MekanikerSamling>(json);
+            BussSamling buss = JsonSerializer.Deserialize<BussSamling>(json);
             sr.Close();
-            return meks.mekaniker as List<T>;
+            return buss.Bussar as List<T>;
         }
     }
 }
