@@ -27,7 +27,7 @@ namespace GUI.Home
     {
         FileLoader fLoader = new FileLoader();
 
-        string filePath { get; set; } = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/";
+        string filePath { get; set; } = "aC:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/";
         string userPath = "/User.json";
         string bussPath = "/Buss.json";string bilPath = "Bil.json";string mekPath = "Mekaniker.json";
         
@@ -57,11 +57,20 @@ namespace GUI.Home
             }
             catch { }
             //Laddar mekaniker från Json
-            ms.mekaniker = IMekaniker.Load<Mekaniker>(filePath+mekPath);
-            dataGridMekaniker.ItemsSource = ms.mekaniker;
-            bilSamling.Bilar = IBil.Load<Bil>(filePath+bilPath);
-            dataGridFordon.ItemsSource = bilSamling.Bilar;
-            
+            try
+            {
+                ms.mekaniker = IMekaniker.Load<Mekaniker>(filePath + mekPath);
+                dataGridMekaniker.ItemsSource = ms.mekaniker;
+                bilSamling.Bilar = IBil.Load<Bil>(filePath + bilPath);
+                fs.AddFordon<Bil>(bilSamling.Bilar);
+                fs.AddFordon<Buss>(bussSamling.Bussar);
+
+                dataGridFordon.ItemsSource = fs.fordon;
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Öppna DAL-mappen för att ladda alllllllt");
+            }
 
         }
 
@@ -99,11 +108,28 @@ namespace GUI.Home
         {
             fLoader.FoldPath();
             filePath = fLoader.folderPath;
+            try
+            {
+                userSamling.users = IUser.Load<User>(filePath + userPath);
+            }
+            catch { }
+            //Laddar mekaniker från Json
+            try
+            {
+                ms.mekaniker = IMekaniker.Load<Mekaniker>(filePath + mekPath);
+                dataGridMekaniker.ItemsSource = ms.mekaniker;
+                bilSamling.Bilar = IBil.Load<Bil>(filePath + bilPath);
+                fs.AddFordon<Bil>(bilSamling.Bilar);
+                fs.AddFordon<Buss>(bussSamling.Bussar);
+
+                dataGridFordon.ItemsSource = fs.fordon;
+            }
+            catch { }
              //FileDialog fileDialog = new OpenFileDialog();
              //fileDialog.ShowDialog();
              //filePath = fileDialog.FileName;
-            //fLoader.LoadFile(filePathMechanics, ms);
-        }
+             //fLoader.LoadFile(filePathMechanics, ms);
+            }
 
         //metod som tar bort texten i TextBoxar och uncheckar Kompetens-bools i mekanikerfliker
         public void ResetMechText()

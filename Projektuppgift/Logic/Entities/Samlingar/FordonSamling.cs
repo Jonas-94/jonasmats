@@ -32,5 +32,10 @@ namespace Logic.Entities
             sw.Write(json);
             sw.Close();
         }
+        public void AddFordon<T>(List<T>list)
+        {
+            foreach (var ford in list)
+                fordon.Add(ford as Fordon);
+        }
     }
 }
