@@ -11,7 +11,7 @@ namespace Logic.Entities
         public string Lösenord { get; set; }
         public Mekaniker mekaniker;
 
-        
+        /*
         public void Startaden(Mekaniker mekanikerm)
         {
             Mekanikerid = mekanikerm.Id;
@@ -31,7 +31,7 @@ namespace Logic.Entities
             mekaniker.Ändrakompetens(kompetens);
         }
 
-        
+        */
 
 
 

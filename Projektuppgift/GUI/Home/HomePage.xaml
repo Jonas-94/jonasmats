@@ -76,11 +76,11 @@
                     <Label Content="Registreringsnummer:" HorizontalAlignment="Left" Margin="36,98,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" Height="26"/>
                     <Label Content="Registreringsdatum:" HorizontalAlignment="Left" Margin="37,151,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" Height="26"/>
                     <Label Content="Drivmedel:" HorizontalAlignment="Left" Margin="34,198,0,0" VerticalAlignment="Top" Width="84" Grid.ColumnSpan="2" Height="26"/>
-                    <CheckBox Content="Däck" HorizontalAlignment="Left" Margin="36,380,0,0" VerticalAlignment="Top" Height="15" Width="77" Grid.ColumnSpan="2"/>
-                    <CheckBox Content="Kaross" Margin="36,324,0,0" VerticalAlignment="Top" Height="15" HorizontalAlignment="Left" Width="78" Grid.ColumnSpan="2"/>
-                    <CheckBox Content="Motor" HorizontalAlignment="Left" Margin="35,343,0,0" VerticalAlignment="Top" Height="15" Width="77" Grid.ColumnSpan="2"/>
-                    <CheckBox Content="Vindruta" HorizontalAlignment="Left" Margin="35,362,0,0" VerticalAlignment="Top" Height="15" Width="71"/>
-                    <CheckBox Content="Bromsar" HorizontalAlignment="Left" Margin="36,304,0,0" VerticalAlignment="Top" Height="15" Width="71" Grid.ColumnSpan="2"/>
+                    <CheckBox x:Name="chBoxÄDäck" Content="Däck" HorizontalAlignment="Left" Margin="36,380,0,0" VerticalAlignment="Top" Height="15" Width="77" Grid.ColumnSpan="2"/>
+                    <CheckBox x:Name="chBoxÄKaross" Content="Kaross" Margin="36,324,0,0" VerticalAlignment="Top" Height="15" HorizontalAlignment="Left" Width="78" Grid.ColumnSpan="2"/>
+                    <CheckBox x:Name="chBoxÄMotor" Content="Motor" HorizontalAlignment="Left" Margin="35,343,0,0" VerticalAlignment="Top" Height="15" Width="77" Grid.ColumnSpan="2"/>
+                    <CheckBox x:Name="chBoxÄVindruta" Content="Vindruta" HorizontalAlignment="Left" Margin="35,362,0,0" VerticalAlignment="Top" Height="15" Width="71"/>
+                    <CheckBox x:Name="chBoxÄBroms" Content="Bromsar" HorizontalAlignment="Left" Margin="36,304,0,0" VerticalAlignment="Top" Height="15" Width="71" Grid.ColumnSpan="2"/>
                     <Label Content="Ärendet gäller:" HorizontalAlignment="Left" Margin="33,274,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="95"/>
                     <Button x:Name="btnTb2CreateFordon" Content="Lägg till fordon" Grid.Column="1" HorizontalAlignment="Left" Margin="33,264,0,0" VerticalAlignment="Top" Height="36" Width="85" Click="BtnCreateFordon_Click_2"/>
                     <ComboBox x:Name="fordonTypeMenu" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="41,22,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
@@ -96,8 +96,12 @@
                         <ColumnDefinition Width="128*"/>
                         <ColumnDefinition Width="737*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="tb3FordonDataGrid" Grid.Column="2" Margin="264,0,0,221"/>
-                    <DataGrid x:Name="tb3mekDataGrid" Grid.Column="2" Margin="263,211,0,0"/>
+                    <DataGrid x:Name="tb3mekDataGrid1" Margin="5,30,492,0" Height="272" VerticalAlignment="Top" Grid.ColumnSpan="3" SelectionChanged="tb3mekDataGrid1_SelectionChanged"/>
+                    <DataGrid x:Name="tb3fordonDataGrid" Grid.Column="2" Margin="264,31,-1,0" Height="276" VerticalAlignment="Top"/>
+                    <Button x:Name="tb3btnFordon" Content="Välj fordon" Grid.Column="2" Margin="0,326,179,0" Width="103" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                    <Button x:Name="tb3btnMek" Content="Välj mekaniker" Grid.Column="1" Margin="0,329,683,0" Width="92" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="2" Click="tb3btnMek_Click"/>
+                    <ComboBox x:Name="tb3cboxFordon" Grid.Column="2" Margin="264,5,0,0" Width="142" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <Button x:Name="tb3btnSkapaÄrende" Content="Skapa Ärende" Grid.Column="2" HorizontalAlignment="Left" Margin="198,331,0,0" VerticalAlignment="Top" Height="44" Width="113"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Användare" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="70" Margin="0,-1,0,0">

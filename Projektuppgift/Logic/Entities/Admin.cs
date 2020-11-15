@@ -9,7 +9,7 @@ namespace Logic.Entities
         
         public Verkstad verkstad;
 
-        
+        /*
         public Fordon Skapafordon(string typ, string modell, string regnr, string drivmedel, decimal milmätare, int däck, string regdatum, bool dragkrok = false, decimal maxvikt = 100, int maxpassagerare = 25)
         {
             if (typ == "Bil")
@@ -288,6 +288,6 @@ namespace Logic.Entities
             }
         }
 
-       
+       */
     }
 }

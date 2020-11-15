@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace provakod.Logic.DAL
 {
+    /*
     public class ijsonmekaniker: Interface_ladda_spara_json
 
     {
@@ -156,5 +157,5 @@ namespace provakod.Logic.DAL
             File.WriteAllText(path + "Motor.json", motor1);
             File.WriteAllText(path + "Däck.json", däck1);
         }
-    }
+    }*/
 }

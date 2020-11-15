@@ -15,7 +15,7 @@ namespace Logic.Entities
         public void Startauppverkstad()
         {
 
-            Skapaadmin("Bosse", "Meckarn123");
+            //Skapaadmin("Bosse", "Meckarn123");
             //användarelista[0].mekaniker = new Mekaniker();
             //Skapamekaniker("Bob", "1945", "2090", "1946");
             //Skapamekaniker("hasse", "1947", "2080", "1950");
@@ -72,6 +72,10 @@ namespace Logic.Entities
         //    Console.WriteLine("--------");
             
         //}
+
+
+
+        /*
         public void Skapanyanvändare(string användarnamn, string lösenord, Mekaniker mekaniker)
         {
 
@@ -110,6 +114,6 @@ namespace Logic.Entities
 
             
         }
-
+        */
     }
 }

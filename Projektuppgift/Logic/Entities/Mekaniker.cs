@@ -11,8 +11,8 @@ namespace Logic.Entities
     {
         //  public event PropertyChangedEventHandler PropertyChanged;
 
-        public List<Ärende> märendelista = new List<Ärende>();
-        public List<int> idlista { get; set; }
+        //public List<Ärende> märendelista = new List<Ärende>();
+        //public List<int> idlista { get; set; }
         
         public int Id { get; set; }
         public string Namn { get; set; }
@@ -27,6 +27,8 @@ namespace Logic.Entities
         public bool Kvindruta { get; set; }
         public bool Kdäck { get; set; }
 
+        public List<int> PågåendeÄrenden = new List<int>();
+
         public override string ToString()
         {
             return Namn + " " + Födelsedatum + " " + Anställningsdatum + " " + Slutdatum +
@@ -34,10 +36,11 @@ namespace Logic.Entities
         }
 
 
-        public Mekaniker CreateMechanic(string Namn, string Fodelsedatum, string Anstallningsdatum, string Slutdatum,
+        public Mekaniker CreateMechanic(int ID, string Namn, string Fodelsedatum, string Anstallningsdatum, string Slutdatum,
             bool bromsar, bool kaross, bool motor, bool vindruta, bool dack)
         {
             Mekaniker mekaniker = new Mekaniker();
+            mekaniker.Id = ID;
             mekaniker.Namn = Namn;
             mekaniker.Födelsedatum = Fodelsedatum;
             mekaniker.Anställningsdatum = Anstallningsdatum;
@@ -50,6 +53,7 @@ namespace Logic.Entities
             return mekaniker;
 
         }
+        /*
         public Mekaniker()
         {
             this.Id = ID.Mnästaid();
@@ -142,7 +146,7 @@ namespace Logic.Entities
            
             return sumärende;
         }
-
+        */
         // Create the OnPropertyChanged method to raise the event
         // The calling member's name will be used as the parameter.
         //protected void OnPropertyChanged([CallerMemberName] string name = "")

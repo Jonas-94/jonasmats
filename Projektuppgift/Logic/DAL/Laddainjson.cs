@@ -7,9 +7,10 @@ using System.Text;
 using System.Text.Json;
 
 namespace provakod.Logic.DAL
-{
+{/*
     class Laddainjson: Interface_ladda_spara_json
     {
+        
         public string path { get; set; }
 
         List<Ärende> ärendelista = new List<Ärende>();
@@ -125,5 +126,6 @@ namespace provakod.Logic.DAL
            
             return ärendelista;
         }
-    }
+        
+    }*/
 }

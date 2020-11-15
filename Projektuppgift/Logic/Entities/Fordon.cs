@@ -15,15 +15,21 @@ namespace Logic.Entities
         public string Drivmedel { get; set; }
         public int Däck { get; set; }
 
-       /* public Fordon()
-        {
-            
-            this.Id = ID.Fnästaid();
-        }
+        public bool Äbromsar { get; set; }
+        public bool Ämotor { get; set; }
+        public bool Äkaross { get; set; }
+        public bool Ävindruta { get; set; }
+        public bool Ädäck { get; set; }
 
-        public void Startafordon()
-        {
+        /* public Fordon()
+         {
 
-        }*/
+             this.Id = ID.Fnästaid();
+         }
+
+         public void Startafordon()
+         {
+
+         }*/
     }
 }

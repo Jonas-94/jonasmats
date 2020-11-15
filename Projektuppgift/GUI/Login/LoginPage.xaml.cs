@@ -27,13 +27,15 @@ namespace GUI.Login
         private const string _errorMsg = "Inloggningen misslyckades";
         InterfaceLoadSave IUser = new UserSamling();
         UserSamling userSamling = new UserSamling();
-        public string filePath { get; set; }
+        public string filePath { get; set; } = "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/User.json";
         
+
 
         private LoginService _loginService;
         public LoginPage()
         {
             InitializeComponent();
+
             try
             {
                 userSamling.users = IUser.Load<User>(filePath);
@@ -44,6 +46,7 @@ namespace GUI.Login
             }
             _loginService = new LoginService();
 
+            _loginService.filePathGet = filePath;
             tbUsernam.Text = "Bosse";
             pbPassword.Password = "Meckarn123";
         }
