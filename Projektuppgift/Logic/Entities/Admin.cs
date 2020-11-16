@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Logic.DAL;
 
 namespace Logic.Entities
 {
@@ -57,12 +58,16 @@ namespace Logic.Entities
         }
         public void Läggtillanvändare(string användarnamn, string lösenord, Mekaniker mekaniker)
         {
-            Användare användare = new Användare();
-            användare.Startaden(mekaniker);
-            användare.Lösenord = lösenord;
-            användare.Användarnamn = användarnamn;
-            
-            verkstad.användarelista.Add(användare);
+            if (regex.VerifyEmail(användarnamn) && regex.VerifyPassword (lösenord))
+            {
+                Användare användare = new Användare();
+                användare.Startaden(mekaniker);
+                användare.Lösenord = lösenord;
+                användare.Användarnamn = användarnamn;
+
+                verkstad.användarelista.Add(användare);
+            }
+
         }
         public void Läggatillmekaniker(string namn, string födelsedatum, string anställningsdatum, string slutdatum)
         {
