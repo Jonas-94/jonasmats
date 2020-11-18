@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Logic.Entities;
 
-namespace Logic.Entities
+namespace Logic.DAL
 {
     class AnvändarSamling
     {

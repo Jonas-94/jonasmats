@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Logic.Entities
 {
-    class Lastbil:Fordon
+    public class Lastbil:Fordon
     {
         public decimal Maxvikt { get; set; }
     }

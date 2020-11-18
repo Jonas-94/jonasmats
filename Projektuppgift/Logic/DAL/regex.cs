@@ -6,10 +6,14 @@ using System.Globalization;
 
 namespace Logic.DAL
 {
-    static class regex
+    static class Regex
     {
         static string ErrorMessage = "";
-
+        /*
+        public static bool VerifyRegNr(string regNr)
+        {
+            regNr = System.Text.RegularExpressions.Regex.Match
+        }*/
         public static bool VerifyEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -18,7 +22,7 @@ namespace Logic.DAL
             try
             {
                 // Normaliserr domänen
-                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
+                email = System.Text.RegularExpressions.Regex.Replace(email, @"(@)(.+)$", DomainMapper,
                                       RegexOptions.None, TimeSpan.FromMilliseconds(200));
 
                 // Undersöker domändelen av e-postmeddelandet och normaliserar det
@@ -43,7 +47,7 @@ namespace Logic.DAL
             }
             try
             {
-                return Regex.IsMatch(email,
+                return System.Text.RegularExpressions.Regex.IsMatch(email,
                     @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
                     RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
             }
@@ -63,11 +67,11 @@ namespace Logic.DAL
                 throw new Exception("Password should not be empty");
             }
 
-            var hasNumber = new Regex(@"[0-9]+");
-            var hasUpperChar = new Regex(@"[A-Z]+");
+            var hasNumber = new System.Text.RegularExpressions.Regex(@"[0-9]+");
+            var hasUpperChar = new System.Text.RegularExpressions.Regex(@"[A-Z]+");
             //var hasMiniMaxChars = new Regex(@".{4-20}");
-            var hasLowerChar = new Regex(@"[a-z]+");
-            var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+            var hasLowerChar = new System.Text.RegularExpressions.Regex(@"[a-z]+");
+            var hasSymbols = new System.Text.RegularExpressions.Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
 
             if (!hasLowerChar.IsMatch(input))
             {
@@ -104,7 +108,7 @@ namespace Logic.DAL
         public static bool checkForEmail(string email)
         {
             bool IsValid = false;
-            Regex r = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             if (r.IsMatch(email))
             {
                 IsValid = true;

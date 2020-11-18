@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Logic.Entities
 {
-    class Motorcykel:Fordon
+    public class Motorcykel:Fordon
     {
     }
 }

@@ -11,66 +11,46 @@ namespace Logic.Entities
     {
 
         public Fordon fordon;
-        public int Id { get; set; }
-        public int Fid { get; set; }
         public string Beskrivning { get; set; }
-
-        public bool Avklaratärende { get; set; }
-        public bool Pågåendeärende { get; set; }
-        public Mekaniker Mekaniker;
-
-        public void UppdateraFid()
-        {
-            Fid = fordon.Id;
-        }
-        public Ärende()
-        {
-            Avklaratärende = false;
-            Pågåendeärende = false;
-            
-            this.Id = ID.Änästaid();
-            
-        }
-
-        public void Startaupp(Fordon fordonm)
-        {
-            fordon = fordonm;
-            Fid = fordonm.Id;
-        }
         
-
-        public void Sparaärende()
+        public bool ÄrendeStatus { get; set; }
+        
+        public Mekaniker mekaniker;
+        public string mekNamn { get; set; }
+        public string fordonNamn { get; set; }
+        public string BeskrivningsMetod(Fordon fordon)
         {
-            //List<Ärende> Ärendelista = new List<Ärende>();
-            //Ärendelista.Add(this);
-            //ErrandList.Ärendes.Add(this);
-            //string json = JsonConvert.SerializeObject(ErrandList.Ärendes.ToArray());
-            //System.IO.File.WriteAllText(@"C: \Users\Acer\OneDrive\Dokument\Repository\C - Sharp\Projektuppgift\Ärenden.json", json);
+            bool broms = fordon.Äbromsar;
+            bool kaross = fordon.Äkaross;
+            bool motor = fordon.Ämotor;
+            bool vindruta = fordon.Ävindruta;
+            bool däck = fordon.Ädäck;
+            string bromsstring="", karossstring="", motorstring="", vindrutastring="", däckstring="";
+            if (broms == true)
+                bromsstring = "\nBehandling av bromsar";
+            if (kaross == true)
+                karossstring = "\nBehanding av kaross";
+            if (motor == true)
+                motorstring = "\nBehandling av motor";
+            if (vindruta == true)
+                vindrutastring = "\nBehandling av vindruta";
+            if (däck == true)
+                däckstring = "\nBehandling av däck";
+            Beskrivning = bromsstring + karossstring + motorstring + vindrutastring + däckstring;
+            return Beskrivning;
         }
-
-        internal void Utförärende()
+        public Ärende SkapaÄrende(string beskrivning, Fordon fordon, Mekaniker mekaniker)
         {
-            Pågåendeärende = false;
-            Avklaratärende = true;
+            this.mekNamn = mekaniker.Namn;
+            this.fordonNamn = fordon.Modellnamn;
+            return new Ärende
+            {
+                Beskrivning = beskrivning,
+                fordon = fordon,
+                mekaniker = mekaniker,
+                ÄrendeStatus = false,
+            };
         }
-
-        public void Setavklaratärende(bool avklaratärende)
-        {
-            Avklaratärende = avklaratärende;
-            Sparaärende();
-        }
-        public void Setpågåendeärende(bool pågåendeärende)
-        {
-            Pågåendeärende = pågåendeärende;
-            Sparaärende();
-        }
-
-        public void Bytamekaniker(Mekaniker nymekaniker)
-        {
-            Mekaniker = nymekaniker;
-            Sparaärende();
-        }
-
 
     }
 }

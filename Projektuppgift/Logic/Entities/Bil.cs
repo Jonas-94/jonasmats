@@ -6,7 +6,7 @@ namespace Logic.Entities
 {
     public class Bil : Fordon
     {
-        
+        public string bilTyp { get; set; }
         public bool Dragkrok { get; set; }
     }
 }

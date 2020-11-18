@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.IO;
-
-namespace Logic.Entities
+using Logic.Entities;
+using System.Threading.Tasks;
+namespace Logic.DAL
 {
     public class MekanikerSamling : InterfaceLoadSave
     {
@@ -20,6 +21,26 @@ namespace Logic.Entities
             }
             sb.Append("]");
             return sb.ToString();
+        }
+        async Task InterfaceLoadSave.SaveAsync(string filePath)
+        {
+            string json = JsonSerializer.Serialize(this);
+            if (File.Exists(filePath))
+            {
+                System.IO.File.WriteAllText(filePath, "");
+                FileStream fs = File.OpenWrite(filePath);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write(json);
+                sw.Close();
+            }
+            else if (!File.Exists(filePath))
+            {
+                FileStream ffs = File.OpenWrite(filePath);
+                StreamWriter tw = new StreamWriter(ffs);
+                await tw.WriteAsync(json);
+                tw.Write(json);
+                tw.Close();
+            }
         }
         void InterfaceLoadSave.Save(string filePath)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 
 namespace Logic.Entities
 {
@@ -9,12 +10,8 @@ namespace Logic.Entities
         public List<Mekaniker> mekanikerlista = new List<Mekaniker>();
         public List<Användare> användarelista = new List<Användare>();
         public List<Ärende> ärendelista = new List<Ärende>();
-        
-
-        
         public void Startauppverkstad()
         {
-
             //Skapaadmin("Bosse", "Meckarn123");
             //användarelista[0].mekaniker = new Mekaniker();
             //Skapamekaniker("Bob", "1945", "2090", "1946");
@@ -26,13 +23,12 @@ namespace Logic.Entities
             //Skapanyanvändare("Pussyslaier2", "Jobdone2", mekanikerlista[1]);
             //Skapanyanvändare("Pussyslaier3", "Jobdone3", mekanikerlista[2]);
             //Skapanyanvändare("Pussyslaier4", "Jobdone4", mekanikerlista[3]);
-
-
-
-
-
         }
-
+        public int HittaIndex<T>(T item, List<T> list)
+        {
+            return list.IndexOf(item);
+        }
+        
         // metoder för att testa koderna så att dem stämmer
         //public void Visainfo()
         //{
@@ -72,9 +68,6 @@ namespace Logic.Entities
         //    Console.WriteLine("--------");
             
         //}
-
-
-
         /*
         public void Skapanyanvändare(string användarnamn, string lösenord, Mekaniker mekaniker)
         {

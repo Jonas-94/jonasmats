@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.Json;
 using System.IO;
-using Logic.DAL;
-
-namespace Logic.Entities
+using System.Text.Json;
+using Logic.Entities;
+namespace Logic.DAL
 {
-    public class UserSamling : InterfaceLoadSave
+    public class FärdigaFordonSamling : InterfaceLoadSave
     {
-        public List<User> users { get; set; } = new List<User>();
-        
+        public List<Fordon> fordon { get; set; } = new List<Fordon>();
         public override string ToString()
         {
-            List<User> users = new List<User>();
-            StringBuilder sb = new StringBuilder("mekaniker:[");
-            for (int i = 0; i < users.Count; i++)
+            StringBuilder sb = new StringBuilder("[");
+
+            for (int i = 0; i < fordon.Count; i++)
             {
-                sb.Append(users[i].ToString());
+                sb.Append(fordon[i].ToString());
                 sb.Append(",");
             }
             sb.Append("]");
+
             return sb.ToString();
 
         }
@@ -38,9 +37,10 @@ namespace Logic.Entities
             FileStream fs = File.OpenRead(filePath);
             StreamReader sr = new StreamReader(fs);
             string json = sr.ReadToEnd();
-            UserSamling user = JsonSerializer.Deserialize<UserSamling>(json);
+            FärdigaFordonSamling färdigafordon = JsonSerializer.Deserialize<FärdigaFordonSamling>(json);
             sr.Close();
-            return user.users as List<T>;
+            return färdigafordon.fordon as List<T>;
         }
     }
+    
 }

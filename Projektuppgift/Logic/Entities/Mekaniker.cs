@@ -20,14 +20,13 @@ namespace Logic.Entities
         public string Anställningsdatum { get; set; }
         public string Slutdatum { get; set; }
 
-
         public bool Kbromsar { get; set; }
         public bool Kmotor { get; set; }
         public bool Kkaross { get; set; }
         public bool Kvindruta { get; set; }
         public bool Kdäck { get; set; }
 
-        public List<int> PågåendeÄrenden = new List<int>();
+        public int Ärenden { get; set; } 
 
         public override string ToString()
         {
