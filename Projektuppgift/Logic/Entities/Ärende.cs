@@ -1,4 +1,4 @@
-﻿using provakod.Logic.Entities;
+﻿
 using System;
 using System.Collections.Generic;
 //using Newtonsoft.Json;
@@ -14,10 +14,13 @@ namespace Logic.Entities
         public string Beskrivning { get; set; }
         
         public bool ÄrendeStatus { get; set; }
+        public int ÄrendeID { get; set; }
         
-        public Mekaniker mekaniker;
-        public string mekNamn { get; set; }
-        public string fordonNamn { get; set; }
+        public Mekaniker mekaniker { get; set; }
+        public string förnamn { get; set; }
+        public string efternamn { get; set; }
+        public string RegNr { get; set; }
+        public string RegDatum { get; set; }
         public string BeskrivningsMetod(Fordon fordon)
         {
             bool broms = fordon.Äbromsar;
@@ -36,21 +39,8 @@ namespace Logic.Entities
                 vindrutastring = "\nBehandling av vindruta";
             if (däck == true)
                 däckstring = "\nBehandling av däck";
-            Beskrivning = bromsstring + karossstring + motorstring + vindrutastring + däckstring;
+            Beskrivning = " " + bromsstring + karossstring + motorstring + vindrutastring + däckstring;
             return Beskrivning;
         }
-        public Ärende SkapaÄrende(string beskrivning, Fordon fordon, Mekaniker mekaniker)
-        {
-            this.mekNamn = mekaniker.Namn;
-            this.fordonNamn = fordon.Modellnamn;
-            return new Ärende
-            {
-                Beskrivning = beskrivning,
-                fordon = fordon,
-                mekaniker = mekaniker,
-                ÄrendeStatus = false,
-            };
-        }
-
     }
 }

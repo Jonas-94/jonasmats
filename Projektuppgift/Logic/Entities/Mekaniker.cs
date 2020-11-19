@@ -1,4 +1,4 @@
-﻿using provakod.Logic.Entities;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +15,8 @@ namespace Logic.Entities
         //public List<int> idlista { get; set; }
         
         public int Id { get; set; }
-        public string Namn { get; set; }
+        public string förnamn { get; set; }
+        public string efternamn { get; set; }
         public string Födelsedatum { get; set; }
         public string Anställningsdatum { get; set; }
         public string Slutdatum { get; set; }
@@ -28,19 +29,23 @@ namespace Logic.Entities
 
         public int Ärenden { get; set; } 
 
-        public override string ToString()
+        public string ToStringBeskrivning()
         {
-            return Namn + " " + Födelsedatum + " " + Anställningsdatum + " " + Slutdatum +
-                " " + Kbromsar + " " + Kmotor + " " + Kkaross + " " + Kvindruta + " " + Kdäck;
+            return "Förnamn: "+förnamn + "\n" + 
+                "Efternamn: " + efternamn + "\n" +
+                "Födelsedatum: " + Födelsedatum + "\n" + 
+                "Anställningsdatum: " + Anställningsdatum + "\n" +
+                "Slutdatum: " +Slutdatum + "\n" +
+                "Kompetenser:\nBromsar: " + Kbromsar +
+                "\nMotor: " + Kmotor + "\nKaross: " + Kkaross + 
+                "\nVindruta: " + Kvindruta + "\nDäck: " + Kdäck;
         }
-
-
         public Mekaniker CreateMechanic(int ID, string Namn, string Fodelsedatum, string Anstallningsdatum, string Slutdatum,
             bool bromsar, bool kaross, bool motor, bool vindruta, bool dack)
         {
             Mekaniker mekaniker = new Mekaniker();
             mekaniker.Id = ID;
-            mekaniker.Namn = Namn;
+            mekaniker.förnamn = Namn;
             mekaniker.Födelsedatum = Fodelsedatum;
             mekaniker.Anställningsdatum = Anstallningsdatum;
             mekaniker.Slutdatum = Slutdatum;

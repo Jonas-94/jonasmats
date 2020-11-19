@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
+using System.IO;
 using Logic.Entities;
 using System.Threading.Tasks;
-using System.IO;
-using System.Text.Json;
 namespace Logic.DAL
 {
-    public class LastbilSamling : InterfaceLoadSave
+    public class BilSamling : InterfaceLoadSave
     {
-        public List<Lastbil> lastbilar { get; set; } = new List<Lastbil>();
+        public List<Bil> Bilar { get; set; } = new List<Bil>();
+        
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder("[");
 
-            for (int i = 0; i < lastbilar.Count; i++)
+            for (int i = 0; i < Bilar.Count; i++)
             {
-                sb.Append(lastbilar[i].ToString());
+                sb.Append(Bilar[i].ToString());
                 sb.Append(",");
             }
             sb.Append("]");
@@ -24,6 +25,7 @@ namespace Logic.DAL
             return sb.ToString();
 
         }
+        
         async Task InterfaceLoadSave.SaveAsync(string filePath)
         {
             string json = JsonSerializer.Serialize(this);
@@ -44,6 +46,7 @@ namespace Logic.DAL
                 tw.Close();
             }
         }
+        
         void InterfaceLoadSave.Save(string filePath)
         {
             System.IO.File.WriteAllText(filePath, "");
@@ -55,13 +58,13 @@ namespace Logic.DAL
         }
         List<T> InterfaceLoadSave.Load<T>(string filePath)
         {
+           
             FileStream fs = File.OpenRead(filePath);
             StreamReader sr = new StreamReader(fs);
             string json = sr.ReadToEnd();
-            LastbilSamling lastbil = JsonSerializer.Deserialize<LastbilSamling>(json);
+            BilSamling bil = JsonSerializer.Deserialize<BilSamling>(json);
             sr.Close();
-            return lastbil.lastbilar as List<T>;
+            return bil.Bilar as List<T>;
         }
     }
 }
-

@@ -25,7 +25,7 @@
                     <TranslateTransform X="0.285"/>
                 </TransformGroup>
             </TabControl.RenderTransform>
-            <TabItem Header="Mekaniker" FontWeight="Normal" Margin="0,0,0,0">
+            <TabItem x:Name="MekanikerTab" Header="Mekaniker" FontWeight="Normal" Margin="0,0,0,0">
                 <Grid RenderTransformOrigin="0.5,0.5" Background="#FFE5E5E5" Margin="2,0,-1,0" Width="Auto" Height="479">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="14*"/>
@@ -51,7 +51,7 @@
                     <Button x:Name="btnCreateMechanic" Content="Lägg till Mekaniker" HorizontalAlignment="Left" Margin="30,324,0,0" Width="120" Click="BtnCreateMechanic_Click" Height="25" VerticalAlignment="Top" Grid.Row="1"/>
                     <Button x:Name="laddaFil" Content="Öppna DAL-mapp" HorizontalAlignment="Left" Margin="7,5,0,0" VerticalAlignment="Top" Click="laddaMekFil_Click" Width="111" Grid.RowSpan="2" Height="36"/>
                     <Label Content="Kompetenser:" HorizontalAlignment="Left" Margin="26,189,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-                    <CheckBox x:Name="chBoxBroms" Content="Bromsar" HorizontalAlignment="Left" Margin="32,216,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="chBoxBroms" Content="Bromsar" HorizontalAlignment="Left" Margin="33,218,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chBoxKaross" Content="Kaross" HorizontalAlignment="Left" Margin="32,238,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chBoxMotor" Content="Motor" HorizontalAlignment="Left" Margin="33,261,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chBoxVindruta" Content="Vindruta" HorizontalAlignment="Left" Margin="34,282,0,0" Grid.Row="1" VerticalAlignment="Top"/>
@@ -61,7 +61,7 @@
                     <Button x:Name="btnDeleteMechanic" Content="Radera vald mekaniker" HorizontalAlignment="Left" Margin="508,351,0,0" Grid.Row="1" VerticalAlignment="Top" Width="139" Grid.RowSpan="2" Click="btnDeleteMechanic_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Fordon" HorizontalAlignment="Right" Margin="0,0,0,0" Width="58" FontWeight="Normal">
+            <TabItem x:Name="FordonTab" Header="Fordon" HorizontalAlignment="Right" Margin="0,0,0,0" Width="58" FontWeight="Normal">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="53*"/>
@@ -75,12 +75,12 @@
                     <Label Content="Modellnamn:" HorizontalAlignment="Left" Margin="42,50,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="105" Height="26"/>
                     <Label Content="Registreringsnummer:" HorizontalAlignment="Left" Margin="36,98,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" Height="26"/>
                     <Label Content="Registreringsdatum:" HorizontalAlignment="Left" Margin="37,151,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" Height="26"/>
-                    <Label Content="Mätare:" HorizontalAlignment="Left" Margin="34,198,0,0" VerticalAlignment="Top" Width="84" Grid.ColumnSpan="2" Height="26"/>
-                    <CheckBox x:Name="chBoxÄDäck" Content="Däck" HorizontalAlignment="Left" Margin="22,362,0,0" VerticalAlignment="Top" Height="15" Width="77" Grid.Column="1"/>
-                    <CheckBox x:Name="chBoxÄKaross" Content="Kaross" Margin="34,324,0,0" VerticalAlignment="Top" Height="15" HorizontalAlignment="Left" Width="78" Grid.ColumnSpan="2"/>
-                    <CheckBox x:Name="chBoxÄMotor" Content="Motor" HorizontalAlignment="Left" Margin="35,343,0,0" VerticalAlignment="Top" Height="15" Width="77" Grid.ColumnSpan="2"/>
-                    <CheckBox x:Name="chBoxÄVindruta" Content="Vindruta" HorizontalAlignment="Left" Margin="35,362,0,0" VerticalAlignment="Top" Height="15" Width="71"/>
-                    <CheckBox x:Name="chBoxÄBroms" Content="Bromsar" HorizontalAlignment="Left" Margin="20,343,0,0" VerticalAlignment="Top" Height="15" Width="71" Grid.Column="1"/>
+                    <Label Content="Milmätare:" HorizontalAlignment="Left" Margin="34,198,0,0" VerticalAlignment="Top" Width="84" Grid.ColumnSpan="2" Height="26"/>
+                    <CheckBox x:Name="chBoxÄDäck" Content="Däck" HorizontalAlignment="Left" Margin="35,397,0,0" VerticalAlignment="Top" Height="15" Width="235" Grid.ColumnSpan="2"/>
+                    <CheckBox x:Name="chBoxÄKaross" Content="Kaross" Margin="34,324,0,0" VerticalAlignment="Top" Height="15" HorizontalAlignment="Left" Width="262" Grid.ColumnSpan="2"/>
+                    <CheckBox x:Name="chBoxÄMotor" Content="Motor" HorizontalAlignment="Left" Margin="35,343,0,0" VerticalAlignment="Top" Height="15" Width="279" Grid.ColumnSpan="2"/>
+                    <CheckBox x:Name="chBoxÄVindruta" Content="Vindruta" HorizontalAlignment="Left" Margin="35,362,0,0" VerticalAlignment="Top" Height="15" Width="262" Grid.ColumnSpan="2"/>
+                    <CheckBox x:Name="chBoxÄBroms" Content="Bromsar" HorizontalAlignment="Left" Margin="35,381,0,0" VerticalAlignment="Top" Height="15" Width="228" Grid.ColumnSpan="2"/>
                     <Label Content="Ärendet gäller:" HorizontalAlignment="Left" Margin="56,297,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="95"/>
                     <Button x:Name="btnTb2CreateFordon" Content="Lägg till fordon" Grid.Column="1" HorizontalAlignment="Left" Margin="97,242,0,0" VerticalAlignment="Top" Height="36" Width="85" Click="BtnCreateFordon_Click_2"/>
                     <ComboBox x:Name="fordonTypeMenu" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="6,22,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
@@ -90,14 +90,13 @@
                         <ComboBoxItem x:Name="Motorcykel" Content="Motorcykel"/>
                     </ComboBox>
                     <ComboBox x:Name="tb2cBoxBilTyp" HorizontalAlignment="Left" Margin="65,73,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectedIndex="0">
-                        <ComboBoxItem Content="Sedan"/>
-                        <ComboBoxItem Content="Herrgårdsvagn"/>
-                        <ComboBoxItem Content="Cabriolet"/>
-                        <ComboBoxItem Content="Halvkombi"/>
+                        <ComboBoxItem x:Name="Sedan" Content="Sedan"/>
+                        <ComboBoxItem x:Name="Herrgårdsvagn" Content="Herrgårdsvagn"/>
+                        <ComboBoxItem x:Name="Cabriolet" Content="Cabriolet"/>
+                        <ComboBoxItem x:Name="Halvkombi" Content="Halvkombi"/>
                     </ComboBox>
-                    <RadioButton x:Name="tb2DragKrok" Content="Dragkrok" Grid.Column="1" HorizontalAlignment="Left" Margin="71,122,0,0" VerticalAlignment="Top"/>
                     <Label Content="Drivmedel:" HorizontalAlignment="Left" Margin="42,241,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="81"/>
-                    <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="31,271,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+                    <ComboBox x:Name="tb2Drivmedel" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="31,271,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
                         <ComboBoxItem x:Name="El" Content="El"/>
                         <ComboBoxItem x:Name="Bensin" Content="Bensin"/>
                         <ComboBoxItem x:Name="Diesel" Content="Diesel"/>
@@ -105,32 +104,36 @@
                     </ComboBox>
                     <Label x:Name="biltypLabel" Content="Typ av bil:" Grid.Column="1" HorizontalAlignment="Left" Margin="64,51,0,0" VerticalAlignment="Top" Width="80"/>
                     <Label Content="Välj fordon att skapa:" HorizontalAlignment="Left" Margin="8,-1,0,0" VerticalAlignment="Top" Width="132" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="txtboxMaxviktOrPassagerare" Grid.Column="1" HorizontalAlignment="Left" Margin="65,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="lblMaxviktOrPassagerare" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="65,154,0,0" VerticalAlignment="Top" Width="113"/>
+                    <CheckBox x:Name="tb2DragKrok" Content="Dragkrok" Grid.Column="1" HorizontalAlignment="Left" Margin="70,126,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Skapa Ärenden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" FontWeight="Normal">
+            <TabItem x:Name="SkapaÄrendeTab" Header="Skapa Ärenden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" FontWeight="Normal">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="83*"/>
                         <ColumnDefinition Width="128*"/>
-                        <ColumnDefinition Width="737*"/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="tb3mekDataGrid1" Margin="6,0,183,29"  Grid.ColumnSpan="3" Height="161" VerticalAlignment="Bottom" />
-                    <DataGrid x:Name="tb3fordonDataGrid" Margin="10,26,0,0" Grid.ColumnSpan="3" HorizontalAlignment="Left" Width="759" VerticalAlignment="Top" Height="147"/>
-                    <Button x:Name="tb3btnFordon" Content="Välj fordon" Grid.Column="2" Margin="0,177,255,0" Width="103" VerticalAlignment="Top" HorizontalAlignment="Right" Click="tb3btnFordon_Click"/>
-                    <Button x:Name="tb3btnMek" Content="Välj mekaniker" Grid.Column="2" Margin="0,384,250,0" Width="92" HorizontalAlignment="Right" Click="tb3btnMek_Click" Height="20" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="tb3cboxFordon" Grid.Column="2" Margin="341,1,0,0" Width="142" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" SelectionChanged="tb3cboxFordon_SelectionChanged">
+                    <DataGrid x:Name="tb3mekDataGrid1" Margin="6,0,183,29"  Grid.ColumnSpan="4" Height="161" VerticalAlignment="Bottom" />
+                    <DataGrid x:Name="tb3fordonDataGrid" Margin="10,26,0,0" Grid.ColumnSpan="4" HorizontalAlignment="Left" Width="759" VerticalAlignment="Top" Height="147"/>
+                    <Button x:Name="tb3btnFordon" Content="Välj fordon" Grid.Column="3" Margin="0,177,255,0" Width="103" VerticalAlignment="Top" HorizontalAlignment="Right" Click="tb3btnFordon_Click" Height="20"/>
+                    <Button x:Name="tb3btnMek" Content="Välj mekaniker" Grid.Column="3" Margin="0,384,250,0" Width="92" HorizontalAlignment="Right" Click="tb3btnMek_Click" Height="20" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="tb3cboxFordon" Grid.Column="3" Margin="340,1,0,0" Width="142" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" SelectionChanged="tb3cboxFordon_SelectionChanged" SelectedIndex="0">
                         <ComboBoxItem Content="Alla fordon"/>
                         <ComboBoxItem Content="Bilar"/>
                         <ComboBoxItem Content="Bussar"/>
                         <ComboBoxItem Content="Lastbilar"/>
                     </ComboBox>
-                    <Button x:Name="tb3btnSkapaÄrende" Content="Skapa Ärende" Grid.Column="2" HorizontalAlignment="Left" Margin="580,304,0,0" VerticalAlignment="Top" Height="44" Width="113" Click="tb3btnSkapaÄrende_Click"/>
-                    <Label x:Name="tb3fordonLabel" Content="" HorizontalAlignment="Left" Margin="28,179,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="543"/>
-                    <Label x:Name="tb3mekLabel" Content="" HorizontalAlignment="Left" Margin="12,384,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="567"/>
-                    <Button x:Name="tb3påellerskapaÄrende" Content="Visa pågående ärenden" Grid.Column="2" HorizontalAlignment="Left" Margin="571,13,0,0" VerticalAlignment="Top" Height="39" Width="141" Click="tb3visapåellerskapaÄrende_Click"/>
+                    <Button x:Name="tb3btnSkapaÄrende" Content="Skapa Ärende" Grid.Column="3" HorizontalAlignment="Left" Margin="579,304,0,0" VerticalAlignment="Top" Height="44" Width="113" Click="tb3btnSkapaÄrende_Click"/>
+                    <Label x:Name="tb3fordonLabel" Content="" HorizontalAlignment="Left" Margin="28,179,0,0" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="543" Height="26"/>
+                    <Label x:Name="tb3mekLabel" Content="" HorizontalAlignment="Left" Margin="12,384,0,0" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="567" Height="26"/>
+                    <Button x:Name="tb3påellerskapaÄrende" Content="Visa pågående ärenden" Grid.Column="3" HorizontalAlignment="Left" Margin="570,13,0,0" VerticalAlignment="Top" Height="39" Width="141" Click="tb3visapåellerskapaÄrende_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Ärenden" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="66" Margin="0,-1,0,0">
+            <TabItem x:Name="ÄrendeTab" Header="Ärenden" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="66" Margin="0,-1,0,0">
                 <Grid Background="#FFE5E5E5">
 
                     <Grid.ColumnDefinitions>
@@ -147,15 +150,15 @@
                         <ComboBoxItem x:Name="Pågående_ärenden" Content="Pågående ärenden"/>
                         <ComboBoxItem x:Name="Avslutade_ärenden" Content="Avslutade ärenden"/>
                     </ComboBox>
-                    <Button x:Name="btnAvslutaÄrende" Content="Markera ärende som klart" HorizontalAlignment="Left" Margin="20,281,0,0" VerticalAlignment="Top" Height="56" Width="153" Click="btnAvslutaÄrende_Click"/>
-                    <Button x:Name="btnDeleteÄrende" Content="Ta bort ärende" Grid.Column="1" HorizontalAlignment="Left" Margin="324,285,0,0" VerticalAlignment="Top" Height="52" Width="178"/>
+                    <Button x:Name="btnAvslutaÄrende" Content="Markera ärende som klart" HorizontalAlignment="Left" Margin="20,344,0,12" Width="153" />
+                    <Button x:Name="btnDeleteÄrende" Content="Ta bort ärende" Grid.Column="1" HorizontalAlignment="Left" Margin="325,347,0,13" Width="178"/>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Användare" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="93" Margin="0,-1,0,0">
+            <TabItem x:Name="UserTab" Header="Användare" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="80" Margin="0,-1,0,0">
                 <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="txtBoxCreateUsername" HorizontalAlignment="Left" Margin="31,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" Height="21"/>
-                    <Label Content="Skapa användarnamn:" HorizontalAlignment="Left" Margin="33,222,0,0" VerticalAlignment="Top" Width="127"/>
+                    <TextBox x:Name="txtBoxCreateUsername" HorizontalAlignment="Left" Margin="31,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" Height="21" IsReadOnlyCaretVisible="True"/>
+                    <Label Content="Användarnamn:" HorizontalAlignment="Left" Margin="33,222,0,0" VerticalAlignment="Top" Width="127"/>
                     <Label Content="Skapa lösenord" HorizontalAlignment="Left" Margin="34,278,0,0" VerticalAlignment="Top" Width="121"/>
                     <TextBox x:Name="txtBoxCreatePassword" HorizontalAlignment="Left" Margin="34,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Button Content="skapa användare" HorizontalAlignment="Left" Margin="34,338,0,0" VerticalAlignment="Top" Width="120" Click="CreateUser_Click_1"/>
@@ -164,7 +167,23 @@
                     <Label Content="---&gt;" HorizontalAlignment="Left" Margin="176,159,0,0" VerticalAlignment="Top" Height="41" Width="48" FontWeight="Bold" FontSize="20"/>
                 </Grid>
             </TabItem>
-            <Label Content="Label"/>
+            <TabItem x:Name="KomponentTab" Header="Komponenter" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="86" Margin="0,-1,0,0">
+                <Grid Background="#FFE5E5E5">
+                    <Label x:Name="bildäcklbl" Content="Bildäck" HorizontalAlignment="Left" Margin="238,111,0,0" VerticalAlignment="Top" Width="215"/>
+                    <Label x:Name="lastbilsdäcklbl" Content="Lastbilsdäck" HorizontalAlignment="Left" Margin="242,144,0,0" VerticalAlignment="Top" Width="246"/>
+                    <Label x:Name="Karosserlbl" Content="Kaross" HorizontalAlignment="Left" Margin="242,175,0,0" VerticalAlignment="Top" Width="241"/>
+                    <Label x:Name="Vindrutorlbl" Content="Vindrutor" HorizontalAlignment="Left" Margin="240,208,0,0" VerticalAlignment="Top" Width="242"/>
+                    <Label x:Name="Motorerlbl" Content="Motorer" HorizontalAlignment="Left" Margin="240,236,0,0" VerticalAlignment="Top" Width="240"/>
+                    <Label x:Name="Bromsarlbl" Content="Bromsar" HorizontalAlignment="Left" Margin="242,267,0,0" VerticalAlignment="Top" Width="334"/>
+                    <TextBox x:Name="bilDäcktxt" HorizontalAlignment="Left" Margin="178,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="25" Text="0"/>
+                    <TextBox x:Name="Lastbildäcktxt" HorizontalAlignment="Left" Margin="178,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="25" Text="0"/>
+                    <TextBox x:Name="karosstxt" HorizontalAlignment="Left" Margin="179,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="25" Text="0"/>
+                    <TextBox x:Name="vindrutatxt" HorizontalAlignment="Left" Margin="184,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="25" Text="0"/>
+                    <TextBox x:Name="motorertxt" HorizontalAlignment="Left" Margin="184,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="25" Text="0"/>
+                    <TextBox x:Name="bromstxt" HorizontalAlignment="Left" Margin="184,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="25" Text="0"/>
+                    <Button x:Name="addkomponentbtn" Content="Lägg till" HorizontalAlignment="Left" Margin="185,301,0,0" VerticalAlignment="Top" Height="26" Width="63" Click="addkomponentbtn_Click"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Page>

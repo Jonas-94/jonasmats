@@ -1,0 +1,66 @@
+﻿<Page x:Class="GUI.Home.FordonPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI.Home"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FordonMeny">
+
+    <Grid Background="#FFB1B1B1">
+        <DataGrid x:Name="FordonGrid" Margin="0,31,506,46" AutoGenerateColumns="False" SelectionChanged="FordonGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="ID" Width="0.1*" Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn x:Name="Modellnamn" Width="0.3*" Header="Modellnamn" Binding="{Binding Modellnamn}"/>
+                <DataGridTextColumn x:Name="RegNr" Width="0.3*" Header="RegNr" Binding="{Binding Registreringsnummer}"/>
+                <DataGridTextColumn x:Name="RegDatum" Width="0.3*" Header="RegDatum" Binding="{Binding Registreringsdatum}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="txtModellnamn" HorizontalAlignment="Left" Margin="319,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtRegNr" HorizontalAlignment="Left" Margin="450,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtMilmätare" HorizontalAlignment="Left" Margin="319,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtRegDatum" HorizontalAlignment="Left" Margin="450,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="Drivmedel" HorizontalAlignment="Left" Margin="319,258,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+            <ComboBoxItem x:Name="El" Content="El"/>
+            <ComboBoxItem x:Name="Diesel" Content="Diesel"/>
+            <ComboBoxItem x:Name="Bensin" Content="Bensin"/>
+            <ComboBoxItem x:Name="Etanol" Content="Etanol"/>
+        </ComboBox>
+        <CheckBox x:Name="Motor" Content="Motor" HorizontalAlignment="Left" Margin="319,311,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Kaross" Content="Kaross" HorizontalAlignment="Left" Margin="319,331,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Vindruta" Content="Vindruta" HorizontalAlignment="Left" Margin="319,349,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Bromsar" Content="Bromsar" HorizontalAlignment="Left" Margin="319,369,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Däck" Content="Däck" HorizontalAlignment="Left" Margin="319,389,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbtnBil" Content="Bil" HorizontalAlignment="Left" Margin="320,74,0,0" VerticalAlignment="Top" Checked="rbtnBil_Checked" IsChecked="True"/>
+        <RadioButton x:Name="rbtnLastbil" Content="Lastbil" HorizontalAlignment="Left" Margin="319,94,0,0" VerticalAlignment="Top" Checked="rbtnLastbil_Checked"/>
+        <RadioButton x:Name="rbtnBuss" Content="Buss" HorizontalAlignment="Left" Margin="319,114,0,0" VerticalAlignment="Top" Checked="rbtnBuss_Checked"/>
+        <RadioButton x:Name="rbtnMc" Content="Motorcykel" HorizontalAlignment="Left" Margin="319,133,0,0" VerticalAlignment="Top" Checked="rbtnMc_Checked"/>
+        <ComboBox x:Name="Biltyp" HorizontalAlignment="Left" Margin="450,86,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+            <ComboBoxItem x:Name="Sedan" Content="Sedan"/>
+            <ComboBoxItem x:Name="Cabriolet" Content="Cabriolet"/>
+            <ComboBoxItem x:Name="Herrgårdsvagn" Content="Herrgårdsvagn"/>
+            <ComboBoxItem x:Name="Halvkombi" Content="Halvkombi"/>
+        </ComboBox>
+        <CheckBox x:Name="Dragkrok" Content="Dragkrok" HorizontalAlignment="Left" Margin="450,126,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtMaxvikt_Passagerare" HorizontalAlignment="Left" Margin="450,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblModellnamn" Content="Modellnamn:" HorizontalAlignment="Left" Margin="317,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="109">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.172"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label x:Name="lblRegnr" Content="Registreringsnummer:" HorizontalAlignment="Left" Margin="446,147,0,0" VerticalAlignment="Top" Width="153"/>
+        <Label x:Name="lblMilmätare" Content="Milmätare:" HorizontalAlignment="Left" Margin="319,196,0,0" VerticalAlignment="Top" Width="98"/>
+        <Label x:Name="lblRegdatum" Content="Registreringsdatum:" HorizontalAlignment="Left" Margin="446,196,0,0" VerticalAlignment="Top" Width="124"/>
+        <Label x:Name="lblMaxvikt_Passagerare" Content="" HorizontalAlignment="Left" Margin="446,237,0,0" VerticalAlignment="Top" Width="116"/>
+        <Button x:Name="btnSkapaFordon" Content="Skapa Fordon" HorizontalAlignment="Left" Margin="450,311,0,0" VerticalAlignment="Top" Height="51" Width="116" Click="btnSkapaFordon_Click"/>
+        <Label x:Name="lblFordonBeskrivning" Content="" HorizontalAlignment="Left" Margin="575,54,0,0" VerticalAlignment="Top" Height="323" Width="215" FontSize="14" FontFamily="Comic Sans MS"/>
+        <Button x:Name="btnRedigeraFordon" Content="Redigera Fordon" HorizontalAlignment="Left" Margin="165,409,0,0" VerticalAlignment="Top" Height="23" Width="129" Click="btnRedigeraFordon_Click"/>
+
+    </Grid>
+</Page>

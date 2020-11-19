@@ -12,7 +12,7 @@ namespace Logic.DAL
         
         public void Save(string filePath) { }
 
-        public async Task SaveAsync(string filePath){}
-        public List<T> Load<T>(string filePath) { List<T> list=new List<T>();  return list; }
+        public async Task SaveAsync(string filePath){ }
+        public List<T> Load<T>(string filePath) { List<T> list = new List<T>(); return list; }
     }
 }

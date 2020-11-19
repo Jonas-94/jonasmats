@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.IO;
 using System.Text.Json;
+using System.IO;
+using System.Linq;
 using Logic.Entities;
+using System.Threading.Tasks;
 namespace Logic.DAL
 {
-    public class FärdigaFordonSamling : InterfaceLoadSave
+    public class FordonSamling : InterfaceLoadSave
     {
+        
         public List<Fordon> fordon { get; set; } = new List<Fordon>();
         public override string ToString()
         {
@@ -21,8 +24,29 @@ namespace Logic.DAL
             sb.Append("]");
 
             return sb.ToString();
-
         }
+        
+        async Task InterfaceLoadSave.SaveAsync(string filePath)
+        {
+            string json = JsonSerializer.Serialize(this);
+            if (File.Exists(filePath))
+            {
+                System.IO.File.WriteAllText(filePath, "");
+                FileStream fs = File.OpenWrite(filePath);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write(json);
+                sw.Close();
+            }
+            else if (!File.Exists(filePath))
+            {
+                FileStream ffs = File.OpenWrite(filePath);
+                StreamWriter tw = new StreamWriter(ffs);
+                await tw.WriteAsync(json);
+                tw.Write(json);
+                tw.Close();
+            }
+        }
+        
         void InterfaceLoadSave.Save(string filePath)
         {
             System.IO.File.WriteAllText(filePath, "");
@@ -37,10 +61,14 @@ namespace Logic.DAL
             FileStream fs = File.OpenRead(filePath);
             StreamReader sr = new StreamReader(fs);
             string json = sr.ReadToEnd();
-            FärdigaFordonSamling färdigafordon = JsonSerializer.Deserialize<FärdigaFordonSamling>(json);
+            FordonSamling ffs = JsonSerializer.Deserialize<FordonSamling>(json);
             sr.Close();
-            return färdigafordon.fordon as List<T>;
+            return ffs.fordon as List<T>;
+        }
+        public void AddFordon<T>(List<T>list)
+        {
+            foreach (var ford in list)
+                fordon.Add(ford as Fordon);
         }
     }
-    
 }

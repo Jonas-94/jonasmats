@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace Logic.DAL
 {
-    static class Regex
+    public class Regex
     {
         static string ErrorMessage = "";
         /*
@@ -105,7 +105,7 @@ namespace Logic.DAL
             }
 
         }
-        public static bool checkForEmail(string email)
+        public bool checkForEmail(string email)
         {
             bool IsValid = false;
             System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");

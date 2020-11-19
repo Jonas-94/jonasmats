@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.Json;
-using System.IO;
-using System.Linq;
 using Logic.Entities;
 using System.Threading.Tasks;
+using System.IO;
+using System.Text.Json;
 namespace Logic.DAL
 {
-    public class FordonSamling : InterfaceLoadSave
+    public class LastbilSamling : InterfaceLoadSave
     {
-        
-        public List<Fordon> fordon { get; set; } = new List<Fordon>();
+        public List<Lastbil> lastbilar { get; set; } = new List<Lastbil>();
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder("[");
 
-            for (int i = 0; i < fordon.Count; i++)
+            for (int i = 0; i < lastbilar.Count; i++)
             {
-                sb.Append(fordon[i].ToString());
+                sb.Append(lastbilar[i].ToString());
                 sb.Append(",");
             }
             sb.Append("]");
@@ -26,7 +24,6 @@ namespace Logic.DAL
             return sb.ToString();
 
         }
-        
         async Task InterfaceLoadSave.SaveAsync(string filePath)
         {
             string json = JsonSerializer.Serialize(this);
@@ -47,7 +44,6 @@ namespace Logic.DAL
                 tw.Close();
             }
         }
-        
         void InterfaceLoadSave.Save(string filePath)
         {
             System.IO.File.WriteAllText(filePath, "");
@@ -59,17 +55,15 @@ namespace Logic.DAL
         }
         List<T> InterfaceLoadSave.Load<T>(string filePath)
         {
-            FileStream fs = File.OpenRead(filePath);
-            StreamReader sr = new StreamReader(fs);
-            string json = sr.ReadToEnd();
-            FordonSamling ffs = JsonSerializer.Deserialize<FordonSamling>(json);
-            sr.Close();
-            return ffs.fordon as List<T>;
-        }
-        public void AddFordon<T>(List<T>list)
-        {
-            foreach (var ford in list)
-                fordon.Add(ford as Fordon);
+            
+                FileStream fs = File.OpenRead(filePath);
+                StreamReader sr = new StreamReader(fs);
+                string json = sr.ReadToEnd();
+                LastbilSamling lastbil = JsonSerializer.Deserialize<LastbilSamling>(json);
+                sr.Close();
+                return lastbil.lastbilar as List<T>;
+            
         }
     }
 }
+

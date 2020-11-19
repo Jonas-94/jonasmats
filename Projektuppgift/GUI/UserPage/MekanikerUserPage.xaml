@@ -1,0 +1,24 @@
+﻿<Page x:Class="GUI.Home.MekanikerUserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI.Home"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1000"
+      WindowHeight="800"  WindowWidth="1000"
+      Title="MekanikerUserPage">
+
+    <Grid Background="#FFDBD7D7">
+        <CheckBox x:Name="kbroms" Content="Bromsar" HorizontalAlignment="Stretch" Margin="73,188,0,0" VerticalAlignment="Stretch"/>
+        <CheckBox x:Name="kmotor" Content="Motorer" Margin="73,213,0,-212"/>
+        <CheckBox x:Name="kvindruta" Content="Vindrutor" HorizontalAlignment="Stretch" Margin="73,245,0,0" VerticalAlignment="Stretch"/>
+        <CheckBox x:Name="kkaross" Content="Karosser" HorizontalAlignment="Stretch" Margin="73,276,0,0" VerticalAlignment="Stretch"/>
+        <CheckBox x:Name="kdäck" Content="Däck" HorizontalAlignment="Stretch" Margin="73,307,0,0" VerticalAlignment="Stretch"/>
+        <Label Content="Redigera kompetenser:" Margin="73,156,793,0" Width="134"/>
+        <DataGrid x:Name="pågåendeärenden" Margin="320,74,397,400"/>
+        <DataGrid x:Name="färdigärenden" Margin="662,74,39,400"/>
+        <Label x:Name="Welcome" Content="" HorizontalAlignment="Left" Margin="121,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.556,0.596" Height="38" Width="603" FontSize="20"/>
+
+    </Grid>
+</Page>
