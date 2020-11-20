@@ -9,9 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="DAL\User.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="DAL\" />
   </ItemGroup>
 
 </Project>

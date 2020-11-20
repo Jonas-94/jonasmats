@@ -15,7 +15,7 @@
         <CheckBox x:Name="kvindruta" Content="Vindrutor" Margin="20,236,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="95"/>
         <CheckBox x:Name="kkaross" Content="Karosser" Margin="20,267,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="95"/>
         <CheckBox x:Name="kdäck" Content="Däck" Margin="20,298,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="95"/>
-        <Label x:Name="Welcome" Content="" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.556,0.596" Height="60" Width="580" FontSize="20"/>
+        <Label x:Name="Welcome" Content="" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.556,0.596" Height="92" Width="502" FontSize="40" FontFamily="Comic Sans MS" FontStyle="Normal" FontWeight="Bold"/>
         <Button x:Name="btnSparaKompetens" Content="Spara" HorizontalAlignment="Left" Margin="20,326,0,0" VerticalAlignment="Top" Width="66" Height="48" Click="btnSparaKompetens_Click"/>
         <DataGrid x:Name="pågåendeÄrenden" Margin="146,139,0,0" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Height="177" Width="413" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>

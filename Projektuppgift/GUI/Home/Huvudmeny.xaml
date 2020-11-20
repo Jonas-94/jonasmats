@@ -13,9 +13,11 @@
         <Button x:Name="MekanikerMeny" Content="Mekaniker" HorizontalAlignment="Left" Margin="40,29,0,0" VerticalAlignment="Top" Height="91" Width="168" Click="MekanikerMeny_Click"/>
         <Button x:Name="FordonMeny" Content="Fordon" HorizontalAlignment="Left" Margin="40,175,0,0" VerticalAlignment="Top" Height="91" Width="168" Click="FordonMeny_Click"/>
         <Button x:Name="SkapaÄrendeMeny" Content="Skapa Ärenden" HorizontalAlignment="Left" Margin="40,326,0,0" VerticalAlignment="Top" Height="91" Width="168" Click="SkapaÄrendeMeny_Click"/>
-        <Button x:Name="ÄrendeMeny" Content="Ärenden" HorizontalAlignment="Left" Margin="585,29,0,0" VerticalAlignment="Top" Height="91" Width="168" Click="ÄrendeMeny_Click"/>
-        <Button x:Name="KomponentMeny" Content="Komponenter" HorizontalAlignment="Left" Margin="585,0,0,0" VerticalAlignment="Center" Height="90" Width="168" Click="KomponentMeny_Click"/>
-        <Button x:Name="SkapaUserMeny" Content="Skapa Användare" HorizontalAlignment="Left" Margin="585,322,0,0" VerticalAlignment="Top" Height="90" Width="168" Click="SkapaUserMeny_Click"/>
+        <Button x:Name="ÄrendeMeny" Content="Ärenden" HorizontalAlignment="Left" Margin="585,322,0,0" VerticalAlignment="Top" Height="90" Width="168" Click="ÄrendeMeny_Click"/>
+        <Button x:Name="KomponentMeny" Content="Komponenter" HorizontalAlignment="Left" Margin="585,25,0,0" VerticalAlignment="Top" Height="90" Width="168" Click="KomponentMeny_Click"/>
+        <Button x:Name="SkapaUserMeny" Content="Skapa Användare" HorizontalAlignment="Left" Margin="585,0,0,0" VerticalAlignment="Center" Height="90" Width="168" Click="SkapaUserMeny_Click"/>
+        <Label Content="Bosses" HorizontalAlignment="Center" Margin="0,127,0,0" VerticalAlignment="Top" Height="128" Width="332" FontFamily="Comic Sans MS" FontSize="80" Background="{x:Null}" FontWeight="Light" FontStyle="Italic"/>
+        <Label Content="Verkstad" HorizontalAlignment="Left" Margin="198,192,0,0" VerticalAlignment="Top" Height="152" Width="377" FontStyle="Oblique" FontFamily="Comic Sans MS" FontSize="80" FontWeight="ExtraBold"/>
 
     </Grid>
 </Page>

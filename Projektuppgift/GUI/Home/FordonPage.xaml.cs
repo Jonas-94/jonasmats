@@ -93,6 +93,14 @@ namespace GUI.Home
 
             return str = new string(letters);
         }
+        public bool RegNrToolong(string str)
+        {
+            bool toolong = false;
+            char[] letters = str.ToCharArray();
+            if (letters.Length >= 7)
+                toolong = true;
+            return toolong;
+        }
 
         public void SkapaFordon()
         {
@@ -131,6 +139,11 @@ namespace GUI.Home
                 int milmätare = 0;
                 string modellNamn = FirstLetterCapital(txtModellnamn.Text);
                 string regNr = txtRegNr.Text.ToUpper();
+                if (RegNrToolong(regNr))
+                {
+                    System.Windows.Forms.MessageBox.Show("Registreringsnumret är för långt!");
+                    break;
+                }
                 if(fLoader.fordonSamling.fordon.Exists(x=>x.Registreringsnummer.Equals(regNr)))
                 {
                     System.Windows.Forms.MessageBox.Show("Registreringsnumret finns redan i registret");

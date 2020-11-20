@@ -65,6 +65,12 @@ namespace GUI.Home
                 System.Windows.Forms.MessageBox.Show($"Användaren:    {username}    skapades!");
             }
         }
+
+        private void btnHuvudmny_Click(object sender, RoutedEventArgs e)
+        {
+            Huvudmeny huvudmeny = new Huvudmeny();
+            this.NavigationService.Navigate(huvudmeny);
+        }
     }
 }
 

@@ -40,7 +40,7 @@ namespace GUI.Home
                     index = fLoader.mekSamling.mekaniker.IndexOf(mek);
                 }
             Kompetenser();
-            Welcome.Content = $"Välkommen {fLoader.mekSamling.mekaniker[index].förnamn}";
+            Welcome.Content = $"Välkommen {fLoader.mekSamling.mekaniker[index].förnamn} !";
             RefreshGrids();
         }
         public void RefreshGrids()

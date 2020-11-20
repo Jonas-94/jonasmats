@@ -31,7 +31,7 @@
         <Label x:Name="lblpågåendeärenden" Content="Pågående Ärenden" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="39" Width="250" FontFamily="Comic Sans MS" FontSize="16"/>
         <Label x:Name="lblklaraärenden" Content="Färdiga Ärenden" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Height="32" Width="250" FontSize="16" FontFamily="Comic Sans MS"/>
         <Label x:Name="lblÄrendeBeskrivning" Content="" HorizontalAlignment="Left" Margin="570,38,0,0" VerticalAlignment="Top" Height="384" Width="220" FontFamily="Comic Sans MS"/>
-        <Button x:Name="btnHuvudmeny" Content="Huvudmeny" HorizontalAlignment="Left" Margin="594,10,0,0" VerticalAlignment="Top" Height="43" Width="174" Click="btnHuvudmeny_Click"/>
+        <Button x:Name="btnHuvudmeny" Content="Huvudmeny" HorizontalAlignment="Left" Margin="570,10,0,0" VerticalAlignment="Top" Height="43" Width="198" Click="btnHuvudmeny_Click"/>
 
     </Grid>
 </Page>

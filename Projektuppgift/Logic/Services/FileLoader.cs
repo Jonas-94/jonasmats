@@ -16,11 +16,11 @@ namespace Logic.DAL
         public static string folderPath { get; set; } //= "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/";
         public static int Id { get; set; }
 
-        string userPath = "/User.json"; string fordonPath = "/Fordon.json"; string lastbilPath = "/Lastbilar.json";
+        string userPath = "/User.json"; string lastbilPath = "/Lastbilar.json";
         string bussPath = "/Buss.json"; string bilPath = "/Bil.json"; string motorcykelPath = "/Motorcyklar.json";
         string mekPath = "/Mekaniker.json"; string ärendePath = "/Ärenden.json"; string idPath = "/ID";
-        string komponentPath = "/Komponenter.json";
-        string bilkompPath = "/BilKomponenter.json"; string busskompPath = "/BussKomponenter.json"; string lastkompPath = "/LastbilKomponenter.json";
+        string bilkompPath = "/BilKomponenter.json"; string busskompPath = "/BussKomponenter.json";
+        string lastkompPath = "/LastbilKomponenter.json";
         string mckompPath = "/McKomponenter.json";
         public string missingFile { get; set; } = "";
         public InterfaceLoadSave IUser { get; set; } = new UserSamling();
@@ -32,7 +32,6 @@ namespace Logic.DAL
         public InterfaceLoadSave IMotorcyklar { get; set; } = new MotorcykelSamling();
         public InterfaceLoadSave IÄrende { get; set; } = new ÄrendeSamling();
         public InterfaceLoadSave IID { get; set; } = new IDSamling();
-        public InterfaceLoadSave IKomponenter { get; set; } = new KomponentSamling();
         public InterfaceLoadSave IBilkomp { get; set; } = new BilkomponentSamling();
         public InterfaceLoadSave IBusskomp { get; set; } = new BusskomponentSamling();
         public InterfaceLoadSave ILastbkomp { get; set; } = new LastbilkomponentSamling();
@@ -50,7 +49,6 @@ namespace Logic.DAL
         public UserSamling userSamling { get; set; } = new UserSamling();
         public LastbilSamling lastbilSamling { get; set; } = new LastbilSamling();
         public IDSamling idSamling { get; set; } = new IDSamling();
-        public KomponentSamling komponentSamling { get; set; } = new KomponentSamling();
         
         public int SendID()
         {
@@ -82,7 +80,7 @@ namespace Logic.DAL
         public void SaveMcKomp()
         {
             IMckomp = kompMcSamling;
-            IMckomp.SaveAsync(folderPath + bilkompPath);
+            IMckomp.SaveAsync(folderPath + mckompPath);
         }
         public void SaveUser() 
         {
@@ -114,7 +112,7 @@ namespace Logic.DAL
             IMotorcyklar = motorcykelSamling;
             IMotorcyklar.SaveAsync(folderPath + motorcykelPath);
         }
-        public async  void SaveÄrenden()
+        public async void SaveÄrenden()
         {
             IÄrende = ärendeSamling;
             IÄrende.SaveAsync(folderPath + ärendePath);
@@ -123,11 +121,6 @@ namespace Logic.DAL
         {
             IID = idSamling;
             IID.SaveAsync(folderPath + idPath);
-        }
-        public void SaveKomponenter()
-        {
-            IKomponenter = komponentSamling;
-            IKomponenter.SaveAsync(folderPath + komponentPath);
         }
         public void SaveAllFordon()
         {
@@ -158,7 +151,7 @@ namespace Logic.DAL
         }
         public void LoadMcKomp()
         {
-            kompMcSamling.komp = IBilkomp.Load<McKomponenter>(folderPath + mckompPath);
+            kompMcSamling.komp = IMckomp.Load<McKomponenter>(folderPath + mckompPath);
         }
         public void LoadBilar()
         {
@@ -195,10 +188,6 @@ namespace Logic.DAL
         public void LoadID()
         {
             idSamling.idlista = IID.Load<ID>(folderPath + idPath);
-        }
-        public void LoadKomponenter()
-        {
-            komponentSamling.komponentlista = IKomponenter.Load<Komponenter>(folderPath + komponentPath);
         }
 
         public void LoadFiles()

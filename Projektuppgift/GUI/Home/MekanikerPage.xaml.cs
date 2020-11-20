@@ -314,6 +314,11 @@ namespace GUI.Home
                 y.ÄrendeTaget = false;
                 y.Id = 0;
             }
+            var är = fLoader.ärendeSamling.ärenden.Where(x => x.ÄrendeID == fLoader.mekSamling.mekaniker[index].Id);
+            foreach(var ä in är)
+            {
+                fLoader.ärendeSamling.ärenden.Remove(ä);
+            }
             fLoader.mekSamling.mekaniker.RemoveAt(index);
             fLoader.SaveAllFordon();
             fLoader.FordonReload();

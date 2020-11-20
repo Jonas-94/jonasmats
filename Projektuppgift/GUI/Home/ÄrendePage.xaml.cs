@@ -3,6 +3,7 @@ using Logic.Entities;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Threading.Tasks;
 namespace GUI.Home
 {
     /// <summary>
@@ -81,14 +82,13 @@ namespace GUI.Home
             fLoader.SaveÄrenden();
             RefreshGrid();
         }
-        private void RefreshGrid()
+        private async void RefreshGrid()
         {
             PågåendeÄrendenGrid.ItemsSource = null;
             FärdigaÄrendenGrid.ItemsSource = null;
-            PågåendeÄrendenGrid.ItemsSource =
-                fLoader.ärendeSamling.ärenden.Where(x => x.ÄrendeStatus == false);
-            FärdigaÄrendenGrid.ItemsSource =
-                fLoader.ärendeSamling.ärenden.Where(x => x.ÄrendeStatus == true);
+            await Task.Delay(20);
+            PågåendeÄrendenGrid.ItemsSource =  fLoader.ärendeSamling.ärenden.Where(x => x.ÄrendeStatus == false);
+            FärdigaÄrendenGrid.ItemsSource = fLoader.ärendeSamling.ärenden.Where(x => x.ÄrendeStatus == true);
         }
         public string BeskrivningsMetod(Fordon fordon)
         {

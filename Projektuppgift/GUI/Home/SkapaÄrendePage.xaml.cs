@@ -45,19 +45,22 @@ namespace GUI.Home
         }
         private void btnVäljFordon_Click(object sender, RoutedEventArgs e)
         {
-            f = (Fordon)FordonGrid.SelectedItem;
-            beskrivning = BeskrivningsMetod(f);
-            if (f != null)
+            if (FordonGrid.SelectedItem is Fordon)
             {
-                foreach (var fordon in fLoader.fordonSamling.fordon)
+                f = (Fordon)FordonGrid.SelectedItem;
+                beskrivning = BeskrivningsMetod(f);
+                if (f != null)
                 {
-                    if (fordon.Registreringsnummer == f.Registreringsnummer)
-                        beskrivning = BeskrivningsMetod(fordon);
+                    foreach (var fordon in fLoader.fordonSamling.fordon)
+                    {
+                        if (fordon.Registreringsnummer == f.Registreringsnummer)
+                            beskrivning = BeskrivningsMetod(fordon);
+                    }
                 }
+                VisaMekanikerTillFordon(f);
+                btnVäljFordon.IsEnabled = false;
+                lblFordonBeskrivning.Content = beskrivning;
             }
-            VisaMekanikerTillFordon(f);
-            btnVäljFordon.IsEnabled = false;
-            lblFordonBeskrivning.Content = beskrivning;
         }
         private void btnVäljMekaniker_Click(object sender, RoutedEventArgs e)
         {
@@ -76,6 +79,16 @@ namespace GUI.Home
             bool run = true;
             while (run)
             {
+                if(f is null)
+                {
+                    System.Windows.Forms.MessageBox.Show("Välj ett fordon!");
+                    break;
+                }
+                if(mek is null)
+                {
+                    System.Windows.Forms.MessageBox.Show("Välj en mekaniker!");
+                    break;
+                }
                 if (f != null && mek != null)
                 {
                     int index = fLoader.mekSamling.mekaniker.IndexOf(mek);

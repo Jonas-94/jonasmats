@@ -31,35 +31,38 @@ namespace GUI.Home
             {
                 fl.LoadBilKomp();
             }
-            catch { }
+            catch { fl.SaveBilKomp();  }
             try
             {
                 fl.LoadBussKomp();
             }
-            catch { }
+            catch { fl.SaveBussKomp(); }
             try
             {
                 fl.LoadLastbilKomp();
             }
-            catch { }
+            catch { fl.SaveLastbilKomp(); }
             try
             {
                 fl.LoadMcKomp();
             }
-            catch { }
+            catch {  }
             RefreshKomponenter();
         }
         public void RefreshKomponenter()
         {
-
-            if (fl.kompBilSamling.komp.Count == 0)
-                fl.kompBilSamling.komp.Add(bkomp);
-            if (fl.kompBussSamling.komp.Count == 0)
-                fl.kompBussSamling.komp.Add(bbkomp);
-            if (fl.kompLastBSamling.komp.Count == 0)
-                fl.kompLastBSamling.komp.Add(lbkomp);
-            if (fl.kompMcSamling.komp.Count == 0)
-                fl.kompMcSamling.komp.Add(mckomp);
+            try
+            {
+                if (fl.kompBilSamling.komp.Count == 0 || fl.kompBilSamling.komp == null)
+                    fl.kompBilSamling.komp.Add(bkomp);
+                if (fl.kompBussSamling.komp.Count == 0 || fl.kompBussSamling.komp == null)
+                    fl.kompBussSamling.komp.Add(bbkomp);
+                if (fl.kompLastBSamling.komp.Count == 0 || fl.kompLastBSamling.komp == null)
+                    fl.kompLastBSamling.komp.Add(lbkomp);
+                if (fl.kompMcSamling.komp.Count == 0 || fl.kompMcSamling.komp == null)
+                    fl.kompMcSamling.komp.Add(mckomp);
+            }
+            catch { }
             try
             {
                 lblBilDäck.Content = fl.kompBilSamling.komp[0].Däck.ToString();
@@ -116,21 +119,25 @@ namespace GUI.Home
             int lbdäck, lbkaross, lbbroms, lbvindruta, lbmotor;
             int bussdäck, busskaross, bussbroms, bussvindruta, bussmotor;
             int mcdäck, mckaross, mcbroms, mcvindruta, mcmotor;
+
             int.TryParse(txtBildäck.Text, out bildäck);
             int.TryParse(txtBilkaross.Text, out bilkaross);
             int.TryParse(txtBilbroms.Text, out bilbroms);
             int.TryParse(txtBilVindruta.Text, out bilvindruta);
             int.TryParse(txtBilmotor.Text, out int bilmotor);
+
             int.TryParse(txtLastbilDäck.Text, out lbdäck);
             int.TryParse(txtLastbilKaross.Text, out lbkaross);
             int.TryParse(txtLastbilBroms.Text, out lbbroms);
             int.TryParse(txtLastbilVindruta.Text, out lbvindruta);
             int.TryParse(txtLastbilMotor.Text, out lbmotor);
+
             int.TryParse(txtBussDäck.Text, out bussdäck);
             int.TryParse(txtBussKaross.Text, out busskaross);
             int.TryParse(txtBussBroms.Text, out bussbroms);
             int.TryParse(txtBussVindruta.Text, out bussvindruta);
             int.TryParse(txtBussMotor.Text, out bussmotor);
+
             int.TryParse(txtMcDäck.Text, out mcdäck);
             int.TryParse(txtMcKaross.Text, out mckaross);
             int.TryParse(txtMcBroms.Text, out mcbroms);
@@ -160,29 +167,36 @@ namespace GUI.Home
 
             fl.kompBilSamling.komp[0].Däck += bildäck;
             fl.kompBilSamling.komp[0].Karosser += bilkaross;
-            fl.kompBilSamling.komp[0].Motorer += bilbroms;
-            fl.kompBilSamling.komp[0].Bromsar += bilvindruta;
-            fl.kompBilSamling.komp[0].Vindrutor += bilmotor;
+            fl.kompBilSamling.komp[0].Motorer += bilmotor;
+            fl.kompBilSamling.komp[0].Bromsar += bilbroms;
+            fl.kompBilSamling.komp[0].Vindrutor += bilvindruta;
+
             fl.kompLastBSamling.komp[0].Bromsar += lbbroms;
             fl.kompLastBSamling.komp[0].Däck += lbdäck;
             fl.kompLastBSamling.komp[0].Motorer += lbmotor;
             fl.kompLastBSamling.komp[0].Vindrutor += lbvindruta;
             fl.kompLastBSamling.komp[0].Karosser += lbkaross;
+
             fl.kompMcSamling.komp[0].Bromsar += mcbroms;
             fl.kompMcSamling.komp[0].Vindrutor += mcvindruta;
             fl.kompMcSamling.komp[0].Motorer += mcmotor;
             fl.kompMcSamling.komp[0].Karosser += mckaross;
             fl.kompMcSamling.komp[0].Däck += mcdäck;
+
             fl.kompBussSamling.komp[0].Bromsar += bussbroms;
             fl.kompBussSamling.komp[0].Däck += bussdäck;
             fl.kompBussSamling.komp[0].Karosser += busskaross;
             fl.kompBussSamling.komp[0].Vindrutor += bussvindruta;
             fl.kompBussSamling.komp[0].Motorer += bussmotor;
 
-
-
             RefreshKomponenter();
             SaveKomponenter();
+        }
+
+        private void btnHuvudmeny_Click(object sender, RoutedEventArgs e)
+        {
+            Huvudmeny huvudmeny = new Huvudmeny();
+            this.NavigationService.Navigate(huvudmeny);
         }
     }
 }
