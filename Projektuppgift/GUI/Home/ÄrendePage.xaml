@@ -18,7 +18,7 @@
                 <DataGridTextColumn x:Name="RegDatum_Copy1" Header="RegDatum" Width="0.4*" Binding="{Binding RegDatum}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="FärdigaÄrendenGrid" Margin="0,272,249,0" AutoGenerateColumns="False">
+        <DataGrid x:Name="FärdigaÄrendenGrid" Margin="0,272,249,0" AutoGenerateColumns="False" SelectionChanged="FärdigaÄrendenGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID_Copy" Header="ID" Width="0.1*" Binding="{Binding ÄrendeID}"/>
                 <DataGridTextColumn x:Name="Förnamn_Copy" Header="Förnamn" Width="0.15*" Binding="{Binding förnamn}"/>

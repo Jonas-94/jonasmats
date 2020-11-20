@@ -62,5 +62,11 @@ namespace GUI.Home
             KomponenterPage kPage = new KomponenterPage();
             this.NavigationService.Navigate(kPage);
         }
+
+        private void SkapaUserMeny_Click(object sender, RoutedEventArgs e)
+        {
+            SkapaUserPage sPage = new SkapaUserPage();
+            this.NavigationService.Navigate(sPage);
+        }
     }
 }

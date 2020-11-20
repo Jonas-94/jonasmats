@@ -14,6 +14,7 @@ namespace Logic.DAL
     public class FileLoader
     {
         public static string folderPath { get; set; } //= "C:/Users/pc/Documents/GitHub/jonasmats/Projektuppgift/Logic/DAL/";
+        public static int Id { get; set; }
 
         string userPath = "/User.json"; string fordonPath = "/Fordon.json"; string lastbilPath = "/Lastbilar.json";
         string bussPath = "/Buss.json"; string bilPath = "/Bil.json"; string motorcykelPath = "/Motorcyklar.json";
@@ -50,11 +51,18 @@ namespace Logic.DAL
         public LastbilSamling lastbilSamling { get; set; } = new LastbilSamling();
         public IDSamling idSamling { get; set; } = new IDSamling();
         public KomponentSamling komponentSamling { get; set; } = new KomponentSamling();
-        public int Id { get; set; }
-
+        
+        public int SendID()
+        {
+            return Id;
+        }
         public void FindFolderPath(string foundfolder)
         {
             folderPath = foundfolder;
+        }
+        public void SetID(int id)
+        {
+            Id = id;
         }
         public void SaveBilKomp()
         {

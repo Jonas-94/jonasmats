@@ -23,8 +23,11 @@ namespace Logic.Services
         {
             fLoader.LoadUsers();
             IEnumerable<User> findID = fLoader.userSamling.users.Where(user => user.Username.Equals(username) && user.Password.Equals(password));
-            foreach (var x in findID)
-                fLoader.Id = x.ID;
+            foreach(var u in findID)
+            {
+                fLoader.SetID(u.ID);
+            }
+
             return fLoader.userSamling.users.Exists(user => user.Username.Equals(username) && user.Password.Equals(password));
         }
     }

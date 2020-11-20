@@ -23,13 +23,54 @@ namespace GUI.Home
     public partial class FordonPage : Page
     {
         FileLoader fLoader = new FileLoader();
+        LastbilKomponenter lb = new LastbilKomponenter();
+        BussKomponenter bb = new BussKomponenter();
+        BilKomponenter b = new BilKomponenter();
+        McKomponenter mc = new McKomponenter();
         public FordonPage()
         {
             InitializeComponent();
             LoadFordon();
+            LastbilKomponenter lb = new LastbilKomponenter();
+            BussKomponenter bb = new BussKomponenter();
+            BilKomponenter b = new BilKomponenter();
+            McKomponenter mc = new McKomponenter();
+            try
+            {
+                fLoader.LoadMekaniker();
+            }
+            catch { }
             fLoader.FordonReload();
-            fLoader.LoadMekaniker();
             RefreshGrid();
+
+            try
+            {
+                fLoader.LoadBilKomp();
+                if (fLoader.kompBilSamling.komp.Count == 0)
+                    fLoader.kompBilSamling.komp.Add(b);
+            }
+            catch { fLoader.SaveBilKomp(); fLoader.kompBilSamling.komp.Add(b); }
+            try
+            {
+                fLoader.LoadBussKomp();
+                if (fLoader.kompBussSamling.komp.Count == 0)
+                    fLoader.kompBussSamling.komp.Add(bb);
+            }
+            catch { fLoader.SaveBussKomp(); fLoader.kompBussSamling.komp.Add(bb); }
+            try
+            {
+                fLoader.LoadLastbilKomp();
+                if (fLoader.kompLastBSamling.komp.Count == 0)
+                    fLoader.kompLastBSamling.komp.Add(lb);
+            }
+            catch { fLoader.SaveLastbilKomp(); fLoader.kompLastBSamling.komp.Add(lb); }
+            try
+            {
+                fLoader.LoadMcKomp();
+                if (fLoader.kompMcSamling.komp.Count == 0)
+                    fLoader.kompMcSamling.komp.Add(mc);
+            }
+            catch { fLoader.SaveMcKomp(); fLoader.kompMcSamling.komp.Add(mc); }
         }
         public void RefreshGrid()
         {
@@ -84,6 +125,7 @@ namespace GUI.Home
                 if (broms == false && kaross == false && motor == false && vindruta == false && däck == false)
                 {
                     System.Windows.Forms.MessageBox.Show("Välj ett eller flera ärenden.");
+                    break;
                 }
                 int maxviktOrPassagerare;
                 int milmätare = 0;
@@ -231,6 +273,28 @@ namespace GUI.Home
             await Task.Delay(25);
             if (rbtnBil.IsChecked == true)
             {
+                if (fLoader.kompBilSamling.komp[0].Däck < 4) 
+                    Däck.IsEnabled = false;
+                else
+                    Däck.IsEnabled = true;
+                if (fLoader.kompBilSamling.komp[0].Bromsar < 4)
+                    Däck.IsEnabled = false;
+                else
+                    Däck.IsEnabled = true;
+                if (fLoader.kompBilSamling.komp[0].Karosser < 1)
+                    Kaross.IsEnabled = false;
+                else
+                    Kaross.IsEnabled = true;
+                if (fLoader.kompBilSamling.komp[0].Vindrutor < 1)
+                    Vindruta.IsEnabled = false;
+                else
+                    Vindruta.IsEnabled = true;
+                if (fLoader.kompBilSamling.komp[0].Motorer < 1)
+                    Motor.IsEnabled = false;
+                else
+                    Motor.IsEnabled = true;
+
+
                 Dragkrok.Visibility = Visibility.Visible;
                 Biltyp.Visibility = Visibility.Visible;
                 txtMaxvikt_Passagerare.Visibility = Visibility.Hidden;
@@ -239,8 +303,29 @@ namespace GUI.Home
         }
         private void rbtnLastbil_Checked(object sender, RoutedEventArgs e)
         {
+           
             if (rbtnLastbil.IsChecked == true)
             {
+                if (fLoader.kompLastBSamling.komp[0].Däck < 6)
+                    Däck.IsEnabled = false;
+                else
+                    Däck.IsEnabled = true;
+                if (fLoader.kompLastBSamling.komp[0].Bromsar < 6)
+                    Däck.IsEnabled = false;
+                else
+                    Däck.IsEnabled = true;
+                if (fLoader.kompLastBSamling.komp[0].Karosser < 1)
+                    Kaross.IsEnabled = false;
+                else
+                    Kaross.IsEnabled = true;
+                if (fLoader.kompLastBSamling.komp[0].Vindrutor < 1)
+                    Vindruta.IsEnabled = false;
+                else
+                    Vindruta.IsEnabled = true;
+                if (fLoader.kompLastBSamling.komp[0].Motorer < 1)
+                    Motor.IsEnabled = false;
+                else
+                    Motor.IsEnabled = true;
                 Dragkrok.Visibility = Visibility.Hidden;
                 Biltyp.Visibility = Visibility.Hidden;
                 txtMaxvikt_Passagerare.Visibility = Visibility.Visible;
@@ -250,8 +335,29 @@ namespace GUI.Home
         }
         private void rbtnBuss_Checked(object sender, RoutedEventArgs e)
         {
+            
             if (rbtnBuss.IsChecked == true)
             {
+                if (fLoader.kompBussSamling.komp[0].Däck < 6)
+                    Däck.IsEnabled = false;
+                else
+                    Däck.IsEnabled = true;
+                if (fLoader.kompBussSamling.komp[0].Bromsar < 6)
+                    Däck.IsEnabled = false;
+                else
+                    Däck.IsEnabled = true;
+                if (fLoader.kompBussSamling.komp[0].Karosser < 1)
+                    Kaross.IsEnabled = false;
+                else
+                    Kaross.IsEnabled = true;
+                if (fLoader.kompBussSamling.komp[0].Vindrutor < 1)
+                    Vindruta.IsEnabled = false;
+                else
+                    Vindruta.IsEnabled = true;
+                if (fLoader.kompBussSamling.komp[0].Motorer < 1)
+                    Motor.IsEnabled = false;
+                else
+                    Motor.IsEnabled = true;
                 txtMaxvikt_Passagerare.Visibility = Visibility.Visible;
                 lblMaxvikt_Passagerare.Visibility = Visibility.Visible;
                 lblMaxvikt_Passagerare.Content = "Antal passagerare:";
@@ -261,8 +367,29 @@ namespace GUI.Home
         }
         private void rbtnMc_Checked(object sender, RoutedEventArgs e)
         {
+            
             if (rbtnMc.IsChecked == true)
             {
+                if (fLoader.kompMcSamling.komp[0].Däck < 2)
+                    Däck.IsEnabled = false;
+                else
+                    Däck.IsEnabled = true;
+                if (fLoader.kompMcSamling.komp[0].Bromsar < 2)
+                    Däck.IsEnabled = false;
+                else
+                    Däck.IsEnabled = true;
+                if (fLoader.kompMcSamling.komp[0].Karosser < 1)
+                    Kaross.IsEnabled = false;
+                else
+                    Kaross.IsEnabled = true;
+                if (fLoader.kompMcSamling.komp[0].Vindrutor < 1)
+                    Vindruta.IsEnabled = false;
+                else
+                    Vindruta.IsEnabled = true;
+                if (fLoader.kompMcSamling.komp[0].Motorer < 1)
+                    Motor.IsEnabled = false;
+                else
+                    Motor.IsEnabled = true;
                 txtMaxvikt_Passagerare.Visibility = Visibility.Hidden;
                 lblMaxvikt_Passagerare.Visibility = Visibility.Hidden;
                 lblMaxvikt_Passagerare.Content = "Antal passagerare:";
@@ -338,5 +465,6 @@ namespace GUI.Home
             Huvudmeny hPage = new Huvudmeny();
             this.NavigationService.Navigate(hPage);
         }
+        
+        }
     }
-}

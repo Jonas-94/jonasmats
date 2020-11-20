@@ -137,6 +137,27 @@ namespace GUI.Home
             int.TryParse(txtMcVindruta.Text, out mcvindruta);
             int.TryParse(txtMcMotor.Text, out mcmotor);
 
+            txtBildäck.Text = "";
+            txtBilkaross.Text = "";
+            txtBilbroms.Text = "";
+            txtBilVindruta.Text = "";
+            txtBilmotor.Text = "";
+            txtLastbilDäck.Text = "";
+            txtLastbilKaross.Text = "";
+            txtLastbilBroms.Text = "";
+            txtLastbilVindruta.Text = "";
+            txtLastbilMotor.Text = "";
+            txtBussDäck.Text = "";
+            txtBussKaross.Text = "";
+            txtBussBroms.Text = "";
+            txtBussVindruta.Text = "";
+            txtBussMotor.Text = "";
+            txtMcDäck.Text = "";
+            txtMcKaross.Text = "";
+            txtMcBroms.Text = "";
+            txtMcVindruta.Text = "";
+            txtMcMotor.Text = "";
+
             fl.kompBilSamling.komp[0].Däck += bildäck;
             fl.kompBilSamling.komp[0].Karosser += bilkaross;
             fl.kompBilSamling.komp[0].Motorer += bilbroms;
@@ -147,7 +168,7 @@ namespace GUI.Home
             fl.kompLastBSamling.komp[0].Motorer += lbmotor;
             fl.kompLastBSamling.komp[0].Vindrutor += lbvindruta;
             fl.kompLastBSamling.komp[0].Karosser += lbkaross;
-            fl.kompMcSamling.komp[0].Bromsar += lbbroms;
+            fl.kompMcSamling.komp[0].Bromsar += mcbroms;
             fl.kompMcSamling.komp[0].Vindrutor += mcvindruta;
             fl.kompMcSamling.komp[0].Motorer += mcmotor;
             fl.kompMcSamling.komp[0].Karosser += mckaross;
@@ -157,6 +178,9 @@ namespace GUI.Home
             fl.kompBussSamling.komp[0].Karosser += busskaross;
             fl.kompBussSamling.komp[0].Vindrutor += bussvindruta;
             fl.kompBussSamling.komp[0].Motorer += bussmotor;
+
+
+
             RefreshKomponenter();
             SaveKomponenter();
         }

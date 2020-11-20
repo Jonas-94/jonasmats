@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Logic.DAL;
 using System.Linq;
+using Logic.Entities;
 namespace GUI.Home
 {
     /// <summary>
@@ -19,58 +20,89 @@ namespace GUI.Home
     /// </summary>
     public partial class MekanikerUserPage : Page
     {
+
         FileLoader fLoader = new FileLoader();
-        ÄrendeSamling ärendeSamling = new ÄrendeSamling();
-        BilSamling bilSamling = new BilSamling();
-        LastbilSamling lbSamling = new LastbilSamling();
-        BussSamling bussSamling = new BussSamling();
-        MotorcykelSamling mcSamling = new MotorcykelSamling();
-        MekanikerSamling mekSamling = new MekanikerSamling();
-        public int id;
+
+        int id { get; set; }
+        int index = 0;
         string missingFile { get; set; }
         public MekanikerUserPage()
         {
             InitializeComponent();
-            LoadAllFiles();
-            var mek = mekSamling.mekaniker.Where(x => x.Id == fLoader.Id);
-            Welcome.Content = $"Välkommen {mek.Select(x => x.förnamn)}";
-            pågåendeärenden.ItemsSource = ärendeSamling.ärenden.Where(ä => ä.ÄrendeID == fLoader.Id);
-            färdigärenden.ItemsSource = ärendeSamling.ärenden.Where(f => f.ÄrendeID == fLoader.Id);
-        }
-
-        public void LoadAllFiles()
-        {
-
-            try
-            {
-                //fLoader.LoadBilar(bilSamling);
-            }
-            catch (Exception a) { if (a.Source != null) missingFile += "\n" + a.Message; }
-            try
-            {
-               // fLoader.LoadBussar(bussSamling);
-            }
-            catch (Exception b) { if (b.Source != null) missingFile += "\n" + b.Message; }
-            try
-            {
-                fLoader.LoadLastbilar();
-            }
-            catch (Exception c) { if (c.Source != null) missingFile += "\n" + c.Message; }
-            try
-            {
-               // fLoader.LoadMotorcyklar(mcSamling);
-            }
-            catch (Exception d) { if (d.Source != null) missingFile += "\n" + d.Message; }
             try
             {
                 fLoader.LoadÄrenden();
+                
             }
-            catch (Exception e) { if (e.Source != null) missingFile += "\n" + e.Message; }
-            try
+            catch { }
+            try { fLoader.LoadMekaniker(); } catch { }
+            try { fLoader.LoadFordon(); } catch { }
+            id = fLoader.SendID();
+            foreach (var mek in fLoader.mekSamling.mekaniker)
+                if (id == mek.Id)
+                {
+                    index = fLoader.mekSamling.mekaniker.IndexOf(mek);
+                }
+            Welcome.Content = $"Välkommen {fLoader.mekSamling.mekaniker[index].förnamn}";
+            RefreshGrids();
+        }
+        public void RefreshGrids()
+        {
+            pågåendeÄrenden.ItemsSource = fLoader.ärendeSamling.ärenden.Where(ä => ä.ÄrendeID == id && ä.ÄrendeStatus == false);
+            färdigaÄrenden.ItemsSource = fLoader.ärendeSamling.ärenden.Where(f => f.ÄrendeID == id && f.ÄrendeStatus == true);
+        }
+
+        private void btnSparaKompetens_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnFärdigtÄrende_Click(object sender, RoutedEventArgs e)
+        {
+            fLoader.LoadMekaniker();
+            Ärende ä = (Ärende)pågåendeÄrenden.SelectedItem;
+            int äindex = fLoader.ärendeSamling.ärenden.IndexOf(ä);
+            if (pågåendeÄrenden.SelectedItem is Ärende)
             {
-                fLoader.LoadMekaniker();
+                fLoader.ärendeSamling.ärenden[äindex].ÄrendeStatus = true;
+                foreach (var m in fLoader.mekSamling.mekaniker)
+                {
+                    if (ä.ÄrendeID == m.Id && m.Ärenden > 0)
+                        m.Ärenden -= 1;
+                }
+                foreach (var x in fLoader.bilSamling.Bilar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        x.ÄrendeKlart = true;
+                }
+                foreach (var x in fLoader.lastbilSamling.lastbilar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        x.ÄrendeKlart = true;
+                }
+                foreach (var x in fLoader.motorcykelSamling.motorcyklar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        x.ÄrendeKlart = true;
+                }
+                foreach (var x in fLoader.bussSamling.Bussar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        x.ÄrendeKlart = true;
+                }
+                foreach (var x in fLoader.ärendeSamling.ärenden)
+                {
+                    if (ä.RegNr == x.RegNr)
+                    {
+                        x.ÄrendeStatus = true;
+                    }
+                }
             }
-            catch (Exception f) { if (f.Source != null) missingFile += "\n" + f.Message; }
         }
     }
 }

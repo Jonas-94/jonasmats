@@ -15,7 +15,7 @@
         <Button x:Name="SkapaÄrendeMeny" Content="Skapa Ärenden" HorizontalAlignment="Left" Margin="40,326,0,0" VerticalAlignment="Top" Height="91" Width="168" Click="SkapaÄrendeMeny_Click"/>
         <Button x:Name="ÄrendeMeny" Content="Ärenden" HorizontalAlignment="Left" Margin="585,29,0,0" VerticalAlignment="Top" Height="91" Width="168" Click="ÄrendeMeny_Click"/>
         <Button x:Name="KomponentMeny" Content="Komponenter" HorizontalAlignment="Left" Margin="585,0,0,0" VerticalAlignment="Center" Height="90" Width="168" Click="KomponentMeny_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="585,322,0,0" VerticalAlignment="Top" Height="90" Width="168"/>
+        <Button x:Name="SkapaUserMeny" Content="Skapa Användare" HorizontalAlignment="Left" Margin="585,322,0,0" VerticalAlignment="Top" Height="90" Width="168" Click="SkapaUserMeny_Click"/>
 
     </Grid>
 </Page>

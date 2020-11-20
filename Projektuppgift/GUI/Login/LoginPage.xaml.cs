@@ -18,6 +18,7 @@ using System.Text.Json;
 using System.IO;
 using Logic.DAL;
 using System.Threading.Tasks;
+using System.Linq;
 namespace GUI.Login
 {
     /// <summary>
@@ -31,7 +32,6 @@ namespace GUI.Login
         Regex reg = new Regex();
         string missingFile { get; set; }
         
-        int id { get; set; }
 
         private LoginService _loginService;
         public LoginPage()
@@ -47,7 +47,7 @@ namespace GUI.Login
         {
             try
             {
-                string username = tbUsernam.Text;
+            string username = tbUsernam.Text;
             string password = pbPassword.Password;
             bool regexSuccessful = reg.checkForEmail(username);
             
@@ -60,7 +60,7 @@ namespace GUI.Login
             }
             else if(regexSuccessful && successful)
             {
-                
+               
                 MekanikerUserPage mekPage = new MekanikerUserPage();
                 this.NavigationService.Navigate(mekPage);
             }
