@@ -24,17 +24,13 @@ namespace GUI.Home
         FileLoader fLoader = new FileLoader();
 
         int id { get; set; }
-        int index = 0;
+        int index { get; set; }
         string missingFile { get; set; }
         public MekanikerUserPage()
         {
             InitializeComponent();
             try
-            {
-                fLoader.LoadÄrenden();
-                
-            }
-            catch { }
+            { fLoader.LoadÄrenden(); }catch { }
             try { fLoader.LoadMekaniker(); } catch { }
             try { fLoader.LoadFordon(); } catch { }
             id = fLoader.SendID();
@@ -43,23 +39,72 @@ namespace GUI.Home
                 {
                     index = fLoader.mekSamling.mekaniker.IndexOf(mek);
                 }
+            Kompetenser();
             Welcome.Content = $"Välkommen {fLoader.mekSamling.mekaniker[index].förnamn}";
             RefreshGrids();
         }
         public void RefreshGrids()
         {
+            pågåendeÄrenden.ItemsSource = null;
+            färdigaÄrenden.ItemsSource = null;
             pågåendeÄrenden.ItemsSource = fLoader.ärendeSamling.ärenden.Where(ä => ä.ÄrendeID == id && ä.ÄrendeStatus == false);
             färdigaÄrenden.ItemsSource = fLoader.ärendeSamling.ärenden.Where(f => f.ÄrendeID == id && f.ÄrendeStatus == true);
         }
 
         private void btnSparaKompetens_Click(object sender, RoutedEventArgs e)
         {
-
+            if(kvindruta.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kvindruta = true; }
+            if(kdäck.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kdäck = true; }
+            if(kbroms.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kbromsar = true; }
+            if(kkaross.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kkaross = true; }
+            if(kmotor.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kmotor = true; }
+            fLoader.SaveMekaniker();
         }
 
+        private void Kompetenser()
+        {
+            if(fLoader.mekSamling.mekaniker[index].Kdäck == true) { kdäck.IsChecked = true; }
+            if (fLoader.mekSamling.mekaniker[index].Kbromsar == true){ kbroms.IsChecked = true; }
+            if (fLoader.mekSamling.mekaniker[index].Kkaross == true) { kkaross.IsChecked = true; }
+            if(fLoader.mekSamling.mekaniker[index].Kmotor == true) { kmotor.IsChecked = true; }
+            if (fLoader.mekSamling.mekaniker[index].Kvindruta == true){ kvindruta.IsChecked = true; }
+        }
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            try
+            {
+                string fbeskrivning = "";
+                if (pågåendeÄrenden.SelectedItem is Ärende)
+                {
+                    Ärende ä = (Ärende)pågåendeÄrenden.SelectedItem;
+                    Bil b = new Bil();
+                    Lastbil lb = new Lastbil();
+                    Buss bb = new Buss();
+                    Motorcykel mc = new Motorcykel();
+                    foreach (var x in fLoader.bilSamling.Bilar)
+                    {
+                        if (ä.RegNr == x.Registreringsnummer)
+                            fbeskrivning = x.ToStringBeskrivning();
+                    }
+                    foreach (var x in fLoader.lastbilSamling.lastbilar)
+                    {
+                        if (ä.RegNr == x.Registreringsnummer)
+                            fbeskrivning = x.ToStringBeskrivning();
+                    }
+                    foreach (var x in fLoader.motorcykelSamling.motorcyklar)
+                    {
+                        if (ä.RegNr == x.Registreringsnummer)
+                            fbeskrivning = x.ToStringBeskrivning();
+                    }
+                    foreach (var x in fLoader.bussSamling.Bussar)
+                    {
+                        if (ä.RegNr == x.Registreringsnummer)
+                            fbeskrivning = x.ToStringBeskrivning();
+                    }
+                    lblÄrendeBeskrivning.Content = ä.Beskrivning + "\n\n" + fbeskrivning;
+                }
+            }
+            catch { }
         }
 
         private void btnFärdigtÄrende_Click(object sender, RoutedEventArgs e)
@@ -69,7 +114,6 @@ namespace GUI.Home
             int äindex = fLoader.ärendeSamling.ärenden.IndexOf(ä);
             if (pågåendeÄrenden.SelectedItem is Ärende)
             {
-                fLoader.ärendeSamling.ärenden[äindex].ÄrendeStatus = true;
                 foreach (var m in fLoader.mekSamling.mekaniker)
                 {
                     if (ä.ÄrendeID == m.Id && m.Ärenden > 0)
@@ -102,7 +146,48 @@ namespace GUI.Home
                         x.ÄrendeStatus = true;
                     }
                 }
+                fLoader.SaveMekaniker();
+                fLoader.SaveAllFordon();
+                fLoader.SaveÄrenden();
+                RefreshGrids();
             }
+        }
+        private void färdigaÄrenden_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                string fbeskrivning = "";
+                if (färdigaÄrenden.SelectedItem is Ärende)
+                {
+                    Ärende ä = (Ärende)färdigaÄrenden.SelectedItem;
+                    Bil b = new Bil();
+                    Lastbil lb = new Lastbil();
+                    Buss bb = new Buss();
+                    Motorcykel mc = new Motorcykel();
+                    foreach (var x in fLoader.bilSamling.Bilar)
+                    {
+                        if (ä.RegNr == x.Registreringsnummer)
+                            fbeskrivning = x.ToStringBeskrivning();
+                    }
+                    foreach (var x in fLoader.lastbilSamling.lastbilar)
+                    {
+                        if (ä.RegNr == x.Registreringsnummer)
+                            fbeskrivning = x.ToStringBeskrivning();
+                    }
+                    foreach (var x in fLoader.motorcykelSamling.motorcyklar)
+                    {
+                        if (ä.RegNr == x.Registreringsnummer)
+                            fbeskrivning = x.ToStringBeskrivning();
+                    }
+                    foreach (var x in fLoader.bussSamling.Bussar)
+                    {
+                        if (ä.RegNr == x.Registreringsnummer)
+                            fbeskrivning = x.ToStringBeskrivning();
+                    }
+                    lblÄrendeBeskrivning.Content = ä.Beskrivning + "\n\n" + fbeskrivning;
+                }
+            }
+            catch { }
         }
     }
 }
