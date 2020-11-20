@@ -9,14 +9,14 @@
       Title="SkapaÄrendePage">
 
     <Grid Background="LightGray">
-        <DataGrid x:Name="FordonGrid" Margin="0,52,509,63" AutoGenerateColumns="False">
+        <DataGrid x:Name="FordonGrid" Margin="0,52,509,63" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Modellnamn" Header="Modellnamn" Width="0.3*" Binding="{Binding Modellnamn}"/>
                 <DataGridTextColumn x:Name="RegNr" Header="RegNr" Width="0.3*" Binding="{Binding Registreringsnummer}"/>
                 <DataGridTextColumn x:Name="RegDatum" Header="Registreringsdatum" Width="0.4*" Binding="{Binding Registreringsdatum}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="MekGrid" Margin="489,52,0,63" AutoGenerateColumns="False">
+        <DataGrid x:Name="MekGrid" Margin="489,52,0,63" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID" Header="ID" Binding="{Binding Id}" Width="0.1*"/>
                 <DataGridTextColumn x:Name="Förnamn" Header="Förnamn" Binding="{Binding förnamn}" Width="0.2*"/>

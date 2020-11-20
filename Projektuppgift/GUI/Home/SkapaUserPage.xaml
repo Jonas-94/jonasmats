@@ -9,7 +9,7 @@
       Title="SkapaUserPage">
 
     <Grid Background="#FF746B6B">
-        <DataGrid x:Name="MekGrid" Margin="0,0,0,213" SelectionChanged="DataGrid_SelectionChanged"/>
+        <DataGrid x:Name="MekGrid" Margin="0,0,0,213" SelectionChanged="DataGrid_SelectionChanged" IsReadOnly="True"/>
         <Button x:Name="btnSkapaUser" Content="Skapa Användare" HorizontalAlignment="Center" Margin="0,382,0,0" VerticalAlignment="Top" Height="68" Width="284" Click="btnSkapaUser_Click"/>
         <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Margin="149,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="24"/>
         <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="461,335,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>

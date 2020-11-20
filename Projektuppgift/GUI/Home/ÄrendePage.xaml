@@ -9,7 +9,7 @@
       Title="ÄrendePage">
 
     <Grid Background="#FFB0B0B0">
-        <DataGrid x:Name="PågåendeÄrendenGrid" Margin="0,38,255,244" SelectionChanged="PågåendeÄrendenGrid_SelectionChanged" AutoGenerateColumns="False">
+        <DataGrid x:Name="PågåendeÄrendenGrid" Margin="0,38,255,244" SelectionChanged="PågåendeÄrendenGrid_SelectionChanged" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID_Copy1" Header="ID" Width="0.1*" Binding="{Binding ÄrendeID}"/>
                 <DataGridTextColumn x:Name="Förnamn_Copy1" Header="Förnamn" Width="0.15*" Binding="{Binding förnamn}"/>
@@ -18,7 +18,7 @@
                 <DataGridTextColumn x:Name="RegDatum_Copy1" Header="RegDatum" Width="0.4*" Binding="{Binding RegDatum}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="FärdigaÄrendenGrid" Margin="0,272,249,0" AutoGenerateColumns="False" SelectionChanged="FärdigaÄrendenGrid_SelectionChanged">
+        <DataGrid x:Name="FärdigaÄrendenGrid" Margin="0,272,249,0" AutoGenerateColumns="False" SelectionChanged="FärdigaÄrendenGrid_SelectionChanged" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID_Copy" Header="ID" Width="0.1*" Binding="{Binding ÄrendeID}"/>
                 <DataGridTextColumn x:Name="Förnamn_Copy" Header="Förnamn" Width="0.15*" Binding="{Binding förnamn}"/>

@@ -21,7 +21,7 @@
         <CheckBox x:Name="Kaross" Content="Karosser" HorizontalAlignment="Left" Margin="304,284,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="Däck" Content="Däck" HorizontalAlignment="Left" Margin="304,304,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnSkapaMekaniker" Content="Skapa Mekaniker" HorizontalAlignment="Left" Margin="422,245,0,0" VerticalAlignment="Top" Height="67" Width="120" Click="Skapa_Mekaniker_Click"/>
-        <DataGrid x:Name="MekanikerGrid" Margin="0,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="366" Width="285" AutoGenerateColumns="False" SelectionChanged="MekanikerGrid_SelectionChanged">
+        <DataGrid x:Name="MekanikerGrid" Margin="0,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="366" Width="285" AutoGenerateColumns="False" SelectionChanged="MekanikerGrid_SelectionChanged" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="IDGrid" Header="ID" Binding="{Binding Id}" Width="0.1*"/>
                 <DataGridTextColumn x:Name="FörnamnGrid" Header="Förnamn" Binding="{Binding förnamn}" Width="0.3*"/>

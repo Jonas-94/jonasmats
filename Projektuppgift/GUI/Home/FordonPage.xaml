@@ -9,7 +9,7 @@
       Title="FordonMeny">
 
     <Grid Background="#FFB1B1B1">
-        <DataGrid x:Name="FordonGrid" Margin="0,31,506,46" AutoGenerateColumns="False" SelectionChanged="FordonGrid_SelectionChanged">
+        <DataGrid x:Name="FordonGrid" Margin="0,31,506,46" AutoGenerateColumns="False" SelectionChanged="FordonGrid_SelectionChanged" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID" Width="0.1*" Header="ID" Binding="{Binding Id}"/>
                 <DataGridTextColumn x:Name="Modellnamn" Width="0.3*" Header="Modellnamn" Binding="{Binding Modellnamn}"/>
