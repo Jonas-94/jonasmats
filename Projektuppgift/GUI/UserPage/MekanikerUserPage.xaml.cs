@@ -54,10 +54,14 @@ namespace GUI.Home
         private void btnSparaKompetens_Click(object sender, RoutedEventArgs e)
         {
             if(kvindruta.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kvindruta = true; }
-            if(kdäck.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kdäck = true; }
-            if(kbroms.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kbromsar = true; }
-            if(kkaross.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kkaross = true; }
+            else { fLoader.mekSamling.mekaniker[index].Kvindruta = true; }
+            if (kdäck.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kdäck = true; }
+            else { fLoader.mekSamling.mekaniker[index].Kbromsar = true; }
+            if (kbroms.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kbromsar = true; }
+            else { fLoader.mekSamling.mekaniker[index].Kkaross = true; }
+            if (kkaross.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kkaross = true; }
             if(kmotor.IsChecked == true) { fLoader.mekSamling.mekaniker[index].Kmotor = true; }
+            else { fLoader.mekSamling.mekaniker[index].Kmotor = true; }
             fLoader.SaveMekaniker();
         }
 
