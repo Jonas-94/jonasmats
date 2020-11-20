@@ -23,7 +23,6 @@ namespace GUI.Home
     public partial class MekanikerPage : Page
     {
         FileLoader fLoader = new FileLoader();
-        FolderPath fPath;
         string folderPath { get; set; }
         MekanikerSamling mekanikerSamling { get; set; } = new MekanikerSamling();
         public MekanikerPage()
@@ -37,6 +36,11 @@ namespace GUI.Home
             }
             catch { }
         }
+        public void RefreshGrid()
+        {
+            MekanikerGrid.ItemsSource = null;
+            MekanikerGrid.ItemsSource = fLoader.mekSamling.mekaniker;
+        }
         private void Skapa_Mekaniker_Click(object sender, RoutedEventArgs e)
         {
             SkapaMekaniker();
@@ -44,18 +48,23 @@ namespace GUI.Home
         public string FirstLetterCapital(string str)
         {
             if (string.IsNullOrEmpty(str))
-                return string.Empty;
+                return null;
+            
+            
             char[] letters = str.ToCharArray();
-            foreach (var l in letters)
+            for (int i = 0; i < letters.Length; i++)
             {
-                char.ToLower(l);
+                letters[i] = char.ToLower(letters[i]);
             }
 
             letters[0] = char.ToUpper(letters[0]);
-            return new string(letters);
+
+            return str = new string(letters);
         }
         public void SkapaMekaniker()
         {
+            string _förnamn = FirstLetterCapital(Förnamn.Text);
+            string _efternamn = FirstLetterCapital(Efternamn.Text);
             //bools för kompetenser
             bool broms = false;
             bool kaross = false;
@@ -79,8 +88,15 @@ namespace GUI.Home
             bool run = true;
             while (run)
             {
-                string _förnamn = FirstLetterCapital(Förnamn.Text);
-                string _efternamn = FirstLetterCapital(Efternamn.Text);
+                if (string.IsNullOrEmpty(_förnamn)){
+                    System.Windows.Forms.MessageBox.Show("Fyll i ett förnamn");
+                    break;
+                }
+                if (string.IsNullOrEmpty(_efternamn))
+                {
+                    System.Windows.Forms.MessageBox.Show("Fyll i ett efternamn");
+                    break;
+                }
                 string _födelsedatum = "";
                 string _anställningsdatum = "";
                 string _slutdatum = "";
@@ -139,7 +155,7 @@ namespace GUI.Home
                 MekanikerGrid.ItemsSource = null;
                 MekanikerGrid.ItemsSource = fLoader.mekSamling.mekaniker;
                 fLoader.SaveMekaniker();
-                fLoader.SaveID(fLoader.idSamling);
+                fLoader.SaveID();
                 break;
             }
         }
@@ -178,6 +194,8 @@ namespace GUI.Home
         private void SparaRedigeradMekaniker_Click(object sender, RoutedEventArgs e)
         {
             SparaRedigeradMekaniker.Visibility = Visibility.Hidden;
+            btnRedigeraMekaniker.Visibility = Visibility.Visible;
+            btnSkapaMekaniker.Visibility = Visibility.Visible;
             //bools för kompetenser
             bool broms = false;
             bool kaross = false;
@@ -196,6 +214,7 @@ namespace GUI.Home
             {
                 string _förnamn = FirstLetterCapital(Förnamn.Text);
                 string _efternamn = FirstLetterCapital(Efternamn.Text);
+                
                 string _födelsedatum = "";
                 string _anställningsdatum = "";
                 string _slutdatum = "";
@@ -210,6 +229,11 @@ namespace GUI.Home
                 else
                 {
                     System.Windows.Forms.MessageBox.Show("Fyll i ett giltigt födelsedatum (YYYY-MM-DD)");
+                    break;
+                }
+                if (fLoader.mekSamling.mekaniker.Exists(x => x.förnamn.Equals(_förnamn) && x.efternamn.Equals(_efternamn) && x.Födelsedatum.Equals(_födelsedatum)))
+                {
+                    System.Windows.Forms.MessageBox.Show("Mekanikern finns redan i systemet.");
                     break;
                 }
                 if (DateTime.TryParse(Anställningsdatum.Text, out DateTime aDay))
@@ -250,7 +274,7 @@ namespace GUI.Home
                 MekanikerGrid.ItemsSource = null;
                 MekanikerGrid.ItemsSource = fLoader.mekSamling.mekaniker;
                 fLoader.SaveMekaniker();
-                fLoader.SaveID(fLoader.idSamling);
+                fLoader.SaveID();
                 break;
             }
         }
@@ -259,6 +283,42 @@ namespace GUI.Home
         {
             Huvudmeny huvudmeny = new Huvudmeny();
             this.NavigationService.Navigate(huvudmeny);
+        }
+
+        private void btnTabortMekaniker_Click(object sender, RoutedEventArgs e)
+        {
+            Mekaniker m = (Mekaniker)MekanikerGrid.SelectedItem;
+            int index = fLoader.mekSamling.mekaniker.IndexOf(m);
+            int mekId = fLoader.mekSamling.mekaniker[index].Id;
+            var bilar = fLoader.bilSamling.Bilar.Where(x => x.Id == mekId && x.ÄrendeTaget == true && x.ÄrendeKlart == false);
+            foreach (var y in bilar)
+            {
+                y.ÄrendeTaget = false;
+                y.Id = 0;
+            }
+            var lastbilar = fLoader.lastbilSamling.lastbilar.Where(x => x.Id == mekId && x.ÄrendeTaget == true && x.ÄrendeKlart == false);
+            foreach (var y in lastbilar)
+            {
+                y.ÄrendeTaget = false;
+                y.Id = 0;
+            }
+            var bussar = fLoader.bussSamling.Bussar.Where(x => x.Id == mekId && x.ÄrendeTaget == true && x.ÄrendeKlart == false);
+            foreach (var y in bussar)
+            {
+                y.ÄrendeTaget = false;
+                y.Id = 0;
+            }
+            var mc = fLoader.motorcykelSamling.motorcyklar.Where(x => x.Id == mekId && x.ÄrendeTaget == true && x.ÄrendeKlart == false);
+            foreach (var y in mc)
+            {
+                y.ÄrendeTaget = false;
+                y.Id = 0;
+            }
+            fLoader.mekSamling.mekaniker.RemoveAt(index);
+            fLoader.SaveAllFordon();
+            fLoader.FordonReload();
+            fLoader.SaveMekaniker();
+            RefreshGrid();
         }
     }
 }

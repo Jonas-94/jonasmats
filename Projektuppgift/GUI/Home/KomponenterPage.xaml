@@ -1,0 +1,83 @@
+﻿<Page x:Class="GUI.Home.KomponenterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI.Home"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="KomponenterPage">
+
+    <Grid Background="#FFAAAAAA">
+        <Button Content="Bilkomponenter" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="159" Margin="1,58,0,0"/>
+        <Button Content="Lastbilkomponenter" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="168" Margin="207,58,0,0"/>
+        <Button Content="Busskomponenter" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="178" Margin="414,58,0,0"/>
+        <Button Content="Motorcykelkomponenter" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="166" Margin="626,58,0,0"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="2,149,0,0"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="26" Margin="2,200,0,0"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="26" Margin="2,250,0,0"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="26" Margin="2,298,0,0"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="26" Margin="2,348,0,0"/>
+        <TextBox x:Name="txtBildäck" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="2,149,0,0" Text="0"/>
+        <TextBox x:Name="txtBilmotor" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="26" Margin="2,200,0,0" Text="0"/>
+        <TextBox x:Name="txtBilkaross" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="26" Margin="2,250,0,0" Text="0"/>
+        <TextBox x:Name="txtBilVindruta" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="26" Margin="2,298,0,0" Text="0"/>
+        <TextBox x:Name="txtBilbroms" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="26" Margin="2,348,0,0" Text="0"/>
+        <Label x:Name="lblBilDäck" Content="" HorizontalAlignment="Left" Margin="52,150,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblBilMotor" Content="" HorizontalAlignment="Left" Margin="52,200,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblBilKaross" Content="" HorizontalAlignment="Left" Margin="52,250,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblBilVindRuta" Content="" HorizontalAlignment="Left" Margin="52,298,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblBilbroms" Content="" HorizontalAlignment="Left" Margin="52,348,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <TextBox x:Name="txtLastbilDäck" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="208,149,0,0" Text="0"/>
+        <TextBox x:Name="txtLastbilMotor" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="208,200,0,0" Text="0"/>
+        <TextBox x:Name="txtLastbilKaross" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="208,250,0,0" Text="0"/>
+        <TextBox x:Name="txtLastbilVindruta" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="208,298,0,0" Text="0"/>
+        <TextBox x:Name="txtLastbilBroms" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="208,348,0,0" Text="0"/>
+        <Label x:Name="lblLastbilDäck" Content="" HorizontalAlignment="Left" Margin="258,150,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblLastbilMotor" Content="" HorizontalAlignment="Left" Margin="258,200,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblLastbilKaross" Content="" HorizontalAlignment="Left" Margin="258,250,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblLastbilVindruta" Content="" HorizontalAlignment="Left" Margin="258,298,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblLastbilBroms" Content="" HorizontalAlignment="Left" Margin="258,348,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <TextBox x:Name="txtBussDäck" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="424,144,0,0" Text="0"/>
+        <TextBox x:Name="txtBussMotor" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="424,195,0,0" Text="0"/>
+        <TextBox x:Name="txtBussKaross" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="424,245,0,0" Text="0"/>
+        <TextBox x:Name="txtBussVindruta" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="424,293,0,0" Text="0"/>
+        <TextBox x:Name="txtBussBroms" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="424,343,0,0" Text="0"/>
+        <Label x:Name="lblBussDäck" Content="" HorizontalAlignment="Left" Margin="474,145,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblBussMotor" Content="" HorizontalAlignment="Left" Margin="474,195,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblBussKaross" Content="" HorizontalAlignment="Left" Margin="474,245,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblBussVindruta" Content="" HorizontalAlignment="Left" Margin="474,293,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblBussBroms" Content="" HorizontalAlignment="Left" Margin="474,343,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <TextBox x:Name="txtMcDäck" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="634,144,0,0" Text="0"/>
+        <TextBox x:Name="txtMcMotor" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="634,195,0,0" Text="0"/>
+        <TextBox x:Name="txtMcKaross" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="634,245,0,0" Text="0"/>
+        <TextBox x:Name="txtMcVindruta" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="634,293,0,0" Text="0"/>
+        <TextBox x:Name="txtMcBroms" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Height="27" Margin="634,343,0,0" Text="0"/>
+        <Label x:Name="lblMcDäck" Content="" HorizontalAlignment="Left" Margin="684,145,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblMcMotor" Content="" HorizontalAlignment="Left" Margin="684,195,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblMcKaross" Content="" HorizontalAlignment="Left" Margin="684,245,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblMcVindruta" Content="" HorizontalAlignment="Left" Margin="684,293,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblMcBroms" Content="" HorizontalAlignment="Left" Margin="684,343,0,0" VerticalAlignment="Top" Width="118" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="lblDäck" Content="Däck:" HorizontalAlignment="Left" Margin="6,126,0,0" VerticalAlignment="Top" Width="60" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblMotor" Content="Motorer:" HorizontalAlignment="Left" Margin="2,177,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblKaross" Content="Karosser:" HorizontalAlignment="Left" Margin="2,227,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblVindrutor" Content="Vindrutor:" HorizontalAlignment="Left" Margin="2,275,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblBromsar" Content="Bromsar:" HorizontalAlignment="Left" Margin="2,325,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblDäck_Copy" Content="Däck:" HorizontalAlignment="Left" Margin="212,126,0,0" VerticalAlignment="Top" Width="60" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblMotor_Copy" Content="Motorer:" HorizontalAlignment="Left" Margin="208,177,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblKaross_Copy" Content="Karosser:" HorizontalAlignment="Left" Margin="208,227,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblVindrutor_Copy" Content="Vindrutor:" HorizontalAlignment="Left" Margin="208,275,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblBromsar_Copy" Content="Bromsar:" HorizontalAlignment="Left" Margin="208,325,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblDäck_Copy1" Content="Däck:" HorizontalAlignment="Left" Margin="428,121,0,0" VerticalAlignment="Top" Width="60" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblMotor_Copy1" Content="Motorer:" HorizontalAlignment="Left" Margin="424,172,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblKaross_Copy1" Content="Karosser:" HorizontalAlignment="Left" Margin="424,222,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblVindrutor_Copy1" Content="Vindrutor:" HorizontalAlignment="Left" Margin="424,270,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblBromsar_Copy1" Content="Bromsar:" HorizontalAlignment="Left" Margin="424,320,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblDäck_Copy2" Content="Däck:" HorizontalAlignment="Left" Margin="638,121,0,0" VerticalAlignment="Top" Width="60" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblMotor_Copy2" Content="Motorer:" HorizontalAlignment="Left" Margin="634,172,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblKaross_Copy2" Content="Karosser:" HorizontalAlignment="Left" Margin="634,222,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblVindrutor_Copy2" Content="Vindrutor:" HorizontalAlignment="Left" Margin="634,270,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblBromsar_Copy2" Content="Bromsar:" HorizontalAlignment="Left" Margin="634,320,0,0" VerticalAlignment="Top" Width="64" FontFamily="Comic Sans MS"/>
+        <Button x:Name="btnAddKomponenter" Content="Lägg till komponenter" HorizontalAlignment="Center" Margin="0,404,0,0" VerticalAlignment="Top" Height="36" Width="260" Click="btnAddKomponenter_Click"/>
+    </Grid>
+</Page>

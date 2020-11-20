@@ -21,6 +21,9 @@ namespace Logic.Entities
         public string efternamn { get; set; }
         public string RegNr { get; set; }
         public string RegDatum { get; set; }
+
+       
+
         public string BeskrivningsMetod(Fordon fordon)
         {
             bool broms = fordon.Äbromsar;

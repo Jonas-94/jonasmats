@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Logic.DAL;
+using Logic.Entities;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Logic.DAL;
-using System.Linq;
-using Logic.Entities;
 namespace GUI.Home
 {
     /// <summary>
@@ -21,25 +11,125 @@ namespace GUI.Home
     public partial class ÄrendePage : Page
     {
         FileLoader fLoader { get; set; } = new FileLoader();
+        Ärende ä { get; set; } = new Ärende();
         public ÄrendePage()
         {
             InitializeComponent();
-            fLoader.LoadÄrenden();
+            fLoader.LoadFordon();
+            fLoader.FordonReload();
             fLoader.LoadMekaniker();
-            PågåendeÄrendenGrid.ItemsSource =
-                fLoader.ärendeSamling.ärenden.Select(x => x.ÄrendeStatus == false);
-            FärdigaÄrendenGrid.ItemsSource =
-                fLoader.ärendeSamling.ärenden.Select(x => x.ÄrendeStatus == true);
+            fLoader.LoadÄrenden();
+            //RefreshÄrenden();
+            RefreshGrid();
         }
 
         private void btnÄrendeFärdigt_Click(object sender, RoutedEventArgs e)
         {
-            Ärende  ä = (Ärende)PågåendeÄrendenGrid.SelectedItem;
-            int index = fLoader.ärendeSamling.ärenden.IndexOf(ä);
-            Mekaniker m = fLoader.ärendeSamling.ärenden[index].mekaniker;
-            int indexmek = fLoader.mekSamling.mekaniker.IndexOf(m);
-            if(fLoader.mekSamling.mekaniker[indexmek].Ärenden > 0)
-            fLoader.mekSamling.mekaniker[indexmek].Ärenden -= 1;
+            fLoader.LoadMekaniker();
+            Ärende ä = (Ärende)PågåendeÄrendenGrid.SelectedItem;
+            int äindex = fLoader.ärendeSamling.ärenden.IndexOf(ä);
+            if (PågåendeÄrendenGrid.SelectedItem is Ärende)
+            {
+                fLoader.ärendeSamling.ärenden[äindex].ÄrendeStatus = true;
+                foreach (Mekaniker m in fLoader.mekSamling.mekaniker)
+                {
+                    if (ä.ÄrendeID == m.Id && m.Ärenden > 0)
+                        m.Ärenden -= 1;
+                }
+                foreach (var x in fLoader.bilSamling.Bilar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        x.ÄrendeKlart = true;
+                }
+                foreach (var x in fLoader.lastbilSamling.lastbilar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        x.ÄrendeKlart = true;
+                }
+                foreach (var x in fLoader.motorcykelSamling.motorcyklar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        x.ÄrendeKlart = true;
+                }
+                foreach (var x in fLoader.bussSamling.Bussar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        x.ÄrendeKlart = true;
+                }
+            }
+            fLoader.SaveÄrenden();
+            RefreshGrid();
+        }
+        private void RefreshGrid()
+        {
+            PågåendeÄrendenGrid.ItemsSource = null;
+            FärdigaÄrendenGrid.ItemsSource = null;
+            PågåendeÄrendenGrid.ItemsSource =
+                fLoader.ärendeSamling.ärenden.Where(x => x.ÄrendeStatus == false);
+            FärdigaÄrendenGrid.ItemsSource =
+                fLoader.ärendeSamling.ärenden.Where(x => x.ÄrendeStatus == true);
+        }
+        public string BeskrivningsMetod(Fordon fordon)
+        {
+            string Beskrivning = " ";
+            bool broms = fordon.Äbromsar;
+            bool kaross = fordon.Äkaross;
+            bool motor = fordon.Ämotor;
+            bool vindruta = fordon.Ävindruta;
+            bool däck = fordon.Ädäck;
+            string bromsstring = "", karossstring = "", motorstring = "", vindrutastring = "", däckstring = "";
+            if (broms == true)
+                bromsstring = "\nBehandling av bromsar";
+            if (kaross == true)
+                karossstring = "\nBehanding av kaross";
+            if (motor == true)
+                motorstring = "\nBehandling av motor";
+            if (vindruta == true)
+                vindrutastring = "\nBehandling av vindruta";
+            if (däck == true)
+                däckstring = "\nBehandling av däck";
+            Beskrivning = " " + bromsstring + karossstring + motorstring + vindrutastring + däckstring;
+            return Beskrivning;
+        }
+        
+        private void PågåendeÄrendenGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string fbeskrivning = "";
+            if (PågåendeÄrendenGrid.SelectedItem is Ärende)
+            {
+                Ärende ä = (Ärende)PågåendeÄrendenGrid.SelectedItem;
+                Bil b = new Bil();
+                Lastbil lb = new Lastbil();
+                Buss bb = new Buss();
+                Motorcykel mc = new Motorcykel();
+                foreach (var x in fLoader.bilSamling.Bilar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        fbeskrivning = x.ToStringBeskrivning();
+                }
+                foreach (var x in fLoader.lastbilSamling.lastbilar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        fbeskrivning = x.ToStringBeskrivning();
+                }
+                foreach (var x in fLoader.motorcykelSamling.motorcyklar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        fbeskrivning = x.ToStringBeskrivning();
+                }
+                foreach (var x in fLoader.bussSamling.Bussar)
+                {
+                    if (ä.RegNr == x.Registreringsnummer)
+                        fbeskrivning = x.ToStringBeskrivning();
+                }
+                lblÄrendeBeskrivning.Content = ä.Beskrivning + "\n\n" + fbeskrivning;
+            }
+        }
+
+        private void btnHuvudmeny_Click(object sender, RoutedEventArgs e)
+        {
+            Huvudmeny hMeny = new Huvudmeny();
+            this.NavigationService.Navigate(hMeny);
         }
     }
 }

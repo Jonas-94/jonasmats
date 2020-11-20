@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using System.Text;
 using Logic.Entities;
+using System.IO;
 using System.Threading.Tasks;
 using System.Text.Json;
-using System.IO;
 
 namespace Logic.DAL
 {
-    public class MotorcykelSamling : InterfaceLoadSave
+    public class BusskomponentSamling : InterfaceLoadSave
     {
-        public List<Motorcykel> motorcyklar { get; set; } = new List<Motorcykel>();
-        string filePath = @"DAL\Motorcyklar.json";
+        public List<BussKomponenter> komp { get; set; } = new List<BussKomponenter>();
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder("[");
 
-            for (int i = 0; i < motorcyklar.Count; i++)
+            for (int i = 0; i < komp.Count; i++)
             {
-                sb.Append(motorcyklar[i].ToString());
+                sb.Append(komp[i].ToString());
                 sb.Append(",");
             }
             sb.Append("]");
-
             return sb.ToString();
-
         }
+
         async Task InterfaceLoadSave.SaveAsync(string filePath)
         {
             string json = JsonSerializer.Serialize(this);
@@ -46,24 +45,15 @@ namespace Logic.DAL
                 tw.Close();
             }
         }
-        void InterfaceLoadSave.Save(string filePath)
-        {
-            System.IO.File.WriteAllText(filePath, "");
-            string json = JsonSerializer.Serialize(this);
-            FileStream fs = File.OpenWrite(filePath);
-            StreamWriter sw = new StreamWriter(fs);
-            sw.Write(json);
-            sw.Close();
-        }
+
         List<T> InterfaceLoadSave.Load<T>(string filePath)
         {
             FileStream fs = File.OpenRead(filePath);
             StreamReader sr = new StreamReader(fs);
             string json = sr.ReadToEnd();
-            MotorcykelSamling mcSamling = JsonSerializer.Deserialize<MotorcykelSamling>(json);
+            BusskomponentSamling bkomp = JsonSerializer.Deserialize<BusskomponentSamling>(json);
             sr.Close();
-            return mcSamling.motorcyklar as List<T>;
+            return bkomp.komp as List<T>;
         }
     }
 }
-

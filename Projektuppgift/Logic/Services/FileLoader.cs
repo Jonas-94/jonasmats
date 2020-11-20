@@ -19,6 +19,8 @@ namespace Logic.DAL
         string bussPath = "/Buss.json"; string bilPath = "/Bil.json"; string motorcykelPath = "/Motorcyklar.json";
         string mekPath = "/Mekaniker.json"; string ärendePath = "/Ärenden.json"; string idPath = "/ID";
         string komponentPath = "/Komponenter.json";
+        string bilkompPath = "/BilKomponenter.json"; string busskompPath = "/BussKomponenter.json"; string lastkompPath = "/LastbilKomponenter.json";
+        string mckompPath = "/McKomponenter.json";
         public string missingFile { get; set; } = "";
         public InterfaceLoadSave IUser { get; set; } = new UserSamling();
         public InterfaceLoadSave IMekaniker { get; set; } = new MekanikerSamling();
@@ -30,6 +32,14 @@ namespace Logic.DAL
         public InterfaceLoadSave IÄrende { get; set; } = new ÄrendeSamling();
         public InterfaceLoadSave IID { get; set; } = new IDSamling();
         public InterfaceLoadSave IKomponenter { get; set; } = new KomponentSamling();
+        public InterfaceLoadSave IBilkomp { get; set; } = new BilkomponentSamling();
+        public InterfaceLoadSave IBusskomp { get; set; } = new BusskomponentSamling();
+        public InterfaceLoadSave ILastbkomp { get; set; } = new LastbilkomponentSamling();
+        public InterfaceLoadSave IMckomp { get; set; } = new MckomponentSamling();
+        public BilkomponentSamling kompBilSamling { get; set; } = new BilkomponentSamling();
+        public BusskomponentSamling kompBussSamling { get; set; } = new BusskomponentSamling();
+        public LastbilkomponentSamling kompLastBSamling { get; set; } = new LastbilkomponentSamling();
+        public MckomponentSamling kompMcSamling { get; set; } = new MckomponentSamling();
         public MekanikerSamling mekSamling { get; set; } = new MekanikerSamling();
         public FordonSamling fordonSamling { get; set; } = new FordonSamling();
         public ÄrendeSamling ärendeSamling { get; set; } = new ÄrendeSamling();
@@ -46,9 +56,29 @@ namespace Logic.DAL
         {
             folderPath = foundfolder;
         }
-        public void SaveUser(UserSamling us) 
+        public void SaveBilKomp()
         {
-            IUser = us;
+            IBilkomp = kompBilSamling;
+            IBilkomp.SaveAsync(folderPath + bilkompPath);
+        }
+        public void SaveBussKomp()
+        {
+            IBusskomp = kompBussSamling;
+            IBusskomp.SaveAsync(folderPath + busskompPath);
+        }
+        public void SaveLastbilKomp()
+        {
+            ILastbkomp = kompLastBSamling;
+            ILastbkomp.SaveAsync(folderPath + lastkompPath);
+        }
+        public void SaveMcKomp()
+        {
+            IMckomp = kompMcSamling;
+            IMckomp.SaveAsync(folderPath + bilkompPath);
+        }
+        public void SaveUser() 
+        {
+            IUser = userSamling;
             IUser.SaveAsync(folderPath + userPath);
         }
         public void SaveMekaniker()
@@ -81,14 +111,14 @@ namespace Logic.DAL
             IÄrende = ärendeSamling;
             IÄrende.SaveAsync(folderPath + ärendePath);
         }
-        public void SaveID(IDSamling ids)
+        public void SaveID()
         {
-            IID = ids;
+            IID = idSamling;
             IID.SaveAsync(folderPath + idPath);
         }
-        public void SaveKomponenter(KomponentSamling ks)
+        public void SaveKomponenter()
         {
-            IKomponenter = ks;
+            IKomponenter = komponentSamling;
             IKomponenter.SaveAsync(folderPath + komponentPath);
         }
         public void SaveAllFordon()
@@ -105,6 +135,22 @@ namespace Logic.DAL
             fordonSamling.AddFordon<Buss>(bussSamling.Bussar);
             fordonSamling.AddFordon<Lastbil>(lastbilSamling.lastbilar);
             fordonSamling.AddFordon<Motorcykel>(motorcykelSamling.motorcyklar);
+        }
+        public void LoadBilKomp()
+        {
+            kompBilSamling.komp = IBilkomp.Load<BilKomponenter>(folderPath + bilkompPath);
+        }
+        public void LoadLastbilKomp()
+        {
+            kompLastBSamling.komp = ILastbkomp.Load<LastbilKomponenter>(folderPath + lastkompPath);
+        }
+        public void LoadBussKomp()
+        {
+           kompBussSamling.komp = IBusskomp.Load<BussKomponenter>(folderPath + busskompPath);
+        }
+        public void LoadMcKomp()
+        {
+            kompMcSamling.komp = IBilkomp.Load<McKomponenter>(folderPath + mckompPath);
         }
         public void LoadBilar()
         {
@@ -147,10 +193,8 @@ namespace Logic.DAL
             komponentSamling.komponentlista = IKomponenter.Load<Komponenter>(folderPath + komponentPath);
         }
 
-        public void LoadFiles(BilSamling bs = null, BussSamling bbs = null, LastbilSamling lbs = null, MotorcykelSamling mcs = null,
-            ÄrendeSamling äs= null, UserSamling us = null, MekanikerSamling ms = null)
+        public void LoadFiles()
         {
-            
             LoadBilar();
             LoadBussar();
             LoadLastbilar();
@@ -159,56 +203,18 @@ namespace Logic.DAL
             LoadUsers();
             LoadMekaniker();
         }
-        /*
-        public void LoadAllFiles()
+        public void LoadFordon()
         {
-            missingFile = null;
-            try
-            {
-                LoadBilar();
-            }
-            catch (Exception a) { if (a.Source != null) missingFile += "\n" + a.Message; }
-            try
-            {
-                LoadBussar();
-            }
-            catch (Exception b) { if (b.Source != null) missingFile += "\n" + b.Message; }
-            try
-            {
-                LoadLastbilar();
-            }
-            catch (Exception c) { if (c.Source != null) missingFile += "\n" + c.Message; }
-            try
-            {
-                LoadMotorcyklar();
-            }
-            catch (Exception d) { if (d.Source != null) missingFile += "\n" + d.Message; }
-            try
-            {
-                LoadÄrenden();
-            }
-            catch (Exception e) { if (e.Source != null) missingFile += "\n" + e.Message; }
-            try
-            {
-                LoadUsers();
-            }
-            catch (Exception f) { if (f.Source != null) missingFile += "\n" + f.Message; }
-            try
-            {
-                LoadMekaniker();
-            }
-            catch (Exception g) { if (g.Source != null) missingFile += "\n" + g.Message; }
-            try
-            {
-                Loader.LoadID();
-            }
-            catch (Exception h) { if (h.Source != null) missingFile += "\n" + h.Message; }
-            try
-            {
-                LoadKomponenter();
-            }
-            catch (Exception i) { if (i.Source != null) missingFile += "\n" + i.Message; }
+            try { LoadBilar(); }
+            catch { }
+            try { LoadLastbilar(); }
+            catch { }
+            try { LoadBussar(); }
+            catch { }
+            try { LoadMotorcyklar(); }
+            catch { }
+
         }
-        */
+        
     }
 }

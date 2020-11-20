@@ -21,16 +21,11 @@ namespace Logic.Services
         }
         public bool Login(string username, string password)
         {
-            try
-            {
-                users = IUser.Load<User>(filePathGet);
-            }
-            catch { }
-            
-            IEnumerable<User> findID = users.Where(user => user.Username.Equals(username) && user.Password.Equals(password));
+            fLoader.LoadUsers();
+            IEnumerable<User> findID = fLoader.userSamling.users.Where(user => user.Username.Equals(username) && user.Password.Equals(password));
             foreach (var x in findID)
                 fLoader.Id = x.ID;
-            return users.Exists(user => user.Username.Equals(username) && user.Password.Equals(password));
+            return fLoader.userSamling.users.Exists(user => user.Username.Equals(username) && user.Password.Equals(password));
         }
     }
 }

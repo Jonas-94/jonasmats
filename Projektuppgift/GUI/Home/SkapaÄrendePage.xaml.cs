@@ -1,19 +1,11 @@
-﻿using System;
+﻿using Logic.DAL;
+using Logic.Entities;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Logic.DAL;
-using Logic.Entities;
 using System.Linq;
-
 namespace GUI.Home
 {
     /// <summary>
@@ -37,13 +29,20 @@ namespace GUI.Home
 
             LoadFiles();
             if (missingFile != null)
+            {
                 System.Windows.Forms.MessageBox.Show("Json-filer skapas automatiskt.\n" +
                     $"Följande filer hittades inte:\n{missingFile}");
-            fLoader.FordonReload();
-            FordonGrid.ItemsSource = fLoader.fordonSamling.fordon;
-            
-        }
+            }
+            RefreshGrid();
 
+        }
+        public void RefreshGrid()
+        {
+            fLoader.FordonReload();
+            FordonGrid.ItemsSource =
+            FordonGrid.ItemsSource =
+                fLoader.fordonSamling.fordon.Where(x => x.ÄrendeTaget == false);
+        }
         private void btnVäljFordon_Click(object sender, RoutedEventArgs e)
         {
             f = (Fordon)FordonGrid.SelectedItem;
@@ -60,10 +59,8 @@ namespace GUI.Home
             btnVäljFordon.IsEnabled = false;
             lblFordonBeskrivning.Content = beskrivning;
         }
-
         private void btnVäljMekaniker_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 mek = (Mekaniker)MekGrid.SelectedItem;
@@ -81,8 +78,6 @@ namespace GUI.Home
             {
                 if (f != null && mek != null)
                 {
-                    
-
                     int index = fLoader.mekSamling.mekaniker.IndexOf(mek);
                     if (mek.Ärenden >= 2)
                     {
@@ -91,7 +86,15 @@ namespace GUI.Home
                     }
                     else
                         fLoader.mekSamling.mekaniker[index].Ärenden += 1;
-
+                    if (f is Bil)
+                        f = f as Bil;
+                    else if (f is Lastbil)
+                        f = f as Lastbil;
+                    else if (f is Buss)
+                        f = f as Buss;
+                    else if (f is Motorcykel)
+                        f = f as Motorcykel;
+                            
                     ärende = new Ärende
                     {
                         RegDatum = f.Registreringsdatum,
@@ -110,33 +113,36 @@ namespace GUI.Home
                     if (f is Bil)
                     {
                         fIndex = fLoader.bilSamling.Bilar.IndexOf(f as Bil);
-                        fLoader.bilSamling.Bilar.RemoveAt(fIndex);
+                        fLoader.bilSamling.Bilar[fIndex].ÄrendeTaget = true;
+                        fLoader.bilSamling.Bilar[fIndex].Id = mek.Id;
                     }
                     if (f is Lastbil)
                     {
                         fIndex = fLoader.lastbilSamling.lastbilar.IndexOf(f as Lastbil);
-                        fLoader.lastbilSamling.lastbilar.RemoveAt(fIndex);
+                        fLoader.lastbilSamling.lastbilar[fIndex].ÄrendeTaget = true;
+                        fLoader.lastbilSamling.lastbilar[fIndex].Id = mek.Id;
                     }
                     if (f is Buss)
                     {
                         fIndex = fLoader.bussSamling.Bussar.IndexOf(f as Buss);
-                        fLoader.bussSamling.Bussar.RemoveAt(fIndex);
+                        fLoader.bussSamling.Bussar[fIndex].ÄrendeTaget = true;
+                        fLoader.bussSamling.Bussar[fIndex].Id = mek.Id;
                     }
                     if (f is Motorcykel)
                     {
                         fIndex = fLoader.motorcykelSamling.motorcyklar.IndexOf(f as Motorcykel);
-                        fLoader.motorcykelSamling.motorcyklar.RemoveAt(fIndex);
+                        fLoader.motorcykelSamling.motorcyklar[fIndex].ÄrendeTaget = true;
+                        fLoader.bussSamling.Bussar[fIndex].Id = mek.Id;
                     }
                     fLoader.SaveAllFordon();
-                    fLoader.FordonReload();
+                    
                     System.Windows.Forms.MessageBox.Show($"Mekanikern {mek.förnamn} {mek.efternamn}" +
                         $" tog ärendet för fordonet {f.Modellnamn} {f.Registreringsnummer}");
                 }
                 VisaMekanikerTillFordon(f);
                 mek = null;
                 f = null;
-                FordonGrid.ItemsSource = null;
-                FordonGrid.ItemsSource = fLoader.fordonSamling.fordon;
+                RefreshGrid();
                 btnVäljMekaniker.IsEnabled = true;
                 btnVäljFordon.IsEnabled = true;
                 btnSkapaÄrende.Background = Brushes.LightGray;
@@ -181,26 +187,26 @@ namespace GUI.Home
         }
         public string BeskrivningsMetod(Fordon fordon)
         {
-            
-                string Beskrivning = " ";
-                bool broms = fordon.Äbromsar;
-                bool kaross = fordon.Äkaross;
-                bool motor = fordon.Ämotor;
-                bool vindruta = fordon.Ävindruta;
-                bool däck = fordon.Ädäck;
-                string bromsstring = "", karossstring = "", motorstring = "", vindrutastring = "", däckstring = "";
-                if (broms == true)
-                    bromsstring = "\nBehandling av bromsar";
-                if (kaross == true)
-                    karossstring = "\nBehanding av kaross";
-                if (motor == true)
-                    motorstring = "\nBehandling av motor";
-                if (vindruta == true)
-                    vindrutastring = "\nBehandling av vindruta";
-                if (däck == true)
-                    däckstring = "\nBehandling av däck";
-                Beskrivning = " " + bromsstring + karossstring + motorstring + vindrutastring + däckstring;
-                return Beskrivning;
+
+            string Beskrivning = " ";
+            bool broms = fordon.Äbromsar;
+            bool kaross = fordon.Äkaross;
+            bool motor = fordon.Ämotor;
+            bool vindruta = fordon.Ävindruta;
+            bool däck = fordon.Ädäck;
+            string bromsstring = "", karossstring = "", motorstring = "", vindrutastring = "", däckstring = "";
+            if (broms == true)
+                bromsstring = "\nBehandling av bromsar";
+            if (kaross == true)
+                karossstring = "\nBehanding av kaross";
+            if (motor == true)
+                motorstring = "\nBehandling av motor";
+            if (vindruta == true)
+                vindrutastring = "\nBehandling av vindruta";
+            if (däck == true)
+                däckstring = "\nBehandling av däck";
+            Beskrivning = " " + bromsstring + karossstring + motorstring + vindrutastring + däckstring;
+            return Beskrivning;
         }
         public void VisaMekanikerTillFordon(Fordon fordo)
         {
@@ -208,12 +214,12 @@ namespace GUI.Home
             ärendeBools.Clear();
             MekanikerSamling ms = new MekanikerSamling();
             MekGrid.ItemsSource = null;
-            
-                    ärendeBools.Add(fordo.Äbromsar);
-                    ärendeBools.Add(fordo.Äkaross);
-                    ärendeBools.Add(fordo.Ämotor);
-                    ärendeBools.Add(fordo.Ädäck);
-                    ärendeBools.Add(fordo.Ävindruta);
+
+            ärendeBools.Add(fordo.Äbromsar);
+            ärendeBools.Add(fordo.Äkaross);
+            ärendeBools.Add(fordo.Ämotor);
+            ärendeBools.Add(fordo.Ädäck);
+            ärendeBools.Add(fordo.Ävindruta);
             bool run = true;
             while (run)
             {
@@ -257,7 +263,8 @@ namespace GUI.Home
             try
             {
                 fLoader.LoadMotorcyklar();
-            }catch (Exception d) { if (d.Source != null) missingFile += "\n" + d.Message; }
+            }
+            catch (Exception d) { if (d.Source != null) missingFile += "\n" + d.Message; }
             try
             {
                 fLoader.LoadMekaniker();

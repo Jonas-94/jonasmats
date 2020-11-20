@@ -19,7 +19,6 @@ namespace GUI.Home
     /// </summary>
     public partial class Huvudmeny : Page
     {
-        FolderPath fPath = new FolderPath();
         FileLoader fLoader = new FileLoader();
         
         public Huvudmeny()
@@ -50,6 +49,18 @@ namespace GUI.Home
         {
             SkapaÄrendePage säPage = new SkapaÄrendePage();
             this.NavigationService.Navigate(säPage);
+        }
+
+        private void ÄrendeMeny_Click(object sender, RoutedEventArgs e)
+        {
+            ÄrendePage äPage = new ÄrendePage();
+            this.NavigationService.Navigate(äPage);
+        }
+
+        private void KomponentMeny_Click(object sender, RoutedEventArgs e)
+        {
+            KomponenterPage kPage = new KomponenterPage();
+            this.NavigationService.Navigate(kPage);
         }
     }
 }

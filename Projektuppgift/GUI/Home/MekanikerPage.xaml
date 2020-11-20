@@ -38,6 +38,7 @@
         <Button x:Name="btnRedigeraMekaniker" Content="Redigera Mekaniker" HorizontalAlignment="Left" Margin="142,381,0,0" VerticalAlignment="Top" Width="143" Height="31" Click="btnRedigeraMekaniker_Click"/>
         <Button x:Name="SparaRedigeradMekaniker" Content="Spara Mekaniker" HorizontalAlignment="Left" Margin="296,340,0,0" VerticalAlignment="Top" Height="71" Width="113" Click="SparaRedigeradMekaniker_Click"/>
         <Button x:Name="btnHuvudmeny" Content="Huvudmeny" HorizontalAlignment="Left" Margin="296,10,0,0" VerticalAlignment="Top" Height="37" Width="246" Click="btnHuvudmeny_Click"/>
+        <Button x:Name="btnTabortMekaniker" Content="Ta bort Mekaniker" HorizontalAlignment="Left" Margin="0,381,0,0" VerticalAlignment="Top" Height="31" Width="137" Click="btnTabortMekaniker_Click"/>
 
     </Grid>
 </Page>

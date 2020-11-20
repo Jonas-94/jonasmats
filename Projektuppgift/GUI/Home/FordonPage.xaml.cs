@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using Logic.DAL;
 using Logic.Entities;
 using System.Threading.Tasks;
+using System.Linq;
 namespace GUI.Home
 {
     /// <summary>
@@ -25,29 +26,33 @@ namespace GUI.Home
         public FordonPage()
         {
             InitializeComponent();
-            try
-            {
-                fLoader.LoadBilar();
-                fLoader.LoadLastbilar();
-                fLoader.LoadMekaniker();
-                FordonGrid.ItemsSource = fLoader.lastbilSamling.lastbilar;
-            }
-            catch { }
-
+            LoadFordon();
+            fLoader.FordonReload();
+            fLoader.LoadMekaniker();
+            RefreshGrid();
+        }
+        public void RefreshGrid()
+        {
+            FordonGrid.ItemsSource =
+                fLoader.fordonSamling.fordon.Where(x => x.ÄrendeKlart == false && x.ÄrendeTaget == false);
         }
         public string FirstLetterCapital(string str)
         {
             if (string.IsNullOrEmpty(str))
-                return string.Empty;
+                return null;
+
+
             char[] letters = str.ToCharArray();
-            foreach (var l in letters)
+            for (int i = 0; i < letters.Length; i++)
             {
-                char.ToLower(l);
+                letters[i] = char.ToLower(letters[i]);
             }
+
             letters[0] = char.ToUpper(letters[0]);
-            return new string(letters);
+
+            return str = new string(letters);
         }
-        
+
         public void SkapaFordon()
         {
             bool broms = false;
@@ -84,6 +89,11 @@ namespace GUI.Home
                 int milmätare = 0;
                 string modellNamn = FirstLetterCapital(txtModellnamn.Text);
                 string regNr = txtRegNr.Text.ToUpper();
+                if(fLoader.fordonSamling.fordon.Exists(x=>x.Registreringsnummer.Equals(regNr)))
+                {
+                    System.Windows.Forms.MessageBox.Show("Registreringsnumret finns redan i registret");
+                    break;
+                } 
                 DateTime datum;
                 string regDatum;
                 if (DateTime.TryParse(txtRegDatum.Text, out datum))
@@ -138,7 +148,6 @@ namespace GUI.Home
                         Ädäck = däck
                     };
                     fLoader.bilSamling.Bilar.Add(bil);
-                    fLoader.fordonSamling.fordon.Add(bil);
                     fLoader.SaveBilar();
                 }
                 else if (rbtnBuss.IsChecked == true)
@@ -165,7 +174,6 @@ namespace GUI.Home
                         Ädäck = däck
                     };
                     fLoader.bussSamling.Bussar.Add(buss);
-                    fLoader.fordonSamling.fordon.Add(buss);
                     fLoader.SaveBussar();
 
                 }
@@ -214,8 +222,7 @@ namespace GUI.Home
                     fLoader.SaveMotorcyklar();
                 }
                 fLoader.FordonReload();
-                FordonGrid.ItemsSource = null;
-                FordonGrid.ItemsSource = fLoader.fordonSamling.fordon;
+                RefreshGrid();
                 run = false;
             }
         }
@@ -302,6 +309,34 @@ namespace GUI.Home
         public void RedigeraFordon()
         {
 
+        }
+        public void LoadFordon()
+        {
+            try
+            {
+                fLoader.LoadBilar();
+            }
+            catch { }
+            try
+            {
+                fLoader.LoadBussar();
+            }
+            catch {   }
+            try
+            {
+                fLoader.LoadLastbilar();
+            }
+            catch { }
+            try
+            {
+                fLoader.LoadMotorcyklar();
+            }
+            catch { }
+        }
+        private void btnHuvudmeny_Click(object sender, RoutedEventArgs e)
+        {
+            Huvudmeny hPage = new Huvudmeny();
+            this.NavigationService.Navigate(hPage);
         }
     }
 }

@@ -9,7 +9,7 @@
       Title="ÄrendePage">
 
     <Grid Background="#FFB0B0B0">
-        <DataGrid x:Name="PågåendeÄrendenGrid" Margin="0,54,495,60">
+        <DataGrid x:Name="PågåendeÄrendenGrid" Margin="0,38,255,244" SelectionChanged="PågåendeÄrendenGrid_SelectionChanged" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID_Copy1" Header="ID" Width="0.1*" Binding="{Binding ÄrendeID}"/>
                 <DataGridTextColumn x:Name="Förnamn_Copy1" Header="Förnamn" Width="0.15*" Binding="{Binding förnamn}"/>
@@ -18,7 +18,7 @@
                 <DataGridTextColumn x:Name="RegDatum_Copy1" Header="RegDatum" Width="0.4*" Binding="{Binding RegDatum}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="FärdigaÄrendenGrid" Margin="472,54,0,60">
+        <DataGrid x:Name="FärdigaÄrendenGrid" Margin="0,272,249,0" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID_Copy" Header="ID" Width="0.1*" Binding="{Binding ÄrendeID}"/>
                 <DataGridTextColumn x:Name="Förnamn_Copy" Header="Förnamn" Width="0.15*" Binding="{Binding förnamn}"/>
@@ -27,9 +27,11 @@
                 <DataGridTextColumn x:Name="RegDatum_Copy" Header="RegDatum" Width="0.4*" Binding="{Binding RegDatum}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnÄrendeFärdigt" Content="Ärende färdigt!" HorizontalAlignment="Left" Margin="162,395,0,0" VerticalAlignment="Top" Height="37" Width="143" Click="btnÄrendeFärdigt_Click"/>
-        <Label x:Name="lblpågåendeärenden" Content="Pågående Ärenden" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" Height="39" Width="250" FontFamily="Comic Sans MS" FontSize="16"/>
-        <Label x:Name="lblklaraärenden" Content="Färdiga Ärenden" HorizontalAlignment="Left" Margin="550,10,0,0" VerticalAlignment="Top" Height="46" Width="250" FontSize="16" FontFamily="Comic Sans MS"/>
+        <Button x:Name="btnÄrendeFärdigt" Content="Ärende färdigt!" HorizontalAlignment="Left" Margin="402,211,0,0" VerticalAlignment="Top" Height="37" Width="143" Click="btnÄrendeFärdigt_Click"/>
+        <Label x:Name="lblpågåendeärenden" Content="Pågående Ärenden" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="39" Width="250" FontFamily="Comic Sans MS" FontSize="16"/>
+        <Label x:Name="lblklaraärenden" Content="Färdiga Ärenden" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Height="32" Width="250" FontSize="16" FontFamily="Comic Sans MS"/>
+        <Label x:Name="lblÄrendeBeskrivning" Content="" HorizontalAlignment="Left" Margin="570,38,0,0" VerticalAlignment="Top" Height="384" Width="220" FontFamily="Comic Sans MS"/>
+        <Button x:Name="btnHuvudmeny" Content="Huvudmeny" HorizontalAlignment="Left" Margin="594,10,0,0" VerticalAlignment="Top" Height="43" Width="174" Click="btnHuvudmeny_Click"/>
 
     </Grid>
 </Page>

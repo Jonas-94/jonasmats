@@ -61,6 +61,7 @@
         <Button x:Name="btnSkapaFordon" Content="Skapa Fordon" HorizontalAlignment="Left" Margin="450,311,0,0" VerticalAlignment="Top" Height="51" Width="116" Click="btnSkapaFordon_Click"/>
         <Label x:Name="lblFordonBeskrivning" Content="" HorizontalAlignment="Left" Margin="575,54,0,0" VerticalAlignment="Top" Height="323" Width="215" FontSize="14" FontFamily="Comic Sans MS"/>
         <Button x:Name="btnRedigeraFordon" Content="Redigera Fordon" HorizontalAlignment="Left" Margin="165,409,0,0" VerticalAlignment="Top" Height="23" Width="129" Click="btnRedigeraFordon_Click"/>
+        <Button x:Name="btnHuvudmeny" Content="Huvudmeny" HorizontalAlignment="Left" Margin="340,10,0,0" VerticalAlignment="Top" Height="42" Width="202" Click="btnHuvudmeny_Click"/>
 
     </Grid>
 </Page>
