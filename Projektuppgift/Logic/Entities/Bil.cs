@@ -12,7 +12,7 @@ namespace Logic.Entities
         {
             return "Modellnamn: " + Modellnamn + "\n" +
                 "Biltyp: " + bilTyp + "\n" +
-                "Dragkrok" + Dragkrok + "\n" +
+                "Dragkrok: " + Dragkrok + "\n" +
                 "RegNr: " + Registreringsnummer + "\n" +
                 "RegDatum: " + Registreringsdatum + "\n" +
                 "Milmätare: " + Milmätare + "\n" +
