@@ -27,22 +27,12 @@ namespace Logic.DAL
         async Task InterfaceLoadSave.SaveAsync(string filePath)
         {
             string json = JsonSerializer.Serialize(this);
-            if (File.Exists(filePath))
-            {
                 System.IO.File.WriteAllText(filePath, "");
                 FileStream fs = File.OpenWrite(filePath);
                 StreamWriter sw = new StreamWriter(fs);
-                sw.Write(json);
+                await sw.WriteAsync(json);
                 sw.Close();
-            }
-            else if (!File.Exists(filePath))
-            {
-                FileStream ffs = File.OpenWrite(filePath);
-                StreamWriter tw = new StreamWriter(ffs);
-                await tw.WriteAsync(json);
-                tw.Write(json);
-                tw.Close();
-            }
+           
         }
 
         List<T> InterfaceLoadSave.Load<T>(string filePath)

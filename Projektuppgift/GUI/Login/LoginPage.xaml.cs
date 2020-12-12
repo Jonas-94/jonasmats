@@ -74,10 +74,12 @@ namespace GUI.Login
             }
             catch { System.Windows.Forms.MessageBox.Show("Ladda DAL-mappen / User-filen"); }
         }
-        private void btnfindUserFile_Click(object sender, RoutedEventArgs e)
+        private async void btnfindUserFile_Click(object sender, RoutedEventArgs e)
         {
             FindFolderPath();
-            LoadAllFiles();
+            await LoadAllFiles();
+            //await fLoader.SaveAll();
+           
             if (missingFile != null)
                 System.Windows.Forms.MessageBox.Show($"Json-filer skapas automatiskt. \nFöljande filer skapades:\n\n{missingFile}");
         }
@@ -90,69 +92,70 @@ namespace GUI.Login
             fLoader.FindFolderPath(folder.SelectedPath);
             
         }
-        public void LoadAllFiles()
+       
+        public async Task LoadAllFiles()
         {
             
             try
             {
                 fLoader.LoadBilar();
             }
-            catch (Exception a) { if (a.Source != null) fLoader.SaveBilar(); missingFile += "\n" + a.Message; }
+            catch (Exception a) { if (a.Source != null) await fLoader.SaveBilar(); missingFile += "\n" + a.Message; }
             try
             {
                 fLoader.LoadBussar();
             }
-            catch (Exception b) { if (b.Source != null) fLoader.SaveBussar(); missingFile += "\n" + b.Message; }
+            catch (Exception b) { if (b.Source != null) await fLoader.SaveBussar(); missingFile += "\n" + b.Message; }
             try
             {
                 fLoader.LoadLastbilar();
             }
-            catch (Exception c) { if (c.Source != null) fLoader.SaveLastBilar(); missingFile += "\n" + c.Message; }
+            catch (Exception c) { if (c.Source != null) await fLoader.SaveLastBilar(); missingFile += "\n" + c.Message; }
             try
             {
                 fLoader.LoadMotorcyklar();
             }
-            catch (Exception d) { if (d.Source != null) fLoader.SaveMotorcyklar(); missingFile += "\n" + d.Message; }
+            catch (Exception d) { if (d.Source != null) await fLoader.SaveMotorcyklar(); missingFile += "\n" + d.Message; }
             try
             {
                 fLoader.LoadÄrenden();
             }
-            catch (Exception e) { if (e.Source != null) fLoader.SaveÄrenden(); missingFile += "\n" + e.Message; }
+            catch (Exception e) { if (e.Source != null) await fLoader.SaveÄrenden(); missingFile += "\n" + e.Message; }
             try
             {
                 fLoader.LoadUsers();
             }
-            catch (Exception f) { if (f.Source != null) fLoader.SaveUser(); missingFile += "\n" + f.Message; }
+            catch (Exception f) { if (f.Source != null) await fLoader.SaveUser(); missingFile += "\n" + f.Message; }
             try
             {
                 fLoader.LoadMekaniker();
             }
-            catch (Exception g) { if (g.Source != null) fLoader.SaveMekaniker(); missingFile += "\n" + g.Message; }
+            catch (Exception g) { if (g.Source != null) await fLoader.SaveMekaniker(); missingFile += "\n" + g.Message; }
             try
             {
                 fLoader.LoadID();
             }
-            catch (Exception h) { if (h.Source != null) fLoader.SaveID(); missingFile += "\n" + h.Message; }
+            catch (Exception h) { if (h.Source != null) await fLoader.SaveID(); missingFile += "\n" + h.Message; }
             try
             {
                 fLoader.LoadLastbilKomp();
             }
-            catch (Exception i) { if (i.Source != null) fLoader.SaveLastbilKomp(); missingFile += "\n" + i.Message; }
+            catch (Exception i) { if (i.Source != null) await fLoader.SaveLastbilKomp(); missingFile += "\n" + i.Message; }
             try
             {
                 fLoader.LoadBilKomp();
             }
-            catch (Exception j) { if (j.Source != null) fLoader.SaveBilKomp(); missingFile += "\n" + j.Message; }
+            catch (Exception j) { if (j.Source != null) await fLoader.SaveBilKomp(); missingFile += "\n" + j.Message; }
             try
             {
                 fLoader.LoadBussKomp();
             }
-            catch (Exception k) { if (k.Source != null) fLoader.SaveBussKomp(); missingFile += "\n" + k.Message; }
+            catch (Exception k) { if (k.Source != null) await fLoader.SaveBussKomp(); missingFile += "\n" + k.Message; }
             try
             {
                 fLoader.LoadMcKomp();
             }
-            catch (Exception l) { if (l.Source != null) fLoader.SaveMcKomp(); missingFile += "\n" + l.Message; }
+            catch (Exception l) { if (l.Source != null) await fLoader.SaveMcKomp(); missingFile += "\n" + l.Message; }
         }
     }
 }

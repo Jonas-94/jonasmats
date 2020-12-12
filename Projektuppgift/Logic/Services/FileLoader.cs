@@ -62,72 +62,86 @@ namespace Logic.DAL
         {
             Id = id;
         }
-        public void SaveBilKomp()
+        public async Task SaveBilKomp()
         {
             IBilkomp = kompBilSamling;
-            IBilkomp.SaveAsync(folderPath + bilkompPath);
+            await IBilkomp.SaveAsync(folderPath + bilkompPath);
         }
-        public void SaveBussKomp()
+        public async Task SaveBussKomp()
         {
             IBusskomp = kompBussSamling;
-            IBusskomp.SaveAsync(folderPath + busskompPath);
+            await IBusskomp.SaveAsync(folderPath + busskompPath);
         }
-        public void SaveLastbilKomp()
+        public async Task  SaveLastbilKomp()
         {
             ILastbkomp = kompLastBSamling;
-            ILastbkomp.SaveAsync(folderPath + lastkompPath);
+            await ILastbkomp.SaveAsync(folderPath + lastkompPath);
         }
-        public void SaveMcKomp()
+        public async Task SaveMcKomp()
         {
             IMckomp = kompMcSamling;
-            IMckomp.SaveAsync(folderPath + mckompPath);
+            await IMckomp.SaveAsync(folderPath + mckompPath);
         }
-        public void SaveUser() 
+        public async Task SaveUser() 
         {
             IUser = userSamling;
-            IUser.SaveAsync(folderPath + userPath);
+            await IUser.SaveAsync(folderPath + userPath);
         }
-        public void SaveMekaniker()
+        public async Task SaveMekaniker()
         {
             IMekaniker = mekSamling;
-            IMekaniker.SaveAsync(folderPath + mekPath);
+            await IMekaniker.SaveAsync(folderPath + mekPath);
         }
-        public void SaveLastBilar()
+        public async Task SaveLastBilar()
         {
             ILastbil = lastbilSamling;
-            ILastbil.SaveAsync(folderPath + lastbilPath);
+            await ILastbil.SaveAsync(folderPath + lastbilPath);
         }
-        public void SaveBilar()
+        public async Task SaveBilar()
         {
             IBil = bilSamling;
-            IBil.SaveAsync(folderPath + bilPath);
+            await IBil.SaveAsync(folderPath + bilPath);
         }
-        public void SaveBussar()
+        public async Task SaveBussar()
         {
             IBuss = bussSamling;
-            IBuss.SaveAsync(folderPath + bussPath);
+            await IBuss.SaveAsync(folderPath + bussPath);
         }
-        public void SaveMotorcyklar()
+        public async Task SaveMotorcyklar()
         {
             IMotorcyklar = motorcykelSamling;
-            IMotorcyklar.SaveAsync(folderPath + motorcykelPath);
+            await IMotorcyklar.SaveAsync(folderPath + motorcykelPath);
         }
-        public async void SaveÄrenden()
+        public async Task SaveÄrenden()
         {
             IÄrende = ärendeSamling;
-            IÄrende.SaveAsync(folderPath + ärendePath);
+            await IÄrende.SaveAsync(folderPath + ärendePath);
         }
-        public void SaveID()
+        public async Task SaveID()
         {
             IID = idSamling;
-            IID.SaveAsync(folderPath + idPath);
+            await IID.SaveAsync(folderPath + idPath);
         }
-        public void SaveAllFordon()
+        public async Task SaveAllFordon()
         {
-            SaveBilar();
-            SaveBussar();
-            SaveLastBilar();
-            SaveMotorcyklar();
+            await SaveBilar();
+            await SaveBussar();
+            await SaveLastBilar();
+            await SaveMotorcyklar();
+        }
+        public async Task SaveAll()
+        {
+            await SaveBilar();
+            await SaveBussar();
+            await SaveLastBilar();
+            await SaveMotorcyklar();
+            await SaveMekaniker();
+            await SaveID();
+            await SaveÄrenden();
+            await SaveMcKomp();
+            await SaveLastbilKomp();
+            await SaveBussKomp();
+            await SaveBilKomp();
         }
         public void FordonReload()
         {

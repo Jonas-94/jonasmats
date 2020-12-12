@@ -75,7 +75,7 @@ namespace GUI.Home
         public void RefreshGrid()
         {
             FordonGrid.ItemsSource =
-                fLoader.fordonSamling.fordon.Where(x => x.ÄrendeKlart == false && x.ÄrendeTaget == false);
+                fLoader.fordonSamling.fordon.Where(x => x.ÄrendeKlart == false);
         }
         public string FirstLetterCapital(string str)
         {
